@@ -13,9 +13,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "News-App"
-include ':app'
-include ':presentation'
-include ':core:network'
-include ':domain'
-include ':core:repository'
-include ':core:database'
+include(":app")
+include(":presentation")
+include(":core:network")
+include(":core:database")
+include(":core:repository")
+include(":domain")
+include(":common")
