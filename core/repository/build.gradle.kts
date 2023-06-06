@@ -37,6 +37,7 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":core:network"))
+    implementation(project(":core:database"))
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -46,7 +47,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Paging
-    implementation("androidx.paging:paging-runtime:3.1.1")
+    implementation("androidx.paging:paging-runtime:3.1.0")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha20")
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
