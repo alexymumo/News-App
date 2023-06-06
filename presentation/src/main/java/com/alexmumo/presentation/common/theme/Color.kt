@@ -1,4 +1,4 @@
-package com.alexmumo.news_app.ui.theme
+package com.alexmumo.presentation.common.theme
 
 import androidx.compose.ui.graphics.Color
 
