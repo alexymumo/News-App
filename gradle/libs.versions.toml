@@ -1,0 +1,13 @@
+[versions]
+junit = "4.13.2"
+roboelectric = "4.9"
+navigation = "2.5.3"
+coroutines = "1.6.4"
+paging-compose = "1.0.0-alpha20"
+kotlin = "1.8.21"
+androidGradle = "8.0.0"
+hilt = "2.44"
+paging = "3.1.1"
+room = "2.5.1"
+okhttp3 = "5.0.0-alpha.2"
+retrofit = "2.9.0"
