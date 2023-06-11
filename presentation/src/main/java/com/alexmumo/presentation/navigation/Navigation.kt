@@ -27,6 +27,7 @@ fun Navigation(navController: NavHostController) {
 
         composable(NavItem.Detail.route) {
 
+
         }
     }
 }
