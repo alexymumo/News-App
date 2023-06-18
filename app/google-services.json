@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533637823257",
+    "project_id": "news-app-2d9fb",
+    "storage_bucket": "news-app-2d9fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533637823257:android:841933890ce30b4c552388",
+        "android_client_info": {
+          "package_name": "com.alexmumo.news_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533637823257-6n239tk56pc3o4hio7gc5dfmk5vhlod9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbnu2NNsk2xTR2kZrDXtk0WM5aI0GHaCw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533637823257-6n239tk56pc3o4hio7gc5dfmk5vhlod9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

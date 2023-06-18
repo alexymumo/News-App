@@ -49,4 +49,6 @@ dependencies {
 
     implementation("androidx.paging:paging-runtime:3.1.1")
 
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
 }
