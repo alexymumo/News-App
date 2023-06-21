@@ -46,7 +46,6 @@ fun MainScreen() {
     }
 }
 
-
 @Preview
 @Composable
 fun MainScreenPreview() {

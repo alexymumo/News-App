@@ -1,4 +1,4 @@
-package com.alexmumo.network.response
+package com.alexmumo.domain.model
 
 data class Source(
     val id: String,

@@ -32,7 +32,7 @@ class NewsRepositoryImpl constructor(private val newsApi: NewsApi): NewsReposito
         return Pager(
             config = pagingConfig,
             pagingSourceFactory = {
-                SearchPagingSource(newsApi = newsApi, searchString = queryString)
+                SearchPagingSource(newsApi = newsApi, queryString = queryString)
             }
         ).flow
     }

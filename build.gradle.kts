@@ -3,9 +3,16 @@ plugins {
     id("com.android.application") version "8.0.0" apply false
     id("com.android.library") version "8.0.0" apply false
     id("org.jetbrains.kotlin.android") version "1.8.21" apply false
-    id("com.google.dagger.hilt.android") version "2.44" apply false
     id("org.jlleitschuh.gradle.ktlint") version ("11.3.1")
     id("com.diffplug.spotless") version ("5.17.1")
+}
+
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
 }
 
 subprojects {

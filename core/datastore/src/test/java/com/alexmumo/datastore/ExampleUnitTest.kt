@@ -1,4 +1,4 @@
-package com.alexmumo.presentation
+package com.alexmumo.datastore
 
 import org.junit.Test
 

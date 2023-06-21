@@ -13,8 +13,8 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveArticles(articles: List<ArticleEntity>)
 
-    @Query("SELECT * FROM article_table WHERE title LIKE :category")
-    suspend fun getPagingArticles(category: String): PagingSource<Int, ArticleEntity>
+    //@Query("SELECT * FROM article_table WHERE title LIKE :category")
+   // suspend fun getPagingArticles(category: String): PagingSource<Int, ArticleEntity>
 
     @Query("DELETE FROM article_table")
     suspend fun deleteAll()

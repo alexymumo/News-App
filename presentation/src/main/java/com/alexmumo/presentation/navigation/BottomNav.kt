@@ -23,6 +23,7 @@ fun BottomNav(navController: NavController) {
     val items = listOf(
         NavItem.Home,
         NavItem.Bookmark,
+        NavItem.Search,
         NavItem.Settings
     )
     BottomAppBar(
