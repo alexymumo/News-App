@@ -5,9 +5,9 @@ import androidx.paging.PagingState
 import com.alexmumo.common.Constants.NEWS_API_KEY
 import com.alexmumo.domain.model.Article
 import com.alexmumo.network.api.NewsApi
-import com.alexmumo.network.response.NewsResponse
 import com.alexmumo.repository.mappers.toDomain
-import retrofit2.Response
+import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 
 
@@ -16,7 +16,6 @@ class SearchPagingSource constructor(
     private val newsApi: NewsApi,
     private val queryString: String
 ): PagingSource<Int, Article>() {
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val page = params.key ?: STARTING_KEY
         return try {
@@ -27,7 +26,7 @@ class SearchPagingSource constructor(
                 apiKey = NEWS_API_KEY
             )
 
-            val searchedArticles = searchResponse.body()?.data?.articles ?: listOf()
+            val searchedArticles = searchResponse.body()?.articles ?: listOf()
             val nextKey = if (searchedArticles.isEmpty()) {
                 null
             } else {
@@ -41,7 +40,8 @@ class SearchPagingSource constructor(
             )
         } catch (e: IOException) {
             return LoadResult.Error(e)
-        } catch (e: IOException) {
+        } catch (e: HttpException) {
+            Timber.d("Http", e.printStackTrace())
             return LoadResult.Error(e)
         }
     }

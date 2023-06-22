@@ -2,6 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -72,4 +75,9 @@ dependencies {
     implementation("androidx.paging:paging-compose:1.0.0-alpha20")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }

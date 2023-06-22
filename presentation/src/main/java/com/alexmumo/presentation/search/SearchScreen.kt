@@ -12,11 +12,11 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SearchScreen(
-    navController: NavController,
-    searchViewModel: SearchViewModel = koinViewModel()
+    navController: NavController
+    //searchViewModel: SearchViewModel = koinViewModel()
 ) {
-    val searchState by searchViewModel.search
-    val searched = searchViewModel.search.value.collectAsLazyPagingItems()
+    //val searchState by searchViewModel.search
+    //val searched = searchViewModel.search.value.collectAsLazyPagingItems()
     Column(modifier = Modifier.fillMaxSize()) {
 
     }

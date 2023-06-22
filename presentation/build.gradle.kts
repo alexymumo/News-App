@@ -75,7 +75,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 
     implementation("androidx.compose.material3:material3:1.1.0")
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.4.3")
     implementation("androidx.compose.ui:ui-util:1.4.3")
 
@@ -106,6 +105,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
 }
 
 

@@ -13,8 +13,8 @@ val networkModule = module {
     single {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
             .client(provideOkhttpClient())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NewsApi::class.java)
 

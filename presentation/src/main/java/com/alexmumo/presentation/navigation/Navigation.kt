@@ -19,7 +19,7 @@ fun Navigation(navController: NavHostController) {
         composable(NavItem.Home.route) {
             HomeScreen(
                 onNavigate = {
-                    navController.navigate("detail")
+                    //navController.navigate("detail")
                 },
                 navController = navController
             )

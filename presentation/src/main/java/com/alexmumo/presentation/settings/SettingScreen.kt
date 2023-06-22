@@ -28,10 +28,9 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SettingScreen(
-    navController: NavController,
-    viewModel: SettingsViewModel = koinViewModel()
+    navController: NavController
 ) {
-    val settings = viewModel.theme.collectAsState().value ?:0
+    //val settings = viewModel.theme.collectAsState().value ?:0
     Scaffold(
         topBar = {
             Text(text = "Settings")
@@ -40,9 +39,6 @@ fun SettingScreen(
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
-            SettingsItem(onClick = {
-                viewModel.setTheme(theme = settings)
-            }, theme = settings)
         }
     }
 }

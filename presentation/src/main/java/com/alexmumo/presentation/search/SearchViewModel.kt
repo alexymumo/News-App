@@ -23,7 +23,7 @@ class SearchViewModel constructor(private val newsRepository: NewsRepository): V
         viewModelScope.launch {
             newsRepository.searchNews(queryString).map { articles ->
                 articles.filter {
-                    it.title.contains(queryString)
+                    it.title!!.contains(queryString)
                 }
             }.cachedIn(viewModelScope)
         }

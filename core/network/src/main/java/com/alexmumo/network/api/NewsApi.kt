@@ -15,7 +15,7 @@ interface NewsApi {
         @Query("pageSize") pageSize: Int = 100,
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = NEWS_API_KEY
-    ): Response<Resource<NewsResponse>>
+    ): Response<NewsResponse>
 
     @GET("top-headlines")
     suspend fun getTopHeadLines(
@@ -24,5 +24,5 @@ interface NewsApi {
         @Query("pageSize") pageSize: Int = 100,
         @Query("page") page: Int = 1,
         @Query("apiKey") apiKey: String = NEWS_API_KEY
-    ): Response<Resource<NewsResponse>>
+    ): Response<NewsResponse>
 }
