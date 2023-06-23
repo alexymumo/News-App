@@ -58,5 +58,7 @@ dependencies {
 
     // Koin
     implementation("io.insert-koin:koin-android:3.3.3")
+    
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
 }

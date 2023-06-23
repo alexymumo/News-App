@@ -80,4 +80,13 @@ dependencies {
 
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
+
+
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
 }

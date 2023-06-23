@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:140042126556:android:0bdf10910a3619c4f92019",
+        "mobilesdk_app_id": "1:140042126556:android:0bdf10910a3619c4f92019"
         "android_client_info": {
           "package_name": "com.alexmumo.news_app"
         }

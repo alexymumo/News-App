@@ -52,8 +52,11 @@ kotlin {
 
 dependencies {
     implementation(project(":domain"))
+    
     implementation(project(":core:datastore"))
     implementation(project(":common"))
+    
+    implementation(project(":core:database"))
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.activity:activity-compose:1.3.1")
@@ -81,8 +84,9 @@ dependencies {
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
-    implementation("androidx.navigation:navigation-compose:2.6.0")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
+    // Nav
+    implementation("androidx.navigation:navigation-compose:2.5.3")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.5.3")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.9")
@@ -109,7 +113,6 @@ dependencies {
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 }
-
 
 kapt {
     correctErrorTypes = true

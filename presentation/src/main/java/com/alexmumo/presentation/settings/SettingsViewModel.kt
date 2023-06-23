@@ -2,6 +2,7 @@ package com.alexmumo.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+
 import com.alexmumo.datastore.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,5 +29,6 @@ class SettingsViewModel constructor(private val settingsRepository: SettingsRepo
                 _theme.value = theme
             }
         }
+        
     }
-}
+    

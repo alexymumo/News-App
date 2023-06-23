@@ -11,6 +11,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -39,6 +40,20 @@ fun SettingScreen(
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
+
+
+@Composable
+fun SettingScreen(
+    settingsViewModel:SettingsViewModel = viewModel()
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        Button(onClick = {
+            settingsViewModel.getTheme()
+        }) {
+            Text(text = "Change")
+        }
+        Button(onClick = { /*TODO*/ }) {
+            Text(text = "Remain")
         }
     }
 }

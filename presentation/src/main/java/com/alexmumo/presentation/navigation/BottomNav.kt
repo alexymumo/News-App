@@ -4,24 +4,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun BottomNav(navController: NavController) {
     val items = listOf(
         NavItem.Home,
+        NavItem.Search,
         NavItem.Bookmark,
         NavItem.Search,
         NavItem.Settings
@@ -45,8 +43,8 @@ fun BottomNav(navController: NavController) {
                 },
                 icon = {
                     Icon(
-                        painter = painterResource(id = navItem.icon),
-                        contentDescription = navItem.title
+                        painter = painterResource(id = navItem.icon!!),
+                        contentDescription = "icon"
                     )
                 },
                 label = { Text(text = navItem.title) },

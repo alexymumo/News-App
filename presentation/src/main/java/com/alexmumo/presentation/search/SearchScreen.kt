@@ -9,16 +9,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import org.koin.androidx.compose.koinViewModel
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SearchScreen(
-    navController: NavController
-    //searchViewModel: SearchViewModel = koinViewModel()
-) {
-    //val searchState by searchViewModel.search
-    //val searched = searchViewModel.search.value.collectAsLazyPagingItems()
-    Column(modifier = Modifier.fillMaxSize()) {
-
+fun SearchScreen() {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Text(text = "Search")
     }
 }
 
@@ -26,5 +27,4 @@ fun SearchScreen(
 @Preview
 @Composable
 fun SearchScreenPreview() {
-    //SearchScreen()
 }

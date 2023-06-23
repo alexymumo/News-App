@@ -24,6 +24,14 @@ fun Navigation(navController: NavHostController) {
                 navController = navController
             )
         }
+                    navController.navigate("detail")
+                }
+            )
+        }
+        composable(NavItem.Search.route) {
+            SearchScreen()
+        }
+
         composable(NavItem.Bookmark.route) {
             BookMarkScreen()
         }
@@ -38,6 +46,5 @@ fun Navigation(navController: NavHostController) {
 
         composable(NavItem.Settings.route) {
             SettingScreen(navController = navController)
-        }
     }
 }
