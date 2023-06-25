@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.getScopeId
 import timber.log.Timber
 
 
@@ -33,18 +34,63 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
     private val _uiState = MutableStateFlow(ArticleState())
     val uiState = _uiState.asStateFlow()
 
+    private val _technology = MutableStateFlow(ArticleState())
+    val technology = _technology.asStateFlow()
+
+    private val _sports = MutableStateFlow(ArticleState())
+    val sports = _sports.asStateFlow()
+
+    private val _entertainment = MutableStateFlow(ArticleState())
+    val entertainment = _entertainment.asStateFlow()
+
+    private val _trending = MutableStateFlow(ArticleState())
+    val trending = _trending.asStateFlow()
+
+    private val _health = MutableStateFlow(ArticleState())
+    val health = _health.asStateFlow()
+
+    private val _business = MutableStateFlow(ArticleState())
+    val business = _business.asStateFlow()
+
     fun setCategory(category: String) {
         _category.value = category
     }
 
     init {
-        getBreakingNews("business")
+        getTechnologyNews("technology")
+        getTrendingNews("trending")
+        getSportsNews("sports")
+        getBusinessNews("business")
+        getBreakingNews("general")
+    }
+
+    private fun getTechnologyNews(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val tech = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _technology.update { it.copy(articles = tech, isLoading = false) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+    }
+
+    private fun getTrendingNews(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val trending = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _trending.update { it.copy(articles = trending, isLoading = false) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun getBreakingNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val breaking = newsRepository.fetchNews(category = category).cachedIn(viewModelScope)
+                val breaking = newsRepository.fetchNews(category).cachedIn(viewModelScope)
                 _uiState.update { it.copy(articles = breaking, isLoading = false) }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -52,33 +98,27 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
         }
     }
 
-    /*
-    private fun fetchTrending(category: String) {
+
+
+    private fun getSportsNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val trending  = newsRepository.fetchNews(category).cachedIn(viewModelScope)
-                trending.collectLatest {
-                    _news.value
-                }
+                val sports = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _sports.update { it.copy(articles = sports, isLoading = false) }
             } catch (e: Exception) {
-                Timber.d("Error", e.localizedMessage)
+                e.printStackTrace()
             }
         }
     }
-    */
 
-
-    private fun fetchSports(category: String) {
+    private fun getBusinessNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            newsRepository.fetchNews(category).launchIn(viewModelScope)
-        }
-
-    }
-
-    private fun fetchBusiness(category: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            newsRepository.fetchNews(category)
+            try {
+                val business = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _business.update { it.copy(articles = business, isLoading = false) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
-
 }

@@ -24,7 +24,7 @@ class NewsPagingSource(private val category:String, private val newsApi: NewsApi
             val response = newsApi.getTopHeadLines(
                 country = "us",
                 category = category,
-                pageSize = 20,
+                pageSize = 30,
                 page = 1,
                 apiKey = NEWS_API_KEY
             )

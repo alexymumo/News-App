@@ -12,6 +12,7 @@ fun DetailScreen() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+
     }
 }
 
