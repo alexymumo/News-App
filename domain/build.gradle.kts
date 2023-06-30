@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
     kotlin("kapt")
 }
 
@@ -38,6 +39,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core:database"))
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

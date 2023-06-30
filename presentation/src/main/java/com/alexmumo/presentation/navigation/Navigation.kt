@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.bookmarks.BookMarkScreen
 import com.alexmumo.presentation.detail.DetailScreen
 import com.alexmumo.presentation.home.HomeScreen
@@ -18,9 +19,6 @@ fun Navigation(navController: NavHostController) {
     ) {
         composable(NavItem.Home.route) {
             HomeScreen(
-                onNavigate = {
-                    //navController.navigate("detail")
-                },
                 navController = navController
             )
         }
@@ -29,7 +27,10 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(NavItem.Detail.route) {
-            DetailScreen()
+            val article = navController.previousBackStackEntry?.savedStateHandle?.get<Article>("news")
+            article?.let {
+                DetailScreen(navController = navController, article = article)
+            }
         }
 
         composable(NavItem.Search.route) {
