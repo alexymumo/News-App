@@ -14,7 +14,7 @@ data class BookMarkEntity(
     val sourceEntity: SourceEntity,
     val title: String?,
     @PrimaryKey
-    val url: String?,
+    val url: String,
     val urlToImage: String?,
     val isBookMarked: Boolean = false
 )

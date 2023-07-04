@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alexmumo.presentation.bookmarks.components.BookMarkItem
 import org.koin.androidx.compose.getViewModel
 
@@ -29,7 +30,7 @@ fun BookMarkScreen(
         ) {
             LazyColumn {
                 items(items = bookmarks.value) { bookMark ->
-                    BookMarkItem(bookMark = bookMark)
+                    BookMarkItem(bookMarkEntity = bookMark)
                 }
             }
         }

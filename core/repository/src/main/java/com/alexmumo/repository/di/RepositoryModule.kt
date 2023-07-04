@@ -9,5 +9,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<NewsRepository> { NewsRepositoryImpl(newsApi = get()) }
-    single<BookMarkRepository> { BookMarkRepositoryImpl(bookMarkDao = get()) }
+    single<BookMarkRepository> { BookMarkRepositoryImpl(get()) }
+
+    
 }

@@ -8,7 +8,7 @@ import com.alexmumo.domain.repository.BookMarkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class BookMarkViewModel(private val bookMarkRepository: BookMarkRepository): ViewModel() {
+class BookMarkViewModel constructor(private val bookMarkRepository: BookMarkRepository): ViewModel() {
     val bookMarkedNews = bookMarkRepository.getBookMarks()
     fun saveBookMark(bookMarkEntity: BookMarkEntity) {
         viewModelScope.launch(Dispatchers.IO) {

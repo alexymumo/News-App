@@ -76,11 +76,9 @@ dependencies {
     implementation("io.insert-koin:koin-core:3.3.3")
 
     // Test
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.1.0")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.0.5")
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
-
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
 
     implementation("androidx.compose.material3:material3:1.1.0")
@@ -89,6 +87,7 @@ dependencies {
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")
 
     implementation("androidx.navigation:navigation-compose:2.6.0")
     androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
