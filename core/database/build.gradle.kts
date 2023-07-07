@@ -42,8 +42,14 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("com.google.truth:truth:1.1.3")
+    androidTestImplementation("android.arch.core:core-testing:1.1.1")
 
+    // Paging
     implementation("androidx.paging:paging-runtime:3.1.1")
+
+    // Roboelectric
+    testImplementation("org.robolectric:robolectric:4.9")
 
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
@@ -54,7 +60,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:2.5.1")
     implementation("androidx.room:room-paging:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
-    implementation("androidx.room:room-runtime:2.5.1")
+    api("androidx.room:room-runtime:2.5.1")
     kapt("androidx.room:room-compiler:2.5.1")
 
     // Koin
