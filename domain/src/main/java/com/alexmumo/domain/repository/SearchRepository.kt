@@ -4,6 +4,6 @@ import androidx.paging.PagingData
 import com.alexmumo.domain.model.Article
 import kotlinx.coroutines.flow.Flow
 
-interface NewsRepository {
-    suspend fun fetchNews(category: String): Flow<PagingData<Article>>
+interface SearchRepository {
+    suspend fun searchNews(queryString: String): Flow<PagingData<Article>>
 }

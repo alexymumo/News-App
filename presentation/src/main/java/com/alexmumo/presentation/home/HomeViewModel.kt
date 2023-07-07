@@ -38,10 +38,6 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
     private val _business = MutableStateFlow(ArticleState())
     val business = _business.asStateFlow()
 
-    fun setCategory(category: String) {
-        _category.value = category
-    }
-
     init {
         getTechnologyNews("technology")
         getScienceNews("science")

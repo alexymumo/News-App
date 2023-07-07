@@ -43,12 +43,14 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("com.google.truth:truth:1.1.3")
     androidTestImplementation("android.arch.core:core-testing:1.1.1")
+    implementation("androidx.test:core-ktx:1.5.0")
 
     // Paging
     implementation("androidx.paging:paging-runtime:3.1.1")
 
-    // Roboelectric
+    // Robolectric
     testImplementation("org.robolectric:robolectric:4.9")
 
     // Coroutine

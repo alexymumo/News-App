@@ -48,13 +48,13 @@ class NewsRemoteMediator(
                     remoteKeys?.nextKey?.minus(1) ?: 1
                 }
                 LoadType.APPEND ->  {
-                    val remoteKeys = getRemoteKeyLastItem(state)
+                    val remoteKeys = getLastRemoteKey(state)
                     val nextKey = remoteKeys?.nextKey
                         ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
                     nextKey
                 }
                 LoadType.PREPEND ->  {
-                    val remoteKey = getRemoteKeyToLastItem(state)
+                    val remoteKey = getFirstRemoteKey(state)
                     val prevKey = remoteKey?.prevKey
                         ?: return MediatorResult.Success(endOfPaginationReached = remoteKey != null)
                     prevKey
@@ -84,16 +84,24 @@ class NewsRemoteMediator(
         }
     }
 
-    private fun getRemoteKeyToLastItem(state: PagingState<Int, Article>): RemoteKeyEntity? {
-        TODO()
+    private suspend fun getFirstRemoteKey(state: PagingState<Int, Article>): RemoteKeyEntity? {
+        return state.pages.firstOrNull { it.data.isNotEmpty()} ?.data?.firstOrNull() ?.let { article ->
+            newsDatabase.remoteKeyDao().getRemoteKeys(article.url)
+        }
     }
 
-    private fun getRemoteKeyLastItem(state: PagingState<Int, Article>): RemoteKeyEntity? {
-        TODO()
+    private suspend fun getLastRemoteKey(state: PagingState<Int, Article>): RemoteKeyEntity? {
+        return state.pages.lastOrNull {it.data.isNotEmpty()} ?.data?.lastOrNull()?.let { article ->
+            newsDatabase.remoteKeyDao().getRemoteKeys(article.url)
+        }
     }
 
-    private fun getRemoteKeyClosesToCurrentPosition(state: PagingState<Int, Article>): RemoteKeyEntity? {
-        TODO()
+    private suspend fun getRemoteKeyClosesToCurrentPosition(state: PagingState<Int, Article>): RemoteKeyEntity? {
+        return state.anchorPosition?.let { position ->
+            state.closestItemToPosition(position)?.url?.let { url ->
+                newsDatabase.remoteKeyDao().getRemoteKeys(url)
+            }
+        }
     }
 
     override suspend fun initialize(): InitializeAction {
