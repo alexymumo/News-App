@@ -37,38 +37,37 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("com.google.truth:truth:1.1.3")
-    androidTestImplementation("android.arch.core:core-testing:1.1.1")
-    implementation("androidx.test:core-ktx:1.5.0")
+    implementation(libs.android.core)
+    implementation(libs.android.appcompat)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.expresso.core)
+    androidTestImplementation(libs.truth)
+    testImplementation(libs.truth)
+    androidTestImplementation(libs.core.testing)
+    implementation(libs.core.ktx)
 
     // Paging
-    implementation("androidx.paging:paging-runtime:3.1.1")
+    implementation(libs.paging.runtime)
 
     // Robolectric
-    testImplementation("org.robolectric:robolectric:4.9")
+    testImplementation(libs.roboelectric)
 
-    // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    // Coroutines
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.test)
 
     // Room
-    testImplementation("androidx.room:room-testing:2.5.1")
-    implementation("androidx.room:room-paging:2.5.1")
-    implementation("androidx.room:room-ktx:2.5.1")
-    api("androidx.room:room-runtime:2.5.1")
-    kapt("androidx.room:room-compiler:2.5.1")
+    testImplementation(libs.room.testing)
+    implementation(libs.room.paging)
+    implementation(libs.room.ktx)
+    api(libs.room.runtime)
+    kapt(libs.room.compiler)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.3.3")
+    implementation(libs.koin.android)
 
     // Timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 
 }

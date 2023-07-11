@@ -35,14 +35,6 @@ subprojects {
             endWithNewline()
         }
 
-        java {
-            target("**/*.java")
-            googleJavaFormat().aosp()
-            removeUnusedImports()
-            trimTrailingWhitespace()
-            indentWithSpaces()
-            endWithNewline()
-        }
         format("xml") {
             target()
             indentWithSpaces()

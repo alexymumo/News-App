@@ -64,59 +64,46 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:repository"))
 
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
-    implementation("androidx.activity:activity-compose:1.3.1")
-    implementation("androidx.compose.runtime:runtime-livedata:1.3.1")
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
+    // Compose
+    implementation(libs.bundles.compose)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.3.3")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.2")
-    implementation("io.insert-koin:koin-core:3.3.3")
-
-    // Test
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-
-    implementation("androidx.compose.material3:material3:1.1.0")
-    implementation("androidx.compose.runtime:runtime-livedata:1.4.3")
-    implementation("androidx.compose.ui:ui-util:1.4.3")
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.core)
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")
+    implementation(libs.bundles.lifecycle)
 
-    implementation("androidx.navigation:navigation-compose:2.6.0")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.6.0")
+    // Navigation
+    implementation(libs.compose.navigation)
+    androidTestImplementation(libs.compose.navigation.testing)
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.robolectric:robolectric:4.9")
+    testImplementation(libs.junit)
+    testImplementation(libs.roboelectric)
+
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     // Splashscreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.splashscreen.core)
 
-    // Coil - Compose
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    // Coil-Compose
+    implementation(libs.coil.compose)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.expresso.core)
 
     // Paging
-    implementation("androidx.paging:paging-runtime:3.1.0")
-    implementation("androidx.paging:paging-compose:3.2.0-beta01")
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
 
-    // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    // Coroutines
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.test)
 
     // Timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 }
 
 

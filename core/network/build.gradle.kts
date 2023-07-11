@@ -37,32 +37,40 @@ android {
 dependencies {
 
     implementation(project(":common"))
-    //implementation(project(":core:database"))
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.android.core)
+    implementation(libs.android.appcompat)
+    testImplementation(libs.junit)
+
+    // Coroutines
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.test)
+
+    androidTestImplementation(libs.expresso.core)
+
+    debugImplementation(libs.chunker.debug)
+    releaseImplementation(libs.chunker.release)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.3.3")
+    implementation(libs.koin.android)
 
     // Okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
-    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.2")
+    implementation(libs.okhttp.interceptor)
+    implementation(libs.okhttp3.version)
 
     // Timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit.version)
+    implementation(libs.retrofit.gson)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    // Serialization-json
+    implementation(libs.kotlin.serializatin)
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.test)
 }

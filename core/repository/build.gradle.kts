@@ -43,30 +43,29 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":common"))
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(libs.android.core)
+    implementation(libs.android.appcompat)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.expresso.core)
 
     // Paging
-    implementation("androidx.paging:paging-runtime:3.1.0")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha20")
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
 
     // Koin
-    implementation("io.insert-koin:koin-android:3.3.3")
+    implementation(libs.koin.android)
 
     // Timber
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation(libs.retrofit.version)
     
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.test)
 
-    implementation("androidx.room:room-ktx:2.5.1")
+    implementation(libs.room.ktx)
 
 }

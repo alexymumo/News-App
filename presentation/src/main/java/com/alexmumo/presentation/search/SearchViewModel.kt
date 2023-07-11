@@ -23,7 +23,6 @@ class SearchViewModel constructor(private val searchRepository: SearchRepository
     private val _search = MutableStateFlow(ArticleState())
     val search = _search.asStateFlow()
 
-
     fun searchArticle(queryString: String) {
         viewModelScope.launch {
             searchRepository.searchNews(queryString).map { articles ->
