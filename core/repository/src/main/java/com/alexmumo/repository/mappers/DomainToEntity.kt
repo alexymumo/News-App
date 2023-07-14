@@ -1,8 +1,6 @@
 package com.alexmumo.repository.mappers
 
-import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.database.entity.SourceEntity
-import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.model.Source
 
 /*
@@ -21,12 +19,9 @@ internal fun Article.toEntity(): BookMarkEntity {
 
  */
 
-
 fun Source.toSourceEntity(): SourceEntity {
     return SourceEntity(
         this.id,
         this.name
     )
 }
-
-

@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.alexmumo.database.entity.RemoteKeyEntity
 
-
 @Dao
 interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

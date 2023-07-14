@@ -9,8 +9,8 @@ import com.alexmumo.repository.mappers.toDomain
 import retrofit2.HttpException
 import java.io.IOException
 
-private const val STARTING_NEWS_PAGE = 1;
-class NewsPagingSource(private val category:String, private val newsApi: NewsApi): PagingSource<Int, Article>() {
+private const val STARTING_NEWS_PAGE = 1
+class NewsPagingSource(private val category: String, private val newsApi: NewsApi) : PagingSource<Int, Article>() {
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { position ->
             state.closestPageToPosition(position)?.prevKey?.plus(1)

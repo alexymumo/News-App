@@ -34,9 +34,6 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = getViewModel()
 ) {
-    val state = viewModel.uiState.collectAsState().value
-    val news = state.articles?.collectAsLazyPagingItems()
-
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("News App") })
@@ -55,13 +52,12 @@ fun HomeScreen(
 }
 
 sealed class TabItem(val title: String) {
-    object GeneralItem: TabItem("General")
-    object BusinessItem: TabItem("Business")
-    object TechItem: TabItem("Technology")
-    object EntertainmentItem: TabItem("Entertainment")
-    object HealthItem: TabItem("Health")
+    object GeneralItem : TabItem("General")
+    object BusinessItem : TabItem("Business")
+    object TechItem : TabItem("Technology")
+    object SportItem : TabItem("Sports")
+    object HealthItem : TabItem("Health")
 }
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -69,7 +65,7 @@ fun RowItem(
     viewModel: HomeViewModel = getViewModel(),
     navController: NavController
 ) {
-    val tabs = listOf(TabItem.GeneralItem, TabItem.BusinessItem, TabItem.EntertainmentItem, TabItem.TechItem, TabItem.HealthItem)
+    val tabs = listOf(TabItem.GeneralItem, TabItem.BusinessItem, TabItem.TechItem, TabItem.SportItem, TabItem.HealthItem)
     val pageState = rememberPagerState()
     Tabs(tabs = tabs, pageState = pageState)
     Screens(tabs = tabs, pageState = pageState, homeViewModel = viewModel, navController = navController)
@@ -78,7 +74,7 @@ fun RowItem(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Tabs(
-    tabs:List<TabItem>,
+    tabs: List<TabItem>,
     pageState: PagerState
 ) {
     val scope = rememberCoroutineScope()
@@ -98,10 +94,10 @@ fun Tabs(
                 },
                 selected = pageState.currentPage == index,
                 onClick = {
-                scope.launch {
-                    pageState.animateScrollToPage(index)
+                    scope.launch {
+                        pageState.animateScrollToPage(index)
+                    }
                 }
-            }
             )
         }
     }
@@ -115,14 +111,11 @@ fun Screens(
     homeViewModel: HomeViewModel,
     navController: NavController
 ) {
-    val homeState = homeViewModel.uiState.collectAsState().value
-    val news = homeState.articles?.collectAsLazyPagingItems()
+    val generalState = homeViewModel.general.collectAsState().value
+    val general = generalState.articles?.collectAsLazyPagingItems()
 
     val techState = homeViewModel.technology.collectAsState().value
-    val tech = techState.articles?.collectAsLazyPagingItems()
-
-    val healthState = homeViewModel.health.collectAsState().value
-    val health = healthState.articles?.collectAsLazyPagingItems()
+    val technology = techState.articles?.collectAsLazyPagingItems()
 
     val businessState = homeViewModel.business.collectAsState().value
     val business = businessState.articles?.collectAsLazyPagingItems()
@@ -130,14 +123,16 @@ fun Screens(
     val sportState = homeViewModel.sports.collectAsState().value
     val sports = sportState.articles?.collectAsLazyPagingItems()
 
+    val healthState = homeViewModel.health.collectAsState().value
+    val health = healthState.articles?.collectAsLazyPagingItems()
 
-    HorizontalPager(state = pageState,pageCount = tabs.size) { count ->
+    HorizontalPager(state = pageState, pageCount = tabs.size) { count ->
         Column(modifier = Modifier.fillMaxSize()) {
             if (count == 0) {
                 LazyColumn {
-                    tech?.let {
+                    general?.let {
                         items(it.itemCount) { index ->
-                            tech[index]?.let { article ->
+                            general[index]?.let { article ->
                                 NewsCard(
                                     onNavigate = { article ->
                                         navController.currentBackStackEntry?.savedStateHandle?.set(
@@ -155,12 +150,19 @@ fun Screens(
             }
             if (count == 1) {
                 LazyColumn {
-                    health?.let {
+                    business?.let {
                         items(it.itemCount) { index ->
-                            health[index]?.let { article ->
+                            business[index]?.let { article ->
                                 NewsCard(
-                                    onNavigate = { article -> it },
-                                    article = article)
+                                    onNavigate = { article ->
+                                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                                            key = "news",
+                                            value = article
+                                        )
+                                        navController.navigate(NavItem.Detail.route)
+                                    },
+                                    article = article
+                                )
                             }
                         }
                     }
@@ -168,11 +170,17 @@ fun Screens(
             }
             if (count == 2) {
                 LazyColumn {
-                    news?.let {
+                    technology?.let {
                         items(it.itemCount) { index ->
-                            news[index]?.let { article ->
+                            technology[index]?.let { article ->
                                 NewsCard(
-                                    onNavigate = { article -> it },
+                                    onNavigate = { article ->
+                                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                                            key = "news",
+                                            value = article
+                                        )
+                                        navController.navigate(NavItem.Detail.route)
+                                    },
                                     article = article,
                                 )
                             }
@@ -186,7 +194,12 @@ fun Screens(
                         items(it.itemCount) { index ->
                             sports[index]?.let { article ->
                                 NewsCard(
-                                    onNavigate = {article -> it },
+                                    onNavigate = { article ->
+                                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                                            key = "news",
+                                            value = article
+                                        )
+                                    },
                                     article = article
                                 )
                             }
@@ -197,11 +210,16 @@ fun Screens(
 
             if (count == 4) {
                 LazyColumn {
-                    business?.let {
+                    health?.let {
                         items(it.itemCount) { index ->
-                            business[index]?.let {article ->
+                            health[index]?.let { article ->
                                 NewsCard(
-                                    onNavigate = {article -> it },
+                                    onNavigate = { news ->
+                                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                                            key = "news",
+                                            value = news
+                                        )
+                                    },
                                     article = article
                                 )
                             }
@@ -209,12 +227,12 @@ fun Screens(
                     }
                 }
             }
-        }        
+        }
     }
 }
 
 @Preview
 @Composable
 fun HomeScreePreview() {
-    //HomeScreen()
+    // HomeScreen()
 }

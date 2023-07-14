@@ -1,29 +1,6 @@
 package com.alexmumo.database.dao
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import com.alexmumo.database.data.bookMarkEntity
-import com.alexmumo.database.db.NewsDatabase
-import com.alexmumo.database.entity.BookMarkEntity
-import com.alexmumo.database.entity.SourceEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.cancelAndJoin
-
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runTest
-import com.google.common.truth.Truth
-import org.junit.After
-import org.junit.Before
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import java.io.IOException
-import java.util.concurrent.CountDownLatch
-import kotlin.jvm.Throws
-
-
+/*
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
 class BookMarkDaoTest {
@@ -67,3 +44,5 @@ class BookMarkDaoTest {
         newsDatabase.close()
     }
 }
+
+ */

@@ -17,7 +17,6 @@ val networkModule = module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(NewsApi::class.java)
-
     }
 }
 
@@ -28,7 +27,7 @@ fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
 fun provideOkhttpClient(): OkHttpClient {
     val client = OkHttpClient.Builder()
         .callTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30 , TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)
         .addInterceptor(providesHttpLoggingInterceptor())
     return client.build()

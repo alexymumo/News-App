@@ -10,7 +10,6 @@ import com.alexmumo.database.db.NewsDatabase
 import com.alexmumo.database.entity.RemoteKeyEntity
 import com.alexmumo.domain.model.Article
 import com.alexmumo.network.api.NewsApi
-import com.alexmumo.repository.mappers.toDomain
 import com.alexmumo.repository.mappers.toEntity
 import retrofit2.HttpException
 import java.io.IOException
@@ -19,7 +18,8 @@ import java.io.IOException
 class NewsRemoteMediator(
     private val category: String,
     private val newsDatabase: NewsDatabase,
-    private val newsApi: NewsApi): RemoteMediator<Int,Article>() {
+    private val newsApi: NewsApi
+) : RemoteMediator<Int, Article>() {
 
     val articleDao = newsDatabase.articleDao()
     val remoteKeyDao = newsDatabase.remoteKeyDao()
@@ -42,18 +42,18 @@ class NewsRemoteMediator(
             val newsResponse = response.body()?.articles ?: listOf()
             val endOfPagination = newsResponse.isNullOrEmpty()
 
-            val page = when(loadType) {
+            val page = when (loadType) {
                 LoadType.REFRESH -> {
                     val remoteKeys = getRemoteKeyClosesToCurrentPosition(state)
                     remoteKeys?.nextKey?.minus(1) ?: 1
                 }
-                LoadType.APPEND ->  {
+                LoadType.APPEND -> {
                     val remoteKeys = getLastRemoteKey(state)
                     val nextKey = remoteKeys?.nextKey
                         ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
                     nextKey
                 }
-                LoadType.PREPEND ->  {
+                LoadType.PREPEND -> {
                     val remoteKey = getFirstRemoteKey(state)
                     val prevKey = remoteKey?.prevKey
                         ?: return MediatorResult.Success(endOfPaginationReached = remoteKey != null)
@@ -85,13 +85,13 @@ class NewsRemoteMediator(
     }
 
     private suspend fun getFirstRemoteKey(state: PagingState<Int, Article>): RemoteKeyEntity? {
-        return state.pages.firstOrNull { it.data.isNotEmpty()} ?.data?.firstOrNull() ?.let { article ->
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull() ?.let { article ->
             newsDatabase.remoteKeyDao().getRemoteKeys(article.url)
         }
     }
 
     private suspend fun getLastRemoteKey(state: PagingState<Int, Article>): RemoteKeyEntity? {
-        return state.pages.lastOrNull {it.data.isNotEmpty()} ?.data?.lastOrNull()?.let { article ->
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { article ->
             newsDatabase.remoteKeyDao().getRemoteKeys(article.url)
         }
     }

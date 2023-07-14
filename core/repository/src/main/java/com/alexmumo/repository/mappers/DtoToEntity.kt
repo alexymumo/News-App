@@ -5,7 +5,7 @@ import com.alexmumo.database.entity.SourceEntity
 import com.alexmumo.network.dto.ArticleDto
 import com.alexmumo.network.dto.SourceDto
 
-internal fun ArticleDto.toEntity() : ArticleEntity {
+internal fun ArticleDto.toEntity(): ArticleEntity {
     return ArticleEntity(
         this.author,
         this.content,

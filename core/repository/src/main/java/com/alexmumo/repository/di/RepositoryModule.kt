@@ -8,9 +8,8 @@ import com.alexmumo.repository.repository.NewsRepositoryImpl
 import com.alexmumo.repository.repository.SearchRepositoryImpl
 import org.koin.dsl.module
 
-
 val repositoryModule = module {
-    single<NewsRepository> { NewsRepositoryImpl(newsDatabase = get(),newsApi = get()) }
-    single<SearchRepository> { SearchRepositoryImpl(newsApi =  get())  }
+    single<NewsRepository> { NewsRepositoryImpl(newsDatabase = get(), newsApi = get()) }
+    single<SearchRepository> { SearchRepositoryImpl(newsApi = get()) }
     single<BookMarkRepository> { BookMarkRepositoryImpl(get()) }
 }

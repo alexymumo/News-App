@@ -11,14 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-
-class HomeViewModel constructor(private val newsRepository: NewsRepository): ViewModel() {
+class HomeViewModel constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
     private val _category = MutableStateFlow<String?>(null)
     val category = _category.asStateFlow()
 
-    private val _uiState = MutableStateFlow(ArticleState())
-    val uiState = _uiState.asStateFlow()
+    private val _general = MutableStateFlow(ArticleState())
+    val general = _general.asStateFlow()
 
     private val _technology = MutableStateFlow(ArticleState())
     val technology = _technology.asStateFlow()
@@ -26,17 +25,17 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
     private val _sports = MutableStateFlow(ArticleState())
     val sports = _sports.asStateFlow()
 
+    private val _science = MutableStateFlow(ArticleState())
+    val science = _science.asStateFlow()
+
     private val _entertainment = MutableStateFlow(ArticleState())
     val entertainment = _entertainment.asStateFlow()
 
-    private val _trending = MutableStateFlow(ArticleState())
-    val trending = _trending.asStateFlow()
+    private val _business = MutableStateFlow(ArticleState())
+    val business = _business.asStateFlow()
 
     private val _health = MutableStateFlow(ArticleState())
     val health = _health.asStateFlow()
-
-    private val _business = MutableStateFlow(ArticleState())
-    val business = _business.asStateFlow()
 
     init {
         getTechnologyNews("technology")
@@ -44,7 +43,21 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
         getSportsNews("sports")
         getBusinessNews("business")
         getGeneralNews("general")
+        getHealthNews("health")
     }
+
+    private fun getHealthNews(category: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val health = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _health.update { it.copy(articles = health, isLoading = false) }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    /*general business, tech, entertainment health*/
 
     private fun getTechnologyNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,14 +68,13 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
                 e.printStackTrace()
             }
         }
-
     }
 
     private fun getScienceNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val trending = newsRepository.fetchNews(category).cachedIn(viewModelScope)
-                _trending.update { it.copy(articles = trending, isLoading = false) }
+                val science = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _science.update { it.copy(articles = science, isLoading = false) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -72,14 +84,13 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository): Vie
     private fun getGeneralNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val breaking = newsRepository.fetchNews(category).cachedIn(viewModelScope)
-                _uiState.update { it.copy(articles = breaking, isLoading = false) }
+                val general = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                _general.update { it.copy(articles = general, isLoading = false) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-
 
     private fun getSportsNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {

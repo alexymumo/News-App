@@ -18,7 +18,6 @@ internal fun ArticleDto.toDomain(): Article {
     )
 }
 
-
 internal fun SourceDto.toSource(): Source {
     return Source(
         this.id,

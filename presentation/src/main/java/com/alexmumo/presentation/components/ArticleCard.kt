@@ -83,6 +83,6 @@ fun NewsCard(
 @Preview
 @Composable
 fun ArticlePreview() {
-    //NewsCard()
-    //ArticleCard()
+    // NewsCard()
+    // ArticleCard()
 }

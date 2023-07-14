@@ -13,7 +13,8 @@ val databaseModule = module {
         Room.databaseBuilder(
             androidContext(),
             NewsDatabase::class.java,
-            "article.db").fallbackToDestructiveMigration().build()
+            "article.db"
+        ).fallbackToDestructiveMigration().build()
     }
 
     single<BookMarkDao> {

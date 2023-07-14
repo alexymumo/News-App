@@ -10,12 +10,11 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
-
 private const val STARTING_KEY = 1
 class SearchPagingSource constructor(
     private val newsApi: NewsApi,
     private val queryString: String
-): PagingSource<Int, Article>() {
+) : PagingSource<Int, Article>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val page = params.key ?: STARTING_KEY
         return try {

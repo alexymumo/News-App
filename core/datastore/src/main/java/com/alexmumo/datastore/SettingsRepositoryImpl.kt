@@ -10,11 +10,10 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-
 val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class SettingsRepositoryImpl constructor(private val context: Context): SettingsRepository {
+class SettingsRepositoryImpl constructor(private val context: Context) : SettingsRepository {
     private val NEWS_THEME = intPreferencesKey(name = "theme")
-    override suspend fun getTheme(): Flow<Int> =  context.datastore.data.map { settings ->
+    override suspend fun getTheme(): Flow<Int> = context.datastore.data.map { settings ->
         settings[NEWS_THEME] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
 

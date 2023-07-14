@@ -3,10 +3,8 @@ package com.alexmumo.presentation.settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -14,31 +12,45 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.R
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SettingScreen(
     navController: NavController
 ) {
-    //val settings = viewModel.theme.collectAsState().value ?:0
+    // val settings = viewModel.theme.collectAsState().value ?:0
     Scaffold(
         topBar = {
-            Text(text = "Settings")
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Settings",
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 18.sp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            )
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
+            ) {
+            }
         }
     }
 }
@@ -50,11 +62,9 @@ fun SettingsScreenPreview() {
     SettingScreen(navController = navController)
 }
 
-
-
 @Composable
 fun SettingsItem(
-    onClick: (Int) ->Unit,
+    onClick: (Int) -> Unit,
     theme: Int
 ) {
     Card(
@@ -75,9 +85,8 @@ fun SettingsItem(
     }
 }
 
-
 @Preview
 @Composable
 fun SettingsItemPreview() {
-    //SettingsItem()
+    // SettingsItem()
 }

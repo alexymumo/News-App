@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class SettingsViewModel constructor(private val settingsRepository: SettingsRepository): ViewModel() {
+class SettingsViewModel constructor(private val settingsRepository: SettingsRepository) : ViewModel() {
     private val _theme = MutableStateFlow<Int?>(null)
     val theme = _theme.asStateFlow()
 
