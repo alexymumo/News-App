@@ -1,5 +1,6 @@
 package com.alexmumo.presentation.bookmarks.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +35,7 @@ fun BookMarkItem(
             .fillMaxWidth()
             .height(100.dp)
             .padding(5.dp)
+            .testTag("bookmark_tag")
     ) {
         Row(
             modifier = Modifier
@@ -60,13 +64,25 @@ fun BookMarkItem(
                     text = bookMarkEntity.description!!,
                     maxLines = 2,
                     fontSize = 16.sp,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    fontWeight = FontWeight.Normal
                 )
-                Text(
-                    text = bookMarkEntity.author!!,
-                    maxLines = 1,
-                    fontSize = 16.sp
-                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    Text(
+                        text = bookMarkEntity.author!!,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        maxLines = 1
+                    )
+                    Text(
+                        text = bookMarkEntity.sourceEntity.name,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        maxLines = 1
+                    )
+                }
             }
         }
     }

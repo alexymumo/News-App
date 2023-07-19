@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -33,7 +32,7 @@ fun NewsCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.testTag("news_card_tag"),
         shape = RoundedCornerShape(4.dp),
         onClick = {
             onNavigate(article)
@@ -43,39 +42,42 @@ fun NewsCard(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(all = 4.dp)
-                .testTag("news_card")
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(article.urlToImage)
                     .crossfade(true)
                     .build(),
-                contentDescription = "url_image",
+                contentDescription = null,
                 modifier = modifier
-                    .height(130.dp)
-                    .width(130.dp).clip(RoundedCornerShape(8.dp)),
+                    .height(145.dp)
+                    .width(145.dp)
+                    .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )
-            Spacer(modifier = modifier.width(2.dp))
+            Spacer(modifier = modifier.width(4.dp))
             Column {
                 Text(
-                    text = article.title!!,
-                    maxLines = 2,
-                    fontWeight = FontWeight.Thin,
-                    fontSize = 16.sp
+                    text = article.source.name,
+                    maxLines = 1,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
                 )
                 Spacer(modifier = modifier.height(4.dp))
-                Text(
-                    text = article.source.name,
-                    fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Light,
-                    maxLines = 1
-                )
+                article.title?.let {
+                    Text(
+                        text = it,
+                        maxLines = 3,
+                        fontWeight = FontWeight.Thin,
+                        fontSize = 16.sp
+                    )
+                }
             }
         }
         Divider(
-            modifier = Modifier.fillMaxWidth().height(2.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(2.dp)
         )
     }
 }

@@ -25,11 +25,6 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private val _sports = MutableStateFlow(ArticleState())
     val sports = _sports.asStateFlow()
 
-    private val _science = MutableStateFlow(ArticleState())
-    val science = _science.asStateFlow()
-
-    private val _entertainment = MutableStateFlow(ArticleState())
-    val entertainment = _entertainment.asStateFlow()
 
     private val _business = MutableStateFlow(ArticleState())
     val business = _business.asStateFlow()
@@ -39,7 +34,6 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
 
     init {
         getTechnologyNews("technology")
-        getScienceNews("science")
         getSportsNews("sports")
         getBusinessNews("business")
         getGeneralNews("general")
@@ -49,7 +43,7 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getHealthNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val health = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                val health = newsRepository.fetchNews(category=category).cachedIn(viewModelScope)
                 _health.update { it.copy(articles = health, isLoading = false) }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -64,17 +58,6 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
             try {
                 val tech = newsRepository.fetchNews(category).cachedIn(viewModelScope)
                 _technology.update { it.copy(articles = tech, isLoading = false) }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private fun getScienceNews(category: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val science = newsRepository.fetchNews(category).cachedIn(viewModelScope)
-                _science.update { it.copy(articles = science, isLoading = false) }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

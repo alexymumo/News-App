@@ -86,12 +86,16 @@ room-runtime = {module = "androidx.room:room-runtime", version.ref = "room"}
 room-compiler = {module = "androidx.room:room-compiler", version.ref = "room"}
 firebase-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.3.2"
 firebase-analytics = "com.google.firebase:firebase-analytics-ktx:21.2.0"
+junit-androidx = "androidx.test.ext:junit:1.1.5"
+junit-androidx-ktx = "androidx.test.ext:junit-ktx:1.1.5"
+test-junit-ktx = "androidx.test.ext:junit-ktx:1.1.5"
 
 [bundles]
 compose = ["coil-compose", "compose-activity", "compose-navigation", "compose-material", "compose-navigation-testing", "compose-ui", "compose-ui-test-junit", "compose-ui-test-manifest", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-ui-util"]
 room = ["room-compiler", "room-ktx", "room-paging", "room-runtime", "room-testing"]
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 lifecycle = ["lifecycle-viewmodel-compose", "lifecycle-livedata", "lifecycle-ktx"]
+test = ["test-junit-ktx"]
 
 
 

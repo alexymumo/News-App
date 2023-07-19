@@ -14,11 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.bookmarks.components.BookMarkItem
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun BookMarkScreen(
+    navController: NavController,
     viewModel: BookMarkViewModel = getViewModel()
 ) {
     val bookmarks = viewModel.bookMarkedNews.collectAsState(emptyList())
@@ -53,5 +56,6 @@ fun BookMarkScreen(
 @Preview
 @Composable
 fun BookMarkScreenPreview() {
-    BookMarkScreen()
+    val navController = rememberNavController()
+    BookMarkScreen(navController = navController)
 }

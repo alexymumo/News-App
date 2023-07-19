@@ -1,7 +1,9 @@
-package com.alexmumo.presentation.navigation.navigation
+package com.alexmumo.presentation.settings
 
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class NavigationTest
+class SettingScreenKtTest {
+
+}

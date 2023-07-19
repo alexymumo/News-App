@@ -82,6 +82,8 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.roboelectric)
 
+    testImplementation("org.robolectric:robolectric:4.9")
+
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     // Splashscreen
@@ -104,6 +106,11 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+
 }
 
 

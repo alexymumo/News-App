@@ -1,8 +1,9 @@
 ## News-App
-- Android application built using kotlin and [News Api]()
+- News App is a multi-module news application built with Jetpack Compose and kotlin. 
 
-## Table of Contents
--[Prerequisite]
--[Architecture]
--[Tech-stack]
--[Screen-shots]
+## Tech Stack
+Kotlin - 
+Koin
+Retrofit
+Gson
+Lifecycle

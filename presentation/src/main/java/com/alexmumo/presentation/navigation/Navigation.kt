@@ -18,12 +18,10 @@ fun Navigation(navController: NavHostController) {
         startDestination = NavItem.Home.route
     ) {
         composable(NavItem.Home.route) {
-            HomeScreen(
-                navController = navController
-            )
+            HomeScreen(navController = navController)
         }
         composable(NavItem.Bookmark.route) {
-            BookMarkScreen()
+            BookMarkScreen(navController = navController)
         }
 
         composable(NavItem.Detail.route) {
@@ -32,7 +30,6 @@ fun Navigation(navController: NavHostController) {
                 DetailScreen(navController = navController, article = article)
             }
         }
-
         composable(NavItem.Search.route) {
             SearchScreen(navController = navController)
         }
