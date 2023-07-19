@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.settings.view
+package com.alexmumo.presentation.auth
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import com.alexmumo.presentation.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -27,9 +26,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowLog
 
 @RunWith(RobolectricTestRunner::class)
-class SettingCardTest {
+class LoginScreenTest {
     @get:Rule
-    val composeRule = createComposeRule()
+    val composeTestRule = createComposeRule()
 
     @Before
     fun setUp() {
@@ -37,11 +36,11 @@ class SettingCardTest {
     }
 
     @Test
-    fun `test setting card is displayed`() {
-        composeRule.setContent {
-            SettingCard(onClick = {}, title = "settings", icon = R.drawable.ic_theme)
+    fun `test login screen is displayed`() {
+        composeTestRule.setContent {
+            LoginScreen()
         }
-        composeRule.onNodeWithTag("settings_tag").assertIsDisplayed()
-        composeRule.onNodeWithTag("settings_tag").assertExists()
+        composeTestRule.onNodeWithTag("login_tag").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("login_tag").assertExists()
     }
 }

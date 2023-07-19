@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -77,6 +78,8 @@ dependencies {
 
     // Navigation
     implementation(libs.compose.navigation)
+    implementation("com.google.firebase:firebase-database-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
     androidTestImplementation(libs.compose.navigation.testing)
 
     testImplementation(libs.junit)

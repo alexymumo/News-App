@@ -13,35 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.settings.view
+package com.alexmumo.presentation.navigation
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithTag
-import com.alexmumo.presentation.R
+import androidx.compose.ui.test.onNodeWithText
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.testing.TestNavHostController
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadows.ShadowLog
 
-@RunWith(RobolectricTestRunner::class)
-class SettingCardTest {
+class NavigationTest {
     @get:Rule
     val composeRule = createComposeRule()
+    private lateinit var navHostController: TestNavHostController
 
     @Before
-    fun setUp() {
-        ShadowLog.stream = System.out
+    fun setupNavigation() {
+        composeRule.setContent {
+            navHostController = TestNavHostController(LocalContext.current)
+            navHostController.navigatorProvider.addNavigator(ComposeNavigator())
+            Navigation(navController = navHostController)
+        }
     }
 
     @Test
-    fun `test setting card is displayed`() {
+    fun `test start destination is home screen`() {
         composeRule.setContent {
-            SettingCard(onClick = {}, title = "settings", icon = R.drawable.ic_theme)
+            composeRule
+                .onNodeWithText("Home")
+                .assertIsDisplayed()
+                .assertExists()
         }
-        composeRule.onNodeWithTag("settings_tag").assertIsDisplayed()
-        composeRule.onNodeWithTag("settings_tag").assertExists()
     }
 }

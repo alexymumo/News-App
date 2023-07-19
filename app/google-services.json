@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "140042126556",
-    "project_id": "news-app-a1f1a",
-    "storage_bucket": "news-app-a1f1a.appspot.com"
+    "project_number": "707558434399",
+    "project_id": "protean-blend-337923",
+    "storage_bucket": "protean-blend-337923.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:140042126556:android:0bdf10910a3619c4f92019",
+        "mobilesdk_app_id": "1:707558434399:android:cdc5672d3201ff49539dea",
         "android_client_info": {
           "package_name": "com.alexmumo.news_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "140042126556-deqa79ihlplrve92so6ldt7dcc63g809.apps.googleusercontent.com",
+          "client_id": "707558434399-8ru47jvfkf7mfibsdie2fgk3j55qcs5u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALeH5euVOem7jc4JytlKpaTkI1FedeXXY"
+          "current_key": "AIzaSyDXfSkNjmrO8K0abKpT4AngZ7v4CGCuhc8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "140042126556-deqa79ihlplrve92so6ldt7dcc63g809.apps.googleusercontent.com",
+              "client_id": "707558434399-8ru47jvfkf7mfibsdie2fgk3j55qcs5u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
