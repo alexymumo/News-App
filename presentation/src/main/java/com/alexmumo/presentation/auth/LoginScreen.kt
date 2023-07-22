@@ -23,9 +23,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -79,7 +83,10 @@ fun LoginScreen() {
                 maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 10.dp)
+                    .padding(all = 10.dp),
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Email, contentDescription = null)
+                }
             )
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
@@ -87,7 +94,12 @@ fun LoginScreen() {
                 onValueChange = { name = it },
                 label = { Text("Name") },
                 maxLines = 1,
-                modifier = Modifier.fillMaxWidth().padding(all = 10.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 10.dp),
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Lock, contentDescription = null)
+                }
             )
         }
         Spacer(modifier = Modifier.height(10.dp))

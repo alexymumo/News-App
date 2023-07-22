@@ -2,9 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
-    id("com.google.firebase.appdistribution")
+    //id("com.google.gms.google-services")
+    //id("com.google.firebase.crashlytics")
+    //id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -50,9 +50,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    buildFeatures {
-        viewBinding = true
-    }
+
 }
 
 dependencies {
@@ -62,6 +60,7 @@ dependencies {
     implementation(project(":core:repository"))
     implementation(project(":core:network"))
     implementation(project(":core:database"))
+    implementation(project(":core:datastore"))
 
     implementation(libs.android.appcompat)
     implementation(libs.android.core)
@@ -72,10 +71,9 @@ dependencies {
     implementation(libs.koin.core)
 
     // Firebase
-    implementation(libs.bundles.firebase)
+    //implementation(libs.bundles.firebase)
+    //implementation(platform(libs.firebase.bom))
 
     // Timber
     implementation(libs.timber)
-    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
-    implementation("com.google.firebase:firebase-database-ktx:20.2.2")
 }

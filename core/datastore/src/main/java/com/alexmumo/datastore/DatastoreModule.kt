@@ -16,13 +16,16 @@
 package com.alexmumo.datastore
 
 import com.alexmumo.domain.repository.SettingRepository
-import kotlinx.coroutines.flow.Flow
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 
-class SettingsRepositoryImpl(private val newsPreference: NewsPreference) : SettingRepository {
-    override val getTheme: Flow<Int>
-        get() = newsPreference.getTheme
-
-    override suspend fun setTheme(theme: Int) {
-        newsPreference.setTheme(theme = theme)
+val datastoreModule = module {
+    single<SettingRepository> {
+        SettingsRepositoryImpl(newsPreference = get())
+    }
+    single {
+        NewsPreference(
+            context = androidApplication().applicationContext
+        )
     }
 }

@@ -16,21 +16,25 @@
 package com.alexmumo.presentation.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.R
-import com.alexmumo.presentation.settings.view.SettingCard
+import com.alexmumo.presentation.settings.view.SettingsItem
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -38,6 +42,8 @@ fun SettingScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel = getViewModel()
 ) {
+    val themeDialog = settingsViewModel.themeDialog.value
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -58,8 +64,9 @@ fun SettingScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            SettingCard(onClick = {
-            }, title = "Change Theme", icon = R.drawable.ic_theme)
+            SettingsItem(title = "Change Theme", icon = R.drawable.ic_theme)
+            Spacer(modifier = Modifier.height(5.dp))
+            SettingsItem(title = "Language", icon = R.drawable.language)
         }
     }
 }
@@ -68,7 +75,7 @@ fun SettingScreen(
 @Composable
 fun SettingsScreenPreview() {
     val navController = rememberNavController()
-    SettingScreen(navController = navController)
+    // SettingScreen(navController = navController)
 }
 
 @Preview

@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":domain"))
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
     testImplementation(libs.junit)

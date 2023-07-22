@@ -15,9 +15,14 @@
  */
 package com.alexmumo.datastore
 
+import com.alexmumo.domain.repository.SettingRepository
 import kotlinx.coroutines.flow.Flow
 
-interface SettingsRepository {
-    suspend fun getTheme(): Flow<Int>
-    suspend fun setTheme(theme: Int)
+class SettingsRepositoryImpl(private val newsPreference: NewsPreference) : SettingRepository {
+    override val getTheme: Flow<Int>
+        get() = newsPreference.getTheme
+
+    override suspend fun setTheme(theme: Int) {
+        newsPreference.setTheme(theme = theme)
+    }
 }

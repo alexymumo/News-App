@@ -16,16 +16,16 @@
 package com.alexmumo.news_app
 
 import android.util.Log
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 class CrashlyticsTree : Timber.Tree() {
-    private val crashlyticsTree = FirebaseCrashlytics.getInstance()
+    // private val crashlyticsTree = FirebaseCrashlytics.getInstance()
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.DEBUG || priority == Log.VERBOSE || priority == Log.INFO) {
             return
         }
+        /*
         crashlyticsTree.setCustomKey(KEY_PRIORITY, priority)
         if (tag != null) {
             crashlyticsTree.setCustomKey(KEY_TAG, tag)
@@ -37,6 +37,7 @@ class CrashlyticsTree : Timber.Tree() {
             crashlyticsTree.recordException(t)
         }
         crashlyticsTree.log(message)
+        */
     }
 
     companion object {

@@ -17,6 +17,7 @@ package com.alexmumo.news_app
 
 import android.app.Application
 import com.alexmumo.database.di.databaseModule
+import com.alexmumo.datastore.datastoreModule
 import com.alexmumo.network.di.networkModule
 import com.alexmumo.presentation.di.presentationModule
 import com.alexmumo.repository.di.repositoryModule
@@ -32,13 +33,13 @@ class NewsApplication : Application() {
         startKoin {
             androidLogger(level = Level.DEBUG)
             androidContext(this@NewsApplication)
-            modules(repositoryModule, networkModule, presentationModule, databaseModule)
+            modules(repositoryModule, networkModule, presentationModule, databaseModule, datastoreModule)
             initTimber()
         }
     }
 
     private fun initTimber() {
         Timber.plant(Timber.DebugTree())
-        Timber.plant(CrashlyticsTree())
+        // Timber.plant(CrashlyticsTree())
     }
 }

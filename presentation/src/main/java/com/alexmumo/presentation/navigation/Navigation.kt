@@ -32,7 +32,7 @@ import com.alexmumo.presentation.settings.SettingScreen
 fun Navigation(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = NavItem.Login.route
+        startDestination = NavItem.Home.route
     ) {
         composable(NavItem.Register.route) {
             RegisterScreen()

@@ -16,11 +16,29 @@
 package com.alexmumo.presentation.auth
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +48,7 @@ import com.alexmumo.presentation.common.theme.NewsAppTheme
 
 @Composable
 fun RegisterScreen() {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -41,6 +60,68 @@ fun RegisterScreen() {
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp
         )
+        var name by remember { mutableStateOf("Name") }
+        var email by remember { mutableStateOf("Email") }
+        var password by remember { mutableStateOf("Password") }
+        Spacer(modifier = Modifier.height(20.dp))
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(all = 5.dp),
+            shape = RoundedCornerShape(10.dp),
+            elevation = CardDefaults.cardElevation(focusedElevation = 20.dp)
+        ) {
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                maxLines = 1,
+                label = {
+                    Text(text = "Name")
+                },
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                maxLines = 1,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Email, contentDescription = null)
+                },
+                label = {
+                    Text(text = "Email")
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(5.dp))
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = {
+                    Text(text = "Password")
+                },
+                maxLines = 1,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Lock, contentDescription = null)
+                },
+                trailingIcon = {
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Register",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+        }
     }
 }
 

@@ -15,31 +15,40 @@
  */
 package com.alexmumo.presentation.settings
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alexmumo.datastore.SettingsRepository
+import com.alexmumo.domain.repository.SettingRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class SettingsViewModel constructor(private val settingsRepository: SettingsRepository) : ViewModel() {
+class SettingsViewModel constructor(private val settingRepository: SettingRepository) : ViewModel() {
     private val _theme = MutableStateFlow<Int?>(null)
     val theme = _theme.asStateFlow()
 
+    private val _themeDialog = mutableStateOf(false)
+    val themeDialog: State<Boolean> = _themeDialog
+
+    fun dialogThemeState(value: Boolean) {
+        _themeDialog.value = value
+    }
     init {
         getTheme()
     }
 
     fun setTheme(theme: Int) {
         viewModelScope.launch {
-            settingsRepository.setTheme(theme = theme)
+            settingRepository.setTheme(theme = theme)
+            dialogThemeState(false)
         }
     }
 
     private fun getTheme() {
         viewModelScope.launch {
-            settingsRepository.getTheme().collectLatest { theme ->
+            settingRepository.getTheme.collectLatest { theme ->
                 _theme.value = theme
             }
         }

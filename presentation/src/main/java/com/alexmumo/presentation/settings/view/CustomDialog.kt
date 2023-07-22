@@ -16,42 +16,70 @@
 package com.alexmumo.presentation.settings.view
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alexmumo.presentation.R
 
 @Composable
-fun SettingCard(
-    title: String,
-    icon: Int,
-    value: Int,
+fun CustomDialog(
+    onDismiss: () -> Unit,
     onSelected: (Int) -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { },
+        title = {
+            Text(text = "Change Theme")
+        },
+        text = {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                // SettingCard(onClick = {}, title = "Dark Theme", icon = R.drawable.ic_theme, theme =onSelected)
+                // SettingCard(onClick = {}, title = "Light Theme", icon = R.drawable.ic_theme, theme = onSelected)
+                SettingCard(title = "Dark Theme", icon = R.drawable.ic_theme, value = 1, onSelected = onSelected)
+                SettingCard(title = "Light Theme", icon = R.drawable.ic_search, value = 2, onSelected = onSelected)
+            }
+        },
+        confirmButton = {
+            Text(
+                text = "OK",
+                color = MaterialTheme.colorScheme.primary,
+                maxLines = 1
+            )
+        }
+    )
+}
+
+@Preview
+@Composable
+fun CustomDialogPreview() {
+    CustomDialog(onDismiss = { /*TODO*/ }, onSelected = {})
+}
+
+@Composable
+fun SettingsItem(
+    title: String,
+    icon: Int
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp)
-            .testTag("settings_tag"),
-        shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.onSurfaceVariant
-        ),
-        onClick = {
-            onSelected(value)
-        }
+            .padding(all = 10.dp),
+        shape = RoundedCornerShape(10.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(all = 16.dp),
@@ -68,18 +96,4 @@ fun SettingCard(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun SettingCardPreview() {
-
-    /*SettingCard(
-        onClick = {
-        },
-        icon = 1,
-        title = "Test",
-        theme = 1
-    )
-    */
 }

@@ -34,6 +34,6 @@ val presentationModule = module {
     }
 
     viewModel {
-        SettingsViewModel(get())
+        SettingsViewModel(settingRepository = get())
     }
 }

@@ -13,16 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.datastore
+package com.alexmumo.domain.repository
 
-import com.alexmumo.domain.repository.SettingRepository
 import kotlinx.coroutines.flow.Flow
 
-class SettingsRepositoryImpl(private val newsPreference: NewsPreference) : SettingRepository {
-    override val getTheme: Flow<Int>
-        get() = newsPreference.getTheme
-
-    override suspend fun setTheme(theme: Int) {
-        newsPreference.setTheme(theme = theme)
-    }
+interface SettingRepository {
+    val getTheme: Flow<Int>
+    suspend fun setTheme(theme: Int)
 }
