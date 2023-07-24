@@ -15,8 +15,22 @@
  */
 package com.alexmumo.database.dao
 
-/*
-@OptIn(ExperimentalCoroutinesApi::class)
+import android.content.Context
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
+import com.alexmumo.database.data.bookMarkEntity
+import com.alexmumo.database.db.NewsDatabase
+import com.google.common.truth.Truth
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
+import org.junit.After
+import org.junit.Before
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import java.io.IOException
+
+
 @RunWith(RobolectricTestRunner::class)
 class BookMarkDaoTest {
 
@@ -40,7 +54,7 @@ class BookMarkDaoTest {
     }
 
 
-    fun `test bookmarkdao fetches bookmark list`() = runTest {
+    fun `test bookmarkdao fetches bookmark list`() = runBlocking {
         bookMarkDao.getBookMarks()
     }
 
@@ -60,4 +74,3 @@ class BookMarkDaoTest {
     }
 }
 
- */

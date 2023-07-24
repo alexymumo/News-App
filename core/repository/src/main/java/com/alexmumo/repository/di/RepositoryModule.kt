@@ -26,5 +26,5 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<NewsRepository> { NewsRepositoryImpl(newsDatabase = get(), newsApi = get()) }
     single<SearchRepository> { SearchRepositoryImpl(newsApi = get()) }
-    single<BookMarkRepository> { BookMarkRepositoryImpl(get()) }
+    single<BookMarkRepository> { BookMarkRepositoryImpl(bookMarkDao = get()) }
 }

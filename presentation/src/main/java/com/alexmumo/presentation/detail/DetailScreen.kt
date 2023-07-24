@@ -66,7 +66,7 @@ fun DetailScreen(
     Scaffold(
         topBar = {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("detail_tag"),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(onClick = {

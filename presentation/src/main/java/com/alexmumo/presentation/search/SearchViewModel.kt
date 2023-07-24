@@ -24,42 +24,33 @@ import androidx.paging.filter
 import androidx.paging.map
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.presentation.state.SearchState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel constructor(private val searchRepository: SearchRepository) : ViewModel() {
 
-    private val _searchState = MutableStateFlow(SearchState())
-    val searchState: StateFlow<SearchState> = _searchState.asStateFlow()
+    private val _article = mutableStateOf(SearchState())
+    val article: State<SearchState> = _article
 
     private val _search = mutableStateOf("")
     val search: State<String> = _search
-
-    fun setSearch(searched: String) {
-        _search.value = searched
+    fun setSearchString(value:String) {
+        _search.value = value
     }
 
-    fun searchArticles(search: String) {
-        viewModelScope.launch {
-            try {
-                val response = searchRepository.searchNews(queryString = search).cachedIn(viewModelScope)
-                _searchState.update { it.copy(articles = response, isLoading = false) }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
     fun searchArticle(queryString: String) {
-        viewModelScope.launch {
-            searchRepository.searchNews(queryString).map { articles ->
-                articles.filter {
-                    it.title!!.contains(queryString)
-                }
-            }.cachedIn(viewModelScope)
+        viewModelScope.launch(Dispatchers.IO) {
+            searchRepository.searchNews(queryString).collectLatest {
+                _article.value = _article.value.copy(
+                    articles = article.value.articles
+                )
+            }
         }
     }
 }

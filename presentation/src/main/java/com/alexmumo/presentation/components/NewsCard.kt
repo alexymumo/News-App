@@ -47,7 +47,9 @@ fun NewsCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.testTag("news_card_tag"),
+        modifier = modifier
+            .padding(all = 4.dp)
+            .testTag("news_card_tag"),
         shape = RoundedCornerShape(4.dp),
         onClick = {
             onNavigate(article)
@@ -87,6 +89,13 @@ fun NewsCard(
                         fontSize = 16.sp
                     )
                 }
+                Spacer(modifier = modifier.height(4.dp))
+                Text(
+                    text = article.author ?: "UnKnown",
+                    maxLines = 1,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 14.sp
+                )
             }
         }
         Divider(

@@ -16,25 +16,26 @@
 package com.alexmumo.presentation.settings
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.R
-import com.alexmumo.presentation.settings.view.SettingsItem
+import com.alexmumo.presentation.settings.view.CustomDialog
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -59,14 +60,30 @@ fun SettingScreen(
         },
         modifier = Modifier.fillMaxSize()
     ) { paddingValues ->
+        val opendialog = remember { mutableStateOf(false) }
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .testTag("setting_tag")
         ) {
-            SettingsItem(title = "Change Theme", icon = R.drawable.ic_theme)
-            Spacer(modifier = Modifier.height(5.dp))
-            SettingsItem(title = "Language", icon = R.drawable.language)
+            Card(
+                onClick = {
+                    opendialog.value =  true
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(all = 4.dp)
+            ) {
+                Text(text = "Change Theme")
+                if (opendialog.value) {
+                    CustomDialog(onDismiss = {
+                        settingsViewModel.dialogThemeState(settingsViewModel.themeDialog.value)
+                    }, onSelected = {
+                        settingsViewModel.setTheme(it)
+                    })
+                }
+            }
         }
     }
 }

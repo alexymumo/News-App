@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
 data class SearchState(
-    val articles: Flow<PagingData<Article>> = emptyFlow(),
+    val articles: Flow<PagingData<Article>>? = null,
     val errors: String? = null,
     val isLoading: Boolean = true
 )

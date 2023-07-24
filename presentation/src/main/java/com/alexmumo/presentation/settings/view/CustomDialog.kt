@@ -48,10 +48,9 @@ fun CustomDialog(
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                // SettingCard(onClick = {}, title = "Dark Theme", icon = R.drawable.ic_theme, theme =onSelected)
-                // SettingCard(onClick = {}, title = "Light Theme", icon = R.drawable.ic_theme, theme = onSelected)
-                SettingCard(title = "Dark Theme", icon = R.drawable.ic_theme, value = 1, onSelected = onSelected)
-                SettingCard(title = "Light Theme", icon = R.drawable.ic_search, value = 2, onSelected = onSelected)
+                SettingCard(title = "Dark Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
+                SettingCard(title = "Light Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
+                SettingCard(title = "System Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
             }
         },
         confirmButton = {
@@ -82,7 +81,9 @@ fun SettingsItem(
         shape = RoundedCornerShape(10.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(all = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {

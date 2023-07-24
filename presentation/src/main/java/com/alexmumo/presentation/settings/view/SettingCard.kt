@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.dp
 fun SettingCard(
     title: String,
     icon: Int,
-    value: Int,
     onSelected: (Int) -> Unit
 ) {
     Card(
@@ -50,7 +49,7 @@ fun SettingCard(
             containerColor = MaterialTheme.colorScheme.onSurfaceVariant
         ),
         onClick = {
-            onSelected(value)
+            //onSelected(value)
         }
     ) {
         Row(

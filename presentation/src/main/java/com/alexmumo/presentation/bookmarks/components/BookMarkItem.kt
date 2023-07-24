@@ -77,14 +77,12 @@ fun BookMarkItem(
             Column {
                 Text(
                     text = bookMarkEntity.description!!,
-                    maxLines = 2,
+                    maxLines = 1,
                     fontSize = 16.sp,
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Normal
                 )
-                Row(
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
+                Row {
                     Text(
                         text = bookMarkEntity.author!!,
                         fontSize = 16.sp,
