@@ -28,9 +28,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel constructor(private val newsRepository: NewsRepository) : ViewModel() {
 
-    private val _category = MutableStateFlow<String?>(null)
-    val category = _category.asStateFlow()
-
     private val _general = MutableStateFlow(ArticleState())
     val general = _general.asStateFlow()
 

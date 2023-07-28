@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     //id("com.google.gms.google-services")
     //id("com.google.firebase.crashlytics")
     //id("com.google.firebase.appdistribution")
@@ -70,10 +72,16 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.koin.core)
 
-    // Firebase
-    //implementation(libs.bundles.firebase)
-    //implementation(platform(libs.firebase.bom))
 
     // Timber
     implementation(libs.timber)
+
+    //Firebase
+    implementation("com.google.firebase:firebase-database-ktx:20.1.0")
+    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
+    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+
+    // Splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

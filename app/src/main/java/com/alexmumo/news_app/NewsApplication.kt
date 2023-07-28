@@ -28,8 +28,10 @@ import org.koin.core.logger.Level
 import timber.log.Timber
 
 class NewsApplication : Application() {
+
     override fun onCreate() {
         super.onCreate()
+
         startKoin {
             androidLogger(level = Level.DEBUG)
             androidContext(this@NewsApplication)
@@ -40,6 +42,6 @@ class NewsApplication : Application() {
 
     private fun initTimber() {
         Timber.plant(Timber.DebugTree())
-        // Timber.plant(CrashlyticsTree())
+        Timber.plant(CrashlyticsTree())
     }
 }

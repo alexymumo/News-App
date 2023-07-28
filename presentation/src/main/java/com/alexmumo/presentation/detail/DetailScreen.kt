@@ -114,15 +114,15 @@ fun DetailScreen(
                 contentDescription = "image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(230.dp),
                 contentScale = ContentScale.Crop
             )
             Card(
                 modifier = Modifier.fillMaxSize(),
-                shape = RoundedCornerShape(topStart = 10.dp, topEnd = 10.dp)
+                shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
                 Text(
-                    text = article.content!!,
+                    text = article.description!!,
                     fontSize = 18.sp,
                     modifier = Modifier.fillMaxWidth()
                         .padding(all = 2.dp),

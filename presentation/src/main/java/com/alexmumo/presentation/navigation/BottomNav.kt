@@ -75,14 +75,6 @@ fun BottomNav(navController: NavController) {
                     )
                 },
                 alwaysShowLabel = true
-                /*,
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.background,
-                    unselectedIconColor = MaterialTheme.colorScheme.primary,
-                    indicatorColor = MaterialTheme.colorScheme.inversePrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.inverseSurface
-                )
-            */
             )
         }
     }
