@@ -15,8 +15,30 @@
  */
 package com.alexmumo.database.data
 
+import com.alexmumo.database.entity.ArticleEntity
 import com.alexmumo.database.entity.BookMarkEntity
+import com.alexmumo.database.entity.RemoteKeyEntity
 import com.alexmumo.database.entity.SourceEntity
+
+val articleEntity = ArticleEntity(
+    "test",
+    "test",
+    "test",
+    "test",
+    "",
+    SourceEntity(
+        "test",
+        "test"
+    ),
+    "test",
+    "url"
+)
+
+val remoteKeyEntity = RemoteKeyEntity(
+    "test",
+    1,
+    2
+)
 
 val bookMarkEntity = BookMarkEntity(
     "alex",

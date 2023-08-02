@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -42,6 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,35 +70,41 @@ fun LoginScreen() {
         }
         Spacer(modifier = Modifier.height(10.dp))
         var name by remember { mutableStateOf("Name") }
-        var email by remember { mutableStateOf("Email") }
+        var password by remember { mutableStateOf("Password") }
 
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(all = 10.dp),
+                .padding(all = 5.dp),
             elevation = CardDefaults.cardElevation(focusedElevation = 20.dp)
         ) {
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Name") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                ),
                 maxLines = 1,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 10.dp),
+                    .padding(all = 5.dp),
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Email, contentDescription = null)
                 }
             )
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(5.dp))
             OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Name") },
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Password") },
                 maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 10.dp),
+                    .padding(all = 5.dp),
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                 }
@@ -107,7 +115,8 @@ fun LoginScreen() {
             text = "Forgot Password?",
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            textAlign = TextAlign.Left
+            textAlign = TextAlign.Left,
+            modifier = Modifier.align(Alignment.End)
         )
         Button(
             onClick = { },
@@ -116,15 +125,15 @@ fun LoginScreen() {
             Text(
                 text = "Log In",
                 maxLines = 1,
-                textAlign = TextAlign.Left,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Normal
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
         Text(
             text = "Don't have an account?, Register",
             fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
 }

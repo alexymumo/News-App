@@ -47,24 +47,24 @@ class BookMarkDaoTest {
         bookMarkDao = newsDatabase.bookMarkDao()
     }
 
-    fun `test save bookmark`() = runBlocking {
+    fun `test save bookmark`() = runTest {
         bookMarkDao.saveBookMark(bookMarkEntity)
         val bookmarks = bookMarkDao.getBookMarks()
         Truth.assertThat(bookmarks).isEqualTo(bookmarks)
     }
 
 
-    fun `test bookmarkdao fetches bookmark list`() = runBlocking {
-        bookMarkDao.getBookMarks()
+    fun `test bookmark dao fetches bookmark list`() = runTest {
+        bookMarkDao.saveBookMark(bookMarkEntity)
+        val result = bookMarkDao.getBookMarks()
+        Truth.assertThat(result).isNotNull()
     }
 
-    fun `test delete bookmark`() {
-        runBlocking {
+    fun `test delete bookmark`() = runTest {
             bookMarkDao.saveBookMark(bookMarkEntity)
             bookMarkDao.deleteBookMark()
             val result = bookMarkDao.getBookMarks()
             Truth.assertThat(result).isNull()
-        }
     }
 
     @After

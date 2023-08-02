@@ -4,10 +4,13 @@ plugins {
     kotlin("kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    //id("com.google.gms.google-services")
-    //id("com.google.firebase.crashlytics")
-    //id("com.google.firebase.appdistribution")
+    jacoco
 }
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
 
 android {
     namespace = "com.alexmumo.news_app"

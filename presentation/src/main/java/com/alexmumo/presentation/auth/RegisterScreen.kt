@@ -15,13 +15,16 @@
  */
 package com.alexmumo.presentation.auth
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -41,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,7 +69,9 @@ fun RegisterScreen() {
         var password by remember { mutableStateOf("Password") }
         Spacer(modifier = Modifier.height(20.dp))
         Card(
-            modifier = Modifier.fillMaxWidth().padding(all = 5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 10.dp),
             shape = RoundedCornerShape(10.dp),
             elevation = CardDefaults.cardElevation(focusedElevation = 20.dp)
         ) {
@@ -76,10 +82,13 @@ fun RegisterScreen() {
                 label = {
                     Text(text = "Name")
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                ),
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Person, contentDescription = null)
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(5.dp)
             )
             Spacer(modifier = Modifier.height(5.dp))
             OutlinedTextField(
@@ -89,10 +98,13 @@ fun RegisterScreen() {
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Email, contentDescription = null)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                ),
                 label = {
                     Text(text = "Email")
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(5.dp)
             )
             Spacer(modifier = Modifier.height(5.dp))
             OutlinedTextField(
@@ -101,13 +113,16 @@ fun RegisterScreen() {
                 label = {
                     Text(text = "Password")
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password
+                ),
                 maxLines = 1,
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                 },
                 trailingIcon = {
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(5.dp)
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -120,6 +135,15 @@ fun RegisterScreen() {
                 text = "Register",
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
+            )
+        }
+        Row(
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "Already have an account?, Sign In",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal
             )
         }
     }

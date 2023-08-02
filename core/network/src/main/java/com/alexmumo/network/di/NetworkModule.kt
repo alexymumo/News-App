@@ -15,8 +15,11 @@
  */
 package com.alexmumo.network.di
 
+import android.content.Context
 import com.alexmumo.common.Constants.BASE_URL
 import com.alexmumo.network.api.NewsApi
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -38,7 +41,14 @@ val networkModule = module {
 fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().setLevel(level = HttpLoggingInterceptor.Level.BODY)
 }
-
+fun provideChuckerInterceptor(context: Context): ChuckerInterceptor {
+    return ChuckerInterceptor.Builder(context)
+        .collector(ChuckerCollector(context))
+        .maxContentLength(length = 250000L)
+        .redactHeaders(headerNames = emptySet())
+        .alwaysReadResponseBody(enable = false)
+        .build()
+}
 fun provideOkhttpClient(): OkHttpClient {
     val client = OkHttpClient.Builder()
         .callTimeout(30, TimeUnit.SECONDS)
