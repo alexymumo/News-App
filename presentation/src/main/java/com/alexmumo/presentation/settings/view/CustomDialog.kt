@@ -48,9 +48,9 @@ fun CustomDialog(
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                SettingCard(title = "Dark Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
-                SettingCard(title = "Light Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
-                SettingCard(title = "System Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
+                //SettingCard(title = "Dark Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
+                //SettingCard(title = "Light Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
+                //SettingCard(title = "System Theme", icon = R.drawable.ic_theme, onSelected = onSelected)
             }
         },
         confirmButton = {

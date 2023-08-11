@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation(project(":core:database"))
+    implementation(project(":common"))
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
@@ -47,16 +48,18 @@ dependencies {
     androidTestImplementation(libs.expresso.core)
 
     // Coroutine
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.test)
+    implementation(libs.bundles.coroutine)
 
     // Timber
     implementation(libs.timber)
 
-    implementation(libs.paging.runtime)
+    implementation(libs.bundles.paging)
+
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
+
+    // Firebase
+    implementation(libs.bundles.firebase)
 
 }

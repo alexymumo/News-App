@@ -15,6 +15,7 @@
  */
 package com.alexmumo.repository.repository
 
+import androidx.lifecycle.LiveData
 import com.alexmumo.database.dao.BookMarkDao
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.repository.BookMarkRepository
@@ -31,5 +32,9 @@ class BookMarkRepositoryImpl constructor(private val bookMarkDao: BookMarkDao) :
 
     override suspend fun deleteBookMark() {
         return bookMarkDao.deleteBookMark()
+    }
+
+    override fun checkBookMarked(id: String): LiveData<Boolean> {
+        return bookMarkDao.checkBookMarked(id)
     }
 }

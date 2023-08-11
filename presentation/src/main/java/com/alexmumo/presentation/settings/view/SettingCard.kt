@@ -36,8 +36,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SettingCard(
     title: String,
-    icon: Int,
-    onSelected: (Int) -> Unit
+    icon: Int
 ) {
     Card(
         modifier = Modifier

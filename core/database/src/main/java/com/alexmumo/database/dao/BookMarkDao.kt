@@ -15,6 +15,7 @@
  */
 package com.alexmumo.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -32,4 +33,7 @@ interface BookMarkDao {
 
     @Query("SELECT * FROM bookmark_table")
     fun getBookMarks(): Flow<List<BookMarkEntity>>
+
+    @Query("SELECT `isBookMarked` FROM bookmark_table WHERE url == :id")
+    fun checkBookMarked(id: String): LiveData<Boolean>
 }

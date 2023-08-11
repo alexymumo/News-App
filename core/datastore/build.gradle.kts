@@ -51,7 +51,7 @@ dependencies {
     implementation(libs.datastore)
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
 
     // Timber
     implementation(libs.timber)

@@ -7,11 +7,14 @@ plugins {
     jacoco
 }
 
+
 jacoco {
     toolVersion = "0.8.8"
 }
 
-
+project.afterEvaluate {
+    setupAndroidReporting()
+}
 android {
     namespace = "com.alexmumo.news_app"
     compileSdk = 33
@@ -71,20 +74,18 @@ dependencies {
     implementation(libs.android.core)
 
     // Koin
-    implementation(libs.koin.android)
-    implementation(libs.koin.compose)
-    implementation(libs.koin.core)
+    implementation(libs.bundles.koin)
 
+    // Compose
+    implementation(libs.bundles.compose)
 
     // Timber
     implementation(libs.timber)
 
     //Firebase
-    implementation("com.google.firebase:firebase-database-ktx:20.1.0")
-    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
-    implementation("com.google.firebase:firebase-crashlytics-ktx:18.3.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+    implementation(libs.bundles.firebase)
+}
 
-    // Splashscreen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+fun setupAndroidReporting() {
+    
 }

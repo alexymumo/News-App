@@ -19,37 +19,44 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.filter
 import androidx.paging.map
+import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.presentation.state.SearchState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel constructor(private val searchRepository: SearchRepository) : ViewModel() {
 
-    private val _article = mutableStateOf(SearchState())
-    val article: State<SearchState> = _article
+    private var _search = mutableStateOf<Flow<PagingData<Article>>>(emptyFlow())
+    var searchState: State<Flow<PagingData<Article>>> = _search
 
-    private val _search = mutableStateOf("")
-    val search: State<String> = _search
-    fun setSearchString(value:String) {
-        _search.value = value
+    var _searchParam = mutableStateOf("")
+    var searchParamState: State<String> = _searchParam
+
+    init {
+        _searchParam.value = ""
     }
 
-    fun searchArticle(queryString: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            searchRepository.searchNews(queryString).collectLatest {
-                _article.value = _article.value.copy(
-                    articles = article.value.articles
-                )
+    fun searchArticle() {
+        viewModelScope.launch {
+            if (_searchParam.value.isNotEmpty()) {
+                _search.value = searchRepository.searchNews(queryString = _searchParam.value).map { articles ->
+                    articles.filter {
+                        ((it.author != null || it.source != null || it.content != null))
+                    }
+                }.cachedIn(viewModelScope)
             }
         }
     }

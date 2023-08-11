@@ -43,14 +43,12 @@ import com.alexmumo.database.entity.BookMarkEntity
 @Composable
 fun BookMarkItem(
     bookMarkEntity: BookMarkEntity
+    //onNavigate: (BookMarkEntity) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .padding(5.dp)
-            .testTag("bookmark_tag")
+        modifier = Modifier.fillMaxWidth().height(100.dp).padding(5.dp).testTag("bookmark_tag"),
+
     ) {
         Row(
             modifier = Modifier
@@ -83,6 +81,7 @@ fun BookMarkItem(
                     fontWeight = FontWeight.Normal
                 )
                 Row {
+                    /*
                     Text(
                         text = bookMarkEntity.author!!,
                         fontSize = 16.sp,
@@ -95,6 +94,7 @@ fun BookMarkItem(
                         fontWeight = FontWeight.Normal,
                         maxLines = 1
                     )
+                    */
                 }
             }
         }

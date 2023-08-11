@@ -15,6 +15,7 @@
  */
 package com.alexmumo.presentation.detail
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,10 +26,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,6 +40,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,10 +68,13 @@ fun DetailScreen(
     viewModel: BookMarkViewModel = getViewModel(),
     article: Article
 ) {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             Row(
-                modifier = Modifier.fillMaxWidth().testTag("detail_tag"),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag("detail_tag"),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(onClick = {
@@ -78,26 +86,28 @@ fun DetailScreen(
                         modifier = Modifier.size(40.dp)
                     )
                 }
-                IconButton(onClick = {
-                    viewModel.saveBookMark(
-                        BookMarkEntity(
-                            author = article.author,
-                            content = article.content,
-                            description = article.description,
-                            publishedAt = article.publishedAt,
-                            sourceEntity = article.source.toSourceEntity(),
-                            title = article.title,
-                            url = article.url,
-                            urlToImage = article.urlToImage
-                        )
-                    )
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "image",
-                        tint = Color.Green
-                    )
-                }
+                CustomLikeButton(
+                    bookmarked = viewModel.checkBookMarked(id = article.url).observeAsState().value != null,
+                    onPress = { bookmarked ->
+                        if (bookmarked) {
+                            Toast.makeText(context, "Liked", Toast.LENGTH_LONG).show()
+                        } else {
+                            viewModel.saveBookMark(
+                                BookMarkEntity(
+                                    author = article.author,
+                                    content = article.content,
+                                    description = article.description,
+                                    publishedAt = article.publishedAt,
+                                    sourceEntity = article.source.toSourceEntity(),
+                                    title = article.title,
+                                    url = article.url,
+                                    urlToImage = article.urlToImage
+                                )
+                            )
+                            Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                )
             }
         }
     ) { paddingValues ->
@@ -124,7 +134,8 @@ fun DetailScreen(
                 Text(
                     text = article.description!!,
                     fontSize = 18.sp,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(all = 2.dp),
                     color = Color.White,
                 )
@@ -166,8 +177,60 @@ fun DetailScreen(
     }
 }
 
+
+@Composable
+fun CustomLikeButton(
+    onPress: (checkBookMark: Boolean) -> Unit = {},
+    bookmarked: Boolean
+) {
+    IconButton(onClick = {
+        onPress(bookmarked)
+    }) {
+        Icon(
+            imageVector = Icons.Filled.FavoriteBorder, contentDescription = null,
+            modifier = Modifier
+                .height(30.dp)
+                .width(30.dp),
+            tint = if (bookmarked) {
+                Color.Magenta
+            } else {
+                Color.Green
+            }
+        )
+    }
+}
+
+@Composable
+fun BackButton(
+    onClick: () -> Unit = {}
+) {
+    Button(
+        shape = CircleShape,
+        onClick = {
+                  onClick()
+        },
+        modifier = Modifier
+            .height(30.dp)
+            .width(30.dp)
+    ) {
+        IconButton(onClick = {
+            onClick()
+
+        }) {
+            Icon(Icons.Filled.ArrowBack, contentDescription = null)
+        }
+    }
+}
+
 @Preview
 @Composable
 fun DetailScreenPreview() {
     // DetailScreen()
+}
+
+
+@Preview
+@Composable
+fun LikePreview() {
+    //BackButton()
 }

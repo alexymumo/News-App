@@ -15,18 +15,23 @@
  */
 package com.alexmumo.repository.repository
 
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.repository.AuthRepository
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 
-class AuthRepositoryImpl : AuthRepository {
-    override suspend fun registerUser(name: String, email: String, password: String) {
+class AuthRepositoryImpl(
+    private val firebaseAuth: FirebaseAuth
+) : AuthRepository {
+    override suspend fun registerUser(name: String, email: String, password: String): Resource<AuthResult> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun loginUser(email: String, password: String) {
+    override suspend fun loginUser(email: String, password: String): Resource<AuthResult> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun logOutUser() {
+    override suspend fun logOutUser(): Resource<Any> {
         TODO("Not yet implemented")
     }
 }
