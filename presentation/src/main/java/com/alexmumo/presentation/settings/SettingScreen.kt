@@ -15,12 +15,16 @@
  */
 package com.alexmumo.presentation.settings
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -38,6 +42,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.settings.view.SettingCard
+import com.alexmumo.presentation.settings.view.ThemeDialog
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -61,22 +66,30 @@ fun SettingScreen(
             )
         },
         modifier = Modifier.fillMaxSize()
-    ) { paddingValues ->
+    ) {paddingValues ->
+
         val opendialog = remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .testTag("setting_tag")
-        ) {
-            SettingCard(title = "Change Theme", icon = R.drawable.ic_theme)
-            Spacer(modifier = Modifier.height(5.dp))
-            SettingCard(title = "Language", icon = R.drawable.language)
-            Spacer(modifier = Modifier.height(5.dp))
-            SettingCard(title = "Share", icon = R.drawable.ic_arrow)
-            Spacer(modifier = Modifier.height(5.dp))
-            SettingCard(title = "Source Code", icon = R.drawable.ic_settings)
+        if (opendialog.value) {
+            ThemeDialog(onDismiss = {
+                settingsViewModel.dialogThemeState(true)
+            }, onSelected = {
+                    settingsViewModel.setTheme(it) }
+            )
         }
+        
+        SettingContent(paddingValues = paddingValues)
+    }
+}
+
+@Composable
+fun SettingContent(
+    paddingValues: PaddingValues
+) {
+    LazyColumn(
+        contentPadding = paddingValues,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        
     }
 }
 
@@ -92,32 +105,3 @@ fun SettingsScreenPreview() {
 fun SettingsItemPreview() {
     // SettingsItem()
 }
-
-
-/*
-         Card(
-             onClick = {
-                 opendialog.value =  true
-             },
-             modifier = Modifier
-                 .fillMaxWidth()
-                 .height(40.dp)
-                 .padding(all = 5.dp)
-         ) {
-             Row(
-                 horizontalArrangement = Arrangement.spacedBy(10.dp),
-                 verticalAlignment = Alignment.CenterVertically
-             ) {
-                 Icon(painter = painterResource(id = R.drawable.ic_theme), contentDescription = null)
-                 Text(text = "Change Theme")
-                 Icon(painter = painterResource(id = R.drawable.ic_arrow), contentDescription = null)
-             }
-             if (opendialog.value) {
-                 CustomDialog(onDismiss = {
-                     settingsViewModel.dialogThemeState(settingsViewModel.themeDialog.value)
-                 }, onSelected = {
-                     settingsViewModel.setTheme(it)
-                 })
-             }
-         }
-         */

@@ -17,6 +17,7 @@ package com.alexmumo.presentation.common.theme
 
 import android.app.Activity
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -81,5 +82,19 @@ fun NewsAppTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
+    )
+}
+
+enum class Theme(
+    val value: Int
+) {
+    LIGHT_THEME(
+        value = AppCompatDelegate.MODE_NIGHT_NO
+    ),
+    DARK_THEME(
+        value = AppCompatDelegate.MODE_NIGHT_YES
+    ),
+    SYSTEM_THEME(
+        value = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     )
 }
