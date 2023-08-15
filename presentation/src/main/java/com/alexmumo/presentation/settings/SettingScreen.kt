@@ -66,30 +66,38 @@ fun SettingScreen(
             )
         },
         modifier = Modifier.fillMaxSize()
-    ) {paddingValues ->
-
-        val opendialog = remember { mutableStateOf(false) }
-        if (opendialog.value) {
+    ) { paddingValues ->
+        if (themeDialog) {
             ThemeDialog(onDismiss = {
-                settingsViewModel.dialogThemeState(true)
+                settingsViewModel.dialogThemeState(settingsViewModel.themeDialog.value)
             }, onSelected = {
                     settingsViewModel.setTheme(it) }
             )
         }
         
-        SettingContent(paddingValues = paddingValues)
+        SettingContent(
+            paddingValues = paddingValues,
+            onChangeTheme = {
+                settingsViewModel.dialogThemeState(settingsViewModel.themeDialog.value)
+            }
+        )
     }
 }
 
 @Composable
 fun SettingContent(
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onChangeTheme: () -> Unit
 ) {
     LazyColumn(
         contentPadding = paddingValues,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        
+        item {
+            SettingCard(title = "Change Theme", icon = R.drawable.ic_theme, onClick = {
+                onChangeTheme()
+            })
+        }
     }
 }
 

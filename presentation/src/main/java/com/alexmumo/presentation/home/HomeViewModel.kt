@@ -56,10 +56,9 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val health = newsRepository.fetchNews(category = category)
-                Resource.Success(data = health)
-                //_health.update { it.copy(articles = health, isLoading = false) }
+                _health.update { it.copy(articles = health, isLoading = false) }
             } catch (e: Exception) {
-                Resource.Error(message = "Error occurred")
+                //Resource.Error(message = "Error occurred")
             }
         }
     }
@@ -70,10 +69,10 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val tech = newsRepository.fetchNews(category)
-                Resource.Success(data = tech)
-                //_technology.update { it.copy(articles = tech, isLoading = false) }
+                //Resource.Success(data = tech)
+                _technology.update { it.copy(articles = tech, isLoading = false) }
             } catch (e: Exception) {
-                Resource.Error(error(e))
+                //Resource.Error(error(e))
             }
         }
     }
@@ -82,10 +81,10 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val general = newsRepository.fetchNews(category)
-                Resource.Success(data = general)
-                //_general.update { it.copy(articles = general, isLoading = false) }
+                //Resource.Success(data = general)
+                _general.update { it.copy(articles = general, isLoading = false) }
             } catch (e: Exception) {
-                Resource.Error(error(e))
+                //Resource.Error(error(e))
             }
         }
     }
@@ -94,10 +93,10 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val sports = newsRepository.fetchNews(category)
-                Resource.Success(data = sports)
-                //_sports.update { it.copy(articles = sports, isLoading = false) }
+                //Resource.Success(data = sports)
+                _sports.update { it.copy(articles = sports, isLoading = false) }
             } catch (e: Exception) {
-                Resource.Error(error(e))
+                //Resource.Error(error(e))
                 //e.printStackTrace()
             }
         }
@@ -107,10 +106,10 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val business = newsRepository.fetchNews(category)
-                Resource.Success(data = business)
-                //_business.update { it.copy(articles = business, isLoading = false) }
+                //Resource.Success(data = business)
+                _business.update { it.copy(articles = business, isLoading = false) }
             } catch (e: Exception) {
-                Resource.Error(error(e))
+                //Resource.Error(error(e))
             }
         }
     }

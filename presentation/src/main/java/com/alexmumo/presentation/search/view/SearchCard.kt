@@ -18,6 +18,7 @@ package com.alexmumo.presentation.search.view
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -37,10 +38,11 @@ import coil.request.ImageRequest
 import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.R
 
-/* modifier: Modifier = Modifier,
-    article: Article*/
 @Composable
-fun SearchCard() {
+fun SearchCard(
+    onNavigate: (Article) -> Unit,
+    article: Article
+) {
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
@@ -50,21 +52,24 @@ fun SearchCard() {
         Row(modifier = Modifier.fillMaxWidth()) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
+                    .data(article.urlToImage)
                     .crossfade(true)
-                    .placeholder(R.drawable.ic_home),
+                    .build(),
                 contentScale = ContentScale.Crop,
                 contentDescription = "search",
                 modifier = Modifier
-                    .height(100.dp)
+                    .fillMaxHeight()
                     .width(100.dp)
             )
             Spacer(modifier = Modifier.width(5.dp))
             Column {
                 Text(
-                    text = "Coded",
+                    text = article.title ?: "Null",
                     fontWeight = FontWeight.Thin,
                     fontSize = 16.sp
                 )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(text = article.author ?: "Null")
             }
         }
     }
@@ -73,5 +78,5 @@ fun SearchCard() {
 @Preview
 @Composable
 fun SearchItemPreview() {
-    SearchCard()
+    //SearchCard()
 }

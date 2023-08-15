@@ -16,18 +16,21 @@
 package com.alexmumo.presentation.search
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.components.NewsCard
 import com.alexmumo.presentation.search.view.SearchBar
+import com.alexmumo.presentation.search.view.SearchCard
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -36,26 +39,31 @@ fun SearchScreen(
     searchViewModel: SearchViewModel = getViewModel(),
     article: Article
 ) {
-    //val searchState =  searchViewModel.searchState.value
     val result = searchViewModel.searchState.value.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         SearchBar(
-            onSearch = {
-                searchViewModel.searchArticle()
-            }
+            onSearch = { searchViewModel.searchArticle() }
         )
 
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(5.dp)
         ) {
             when(result.loadState.refresh) {
                 is LoadState.NotLoading -> {
-                    items(result.itemCount) {
+                    items(result.itemCount) { 
                         NewsCard(onNavigate = {}, article = article)
                     }
+                }
+                is LoadState.Loading -> {
+
+                }
+                is LoadState.Error -> {
+
+
                 }
                 else -> {}
             }

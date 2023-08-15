@@ -42,19 +42,20 @@ class SearchViewModel constructor(private val searchRepository: SearchRepository
     private var _search = mutableStateOf<Flow<PagingData<Article>>>(emptyFlow())
     var searchState: State<Flow<PagingData<Article>>> = _search
 
-    var _searchParam = mutableStateOf("")
-    var searchParamState: State<String> = _searchParam
+    var searchParam = mutableStateOf("")
+    var _prevSearch = mutableStateOf("")
+    var searchParamState: State<String> = searchParam
 
     init {
-        _searchParam.value = ""
+        searchParam.value = ""
     }
 
     fun searchArticle() {
         viewModelScope.launch {
-            if (_searchParam.value.isNotEmpty()) {
-                _search.value = searchRepository.searchNews(queryString = _searchParam.value).map { articles ->
+            if (searchParam.value.isNotEmpty()) {
+                _search.value = searchRepository.searchNews(queryString = searchParam.value).map { articles ->
                     articles.filter {
-                        ((it.author != null || it.source != null || it.content != null))
+                        ((it.author != null || it.source != null || it.content != null || it.description != null))
                     }
                 }.cachedIn(viewModelScope)
             }

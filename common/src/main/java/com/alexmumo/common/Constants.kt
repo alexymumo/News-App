@@ -15,10 +15,10 @@
  */
 package com.alexmumo.common
 
-
-
 object Constants {
     const val BASE_URL = "https://newsapi.org/v2/"
-    const val NEWS_API_KEY = "13b1c72055c540dba871a6cd78ef7c69"
-
+    const val NEWS_API_KEY = "f982987c31514f529685997518bdade9"
+    const val PAGE_SIZE = 100
+    const val PAGE = 1
+    const val COUNTRY_CODE = "us"
 }

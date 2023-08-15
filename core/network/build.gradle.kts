@@ -58,12 +58,18 @@ dependencies {
 
     // Espresso
     androidTestImplementation(libs.expresso.core)
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
+    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("androidx.test:core:1.5.0")
 
     // Koin
     implementation(libs.bundles.koin)
 
     // Okhttp, Retrofit
     implementation(libs.bundles.networking)
+
+    // Robolectric
+    implementation(libs.roboelectric)
 
     // Timber
     implementation(libs.timber)
