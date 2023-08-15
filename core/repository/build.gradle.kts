@@ -33,8 +33,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
 }
+
 
 dependencies {
 
@@ -49,11 +49,10 @@ dependencies {
     androidTestImplementation(libs.expresso.core)
 
     // Paging
-    implementation(libs.paging.runtime)
-    implementation(libs.paging.compose)
+    implementation(libs.bundles.paging)
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
 
     // Timber
     implementation(libs.timber)
@@ -62,10 +61,12 @@ dependencies {
     implementation(libs.retrofit.version)
     
     // Coroutine
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.test)
+    implementation(libs.bundles.coroutine)
 
+    // Room
     implementation(libs.room.ktx)
+
+    // Firebase
+    implementation(libs.bundles.firebase)
 
 }

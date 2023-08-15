@@ -54,10 +54,8 @@ dependencies {
     // Robolectric
     testImplementation(libs.roboelectric)
 
-    // Coroutines
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.test)
+    // Coroutine
+    implementation(libs.bundles.coroutine)
 
     // Room
     testImplementation(libs.room.testing)
@@ -67,7 +65,7 @@ dependencies {
     kapt(libs.room.compiler)
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
 
     // Timber
     implementation(libs.timber)

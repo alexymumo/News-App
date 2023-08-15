@@ -16,6 +16,7 @@
 package com.alexmumo.presentation.navigation
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
@@ -43,7 +44,7 @@ fun BottomNav(navController: NavController) {
         NavItem.Settings
     )
     BottomAppBar(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().height(70.dp),
         contentColor = MaterialTheme.colorScheme.background
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

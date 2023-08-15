@@ -15,6 +15,7 @@
  */
 package com.alexmumo.presentation.bookmarks
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.database.entity.BookMarkEntity
@@ -33,5 +34,8 @@ class BookMarkViewModel constructor(private val bookMarkRepository: BookMarkRepo
         viewModelScope.launch {
             bookMarkRepository.deleteBookMark()
         }
+    }
+    fun checkBookMarked(id: String): LiveData<Boolean> {
+        return bookMarkRepository.checkBookMarked(id)
     }
 }

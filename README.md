@@ -1,12 +1,20 @@
 ## News-App
-- News App is a multi-module news application built using Kotlin, Jetpack Compose and [News API]("https://newsapi.org/")
-- 
+- News App is a multi-module news app built using Kotlin, Jetpack Compose and [News API]("https://newsapi.org/")
+
 ## Table of Contents
+- [Features](#features)
 - [Architecture](#architecture)
 - [Tech-Stack](#tech-stack)
 - [Screenshots](#screenshots)
 - [Tests](#tests)
 - [Demo](#demo)
+
+## Features
+- Display news into categories 
+- Search trending news
+- BookMarks 
+- Offline support
+- Support different languages,Themes,
 
 ## Architecture
 - Built using clean architecture 
@@ -31,7 +39,10 @@
 - [Timber](https://github.com/JakeWharton/timber) - Library for easier logging.
 - [Coil](https://coil-kt.github.io/coil/compose/) - Image Library from loading images from the database and caching in memory.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
-- []() - 
+- [Truth]()
+- [Material3]()
+
+
 ## Screenshots
 
 ## Tests

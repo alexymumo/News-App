@@ -16,48 +16,59 @@
 package com.alexmumo.presentation.search
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.alexmumo.presentation.search.view.CustomSearchBar
+import androidx.paging.LoadState
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.alexmumo.domain.model.Article
+import com.alexmumo.presentation.components.NewsCard
+import com.alexmumo.presentation.search.view.SearchBar
+import com.alexmumo.presentation.search.view.SearchCard
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun SearchScreen(
     navController: NavController,
-    searchViewModel: SearchViewModel = getViewModel()
+    searchViewModel: SearchViewModel = getViewModel(),
+    article: Article
 ) {
-    val searchState =  searchViewModel.article.value
-    val search by searchViewModel.search
-    Scaffold(
-        topBar = {
-            CustomSearchBar(text = search,
-                onTextChange = {
-                searchViewModel.setSearchString(it)
-            }, onSearch = {
-                searchViewModel.searchArticle(it.trim())
+    val result = searchViewModel.searchState.value.collectAsLazyPagingItems()
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        SearchBar(
+            onSearch = { searchViewModel.searchArticle() }
+        )
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(5.dp)
+        ) {
+            when(result.loadState.refresh) {
+                is LoadState.NotLoading -> {
+                    items(result.itemCount) { 
+                        NewsCard(onNavigate = {}, article = article)
+                    }
                 }
-            )
-        }, content ={paddingValues ->
-            Column(modifier = Modifier.fillMaxSize().testTag("search_tag")) {
-                LazyColumn(contentPadding = paddingValues) {
+                is LoadState.Loading -> {
+
                 }
+                is LoadState.Error -> {
+
+
+                }
+                else -> {}
             }
         }
-    )
-}
-
-@Composable
-fun SearchList(
-
-) {
-
+    }
 }
 
 
@@ -67,3 +78,5 @@ fun SearchList(
 fun SearchScreenPreview() {
     // SearchScreen()
 }
+
+

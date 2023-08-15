@@ -54,7 +54,10 @@ fun Navigation(navController: NavHostController) {
             }
         }
         composable(NavItem.Search.route) {
-            SearchScreen(navController = navController)
+            val news = navController.previousBackStackEntry?.savedStateHandle?.get<Article>("news")
+            news?.let {
+                SearchScreen(navController = navController, article = news)
+            }
         }
 
         composable(NavItem.Settings.route) {

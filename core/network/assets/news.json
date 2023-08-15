@@ -1,0 +1,89 @@
+{
+
+  "status": "ok",
+  "totalResults": 8551,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Gizmodo.com"
+      },
+      "author": "Kevin Hurler",
+      "title": "SEC Reportedly Asked Coinbase to Halt All Trading—Except for Bitcoin",
+      "description": "Coinbase’s CEO Brian Armstrong reportedly told the Financial Times that the U.S. Securities & Exchange Commission asked him to halt trading in the exchange with all currencies except bitcoin. According to Armstrong, the suggestion came just before the SEC sue…",
+      "url": "https://gizmodo.com/sec-asked-coinbase-to-halt-trading-except-for-bitcoin-1850691411",
+      "urlToImage": "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/76f95899df261776c441932b344183f1.jpg",
+      "publishedAt": "2023-07-31T14:55:00Z",
+      "content": "Coinbases CEO Brian Armstrong reportedly told the Financial Times that the U.S. Securities &amp; Exchange Commission asked him to halt trading in the exchange with all currencies except bitcoin. Acco… [+1850 chars]"
+    },
+
+    {
+
+      "source": {
+        "id": null,
+        "name": "Gizmodo.com"
+      },
+      "author": "Cheryl Eddy",
+      "title": "Everyone's Favorite Knife-Wielding Robot Returns in Next Week's Futurama",
+      "description": "Futurama’s new season continues its examination of 3023 by way of 2023 with next week’s “How the West Was 1010001,” which sees the gang heading to, ahem, Doge City to cash in on the bitcoin mining craze. Like most places they visit, they encounter absurdities…",
+      "url": "https://gizmodo.com/futurama-hulu-new-ep-3-clips-bitcoin-crypto-wild-west-1850708869",
+      "urlToImage": "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_675,pg_1,q_80,w_1200/11cf0e30bb3cfd27a7b0f55aa6eddfd3.jpg",
+      "publishedAt": "2023-08-04T20:45:00Z",
+      "content": "Futuramas new season continues its examination of 3023 by way of 2023 with next weeks How the West Was 1010001, which sees the gang heading to, ahem, Doge City to cash in on the bitcoin mining craze.… [+2351 chars]"
+    },
+    {
+      "source": {
+        "id": "the-verge",
+        "name": "The Verge"
+      },
+      "author": "Emma Roth",
+      "title": "PayPal launches PYUSD stablecoin backed by the US dollar",
+      "description": "PayPal has launched a stablecoin called PayPal USD, starting today and “rolling out in the coming weeks.” The new stablecoin can be used for purchases and person-to-person payments.",
+      "url": "https://www.theverge.com/2023/8/7/23822752/paypal-pyusd-stablecoin-cryptocurrency",
+      "urlToImage": "https://cdn.vox-cdn.com/thumbor/AzUxs8UmwIY2lOByn5LIX8geWjY=/0x0:2200x1650/1200x628/filters:focal(1100x825:1101x826)/cdn.vox-cdn.com/uploads/chorus_asset/file/24835037/PayPal_stablecoin.png",
+      "publishedAt": "2023-08-07T14:07:51Z",
+      "content": "PayPal launches PYUSD stablecoin backed by the US dollar\r\nPayPal launches PYUSD stablecoin backed by the US dollar\r\n / PayPal USD is built on Ethereum and is 1:1 redeemable for US dollars.\r\nPayPal is… [+1960 chars]"
+    },
+    {
+
+      "source": {
+        "id": "business-insider",
+        "name": "Business Insider"
+      },
+      "author": "Matthew Fox",
+      "title": "Bitcoin could soar to $180,000 before the April 2024 halving as potential BlackRock ETF helps drive demand, Fundstrat says",
+      "description": "\"We anticipate [a bitcoin ETF] would attract new investors and generate increased demand for bitcoin,\" Fundstrat said.",
+      "url": "https://markets.businessinsider.com/news/currencies/bitcoin-price-outlook-blackrock-etf-filing-demand-180000-crypto-halving-2023-7",
+      "urlToImage": "https://i.insider.com/64bebc9fbea3440019602937?width=1200&format=jpeg",
+      "publishedAt": "2023-07-24T18:47:22Z",
+      "content": "Wenjin Chen/Getty Images\r\n<ul><li>The price of bitcoin could soar to $180,000 before the scheduled April 2024 halving, according to Fundstrat.</li><li>Fundstrat said a bitcoin ETF from BlackRock coul… [+2884 chars]"
+    },
+    {
+
+      "source": {
+        "id": "google-news",
+        "name": "Google News"
+      },
+      "author": null,
+      "title": "Move over, bitcoin: El Salvador's sovereign bonds haven't finished rallying - Reuters.com - OltNews",
+      "description": "Move over, bitcoin: El Salvador's sovereign bonds haven't finished rallying - Reuters.com  OltNews",
+      "url": "https://consent.google.com/ml?continue=https://news.google.com/rss/articles/CBMiZ2h0dHBzOi8vb2x0bmV3cy5jb20vbW92ZS1vdmVyLWJpdGNvaW4tZWwtc2FsdmFkb3JzLXNvdmVyZWlnbi1ib25kcy1oYXZlbnQtZmluaXNoZWQtcmFsbHlpbmctcmV1dGVycy1jb23SAQA?oc%3D5&gl=FR&hl=en-US&cm=2&pc=n&src=1",
+      "urlToImage": null,
+      "publishedAt": "2023-07-19T13:13:40Z",
+      "content": "We use cookies and data to<ul><li>Deliver and maintain Google services</li><li>Track outages and protect against spam, fraud, and abuse</li><li>Measure audience engagement and site statistics to unde… [+1131 chars]"
+    },
+    {
+      "source": {
+        "id": "google-news",
+        "name": "Google News"
+      },
+      "author": null,
+      "title": "Before suing Coinbase, SEC asked it to trade only in bitcoin -FT - Reuters",
+      "description": "Before suing Coinbase, SEC asked it to trade only in bitcoin -FT  Reuters",
+      "url": "https://consent.google.com/ml?continue=https://news.google.com/rss/articles/CBMifmh0dHBzOi8vd3d3LnJldXRlcnMuY29tL3RlY2hub2xvZ3kvc2VjLWFza2VkLWNvaW5iYXNlLXN0b3AtdHJhZGluZy1jcnlwdG9jdXJyZW5jaWVzLW90aGVyLXRoYW4tYml0Y29pbi1wcmlvci1zdWluZy0yMDIzLTA3LTMxL9IBAA?oc%3D5&gl=FR&hl=en-US&cm=2&pc=n&src=1",
+      "urlToImage": null,
+      "publishedAt": "2023-07-31T05:06:42Z",
+      "content": "We use cookies and data to<ul><li>Deliver and maintain Google services</li><li>Track outages and protect against spam, fraud, and abuse</li><li>Measure audience engagement and site statistics to unde… [+1131 chars]"
+    }
+    ]
+  }

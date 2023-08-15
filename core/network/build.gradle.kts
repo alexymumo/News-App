@@ -1,13 +1,21 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties()
+localProperties.load(FileInputStream(localPropertiesFile))
+
 
 android {
     namespace = "com.alexmumo.network"
     compileSdk = 33
 
     defaultConfig {
+       // buildConfigField("String", "APIKEY", localProperties.getProperty("APIKEY"))
         minSdk = 26
         targetSdk = 33
 
@@ -32,6 +40,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -42,36 +53,29 @@ dependencies {
     implementation(libs.android.appcompat)
     testImplementation(libs.junit)
 
-    // Coroutines
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.test)
+    // Coroutine
+    implementation(libs.bundles.coroutine)
 
+    // Espresso
     androidTestImplementation(libs.expresso.core)
-
-    debugImplementation(libs.chunker.debug)
-    releaseImplementation(libs.chunker.release)
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
+    testImplementation("com.google.truth:truth:1.1.3")
+    testImplementation("androidx.test:core:1.5.0")
 
     // Koin
-    implementation(libs.koin.android)
-    implementation(libs.koin.core)
+    implementation(libs.bundles.koin)
 
-    // Okhttp
-    implementation(libs.okhttp.interceptor)
-    implementation(libs.okhttp3.version)
+    // Okhttp, Retrofit
+    implementation(libs.bundles.networking)
+
+    // Robolectric
+    implementation(libs.roboelectric)
 
     // Timber
     implementation(libs.timber)
 
-    // Retrofit
-    implementation(libs.retrofit.version)
-    implementation(libs.retrofit.gson)
-
     // Serialization-json
     implementation(libs.kotlin.serializatin)
 
-    // Coroutine
-    implementation(libs.coroutines.android)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.test)
+
 }

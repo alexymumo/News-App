@@ -16,6 +16,7 @@
 package com.alexmumo.presentation.state
 
 import androidx.paging.PagingData
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.model.Article
 import kotlinx.coroutines.flow.Flow
 

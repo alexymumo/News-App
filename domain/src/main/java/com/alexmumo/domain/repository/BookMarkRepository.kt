@@ -15,6 +15,7 @@
  */
 package com.alexmumo.domain.repository
 
+import androidx.lifecycle.LiveData
 import com.alexmumo.database.entity.BookMarkEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -22,4 +23,6 @@ interface BookMarkRepository {
     fun getBookMarks(): Flow<List<BookMarkEntity>>
     suspend fun saveBookMark(bookMarkEntity: BookMarkEntity)
     suspend fun deleteBookMark()
+
+    fun checkBookMarked(id: String): LiveData<Boolean>
 }

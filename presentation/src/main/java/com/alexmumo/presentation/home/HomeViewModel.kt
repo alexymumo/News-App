@@ -18,6 +18,7 @@ package com.alexmumo.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.repository.NewsRepository
 import com.alexmumo.presentation.state.ArticleState
 import kotlinx.coroutines.Dispatchers
@@ -54,10 +55,10 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getHealthNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val health = newsRepository.fetchNews(category = category).cachedIn(viewModelScope)
+                val health = newsRepository.fetchNews(category = category)
                 _health.update { it.copy(articles = health, isLoading = false) }
             } catch (e: Exception) {
-                e.printStackTrace()
+                //Resource.Error(message = "Error occurred")
             }
         }
     }
@@ -67,10 +68,11 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getTechnologyNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val tech = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                val tech = newsRepository.fetchNews(category)
+                //Resource.Success(data = tech)
                 _technology.update { it.copy(articles = tech, isLoading = false) }
             } catch (e: Exception) {
-                e.printStackTrace()
+                //Resource.Error(error(e))
             }
         }
     }
@@ -78,10 +80,11 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getGeneralNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val general = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                val general = newsRepository.fetchNews(category)
+                //Resource.Success(data = general)
                 _general.update { it.copy(articles = general, isLoading = false) }
             } catch (e: Exception) {
-                e.printStackTrace()
+                //Resource.Error(error(e))
             }
         }
     }
@@ -89,10 +92,12 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getSportsNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val sports = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                val sports = newsRepository.fetchNews(category)
+                //Resource.Success(data = sports)
                 _sports.update { it.copy(articles = sports, isLoading = false) }
             } catch (e: Exception) {
-                e.printStackTrace()
+                //Resource.Error(error(e))
+                //e.printStackTrace()
             }
         }
     }
@@ -100,10 +105,11 @@ class HomeViewModel constructor(private val newsRepository: NewsRepository) : Vi
     private fun getBusinessNews(category: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val business = newsRepository.fetchNews(category).cachedIn(viewModelScope)
+                val business = newsRepository.fetchNews(category)
+                //Resource.Success(data = business)
                 _business.update { it.copy(articles = business, isLoading = false) }
             } catch (e: Exception) {
-                e.printStackTrace()
+                //Resource.Error(error(e))
             }
         }
     }

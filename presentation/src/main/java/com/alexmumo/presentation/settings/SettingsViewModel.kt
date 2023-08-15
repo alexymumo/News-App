@@ -26,17 +26,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SettingsViewModel constructor(private val settingRepository: SettingRepository) : ViewModel() {
-    private val _theme = MutableStateFlow<Int?>(null)
-    val theme = _theme.asStateFlow()
 
     private val _themeDialog = mutableStateOf(false)
     val themeDialog: State<Boolean> = _themeDialog
-
     fun dialogThemeState(value: Boolean) {
         _themeDialog.value = value
-    }
-    init {
-        getTheme()
     }
 
     fun setTheme(theme: Int) {
@@ -46,11 +40,4 @@ class SettingsViewModel constructor(private val settingRepository: SettingReposi
         }
     }
 
-    private fun getTheme() {
-        viewModelScope.launch {
-            settingRepository.getTheme.collectLatest { theme ->
-                _theme.value = theme
-            }
-        }
-    }
 }

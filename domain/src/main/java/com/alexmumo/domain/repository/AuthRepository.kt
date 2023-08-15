@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 package com.alexmumo.domain.repository
+
+import com.alexmumo.common.Resource
+import com.google.firebase.auth.AuthResult
+
 interface AuthRepository {
-    suspend fun registerUser(name: String, email: String, password: String)
-    suspend fun loginUser(email: String, password: String)
-    suspend fun logOutUser()
+    suspend fun registerUser(name: String, email: String, password: String): Resource<AuthResult>
+    suspend fun loginUser(email: String, password: String): Resource<AuthResult>
+    suspend fun logOutUser(): Resource<Any>
 }
