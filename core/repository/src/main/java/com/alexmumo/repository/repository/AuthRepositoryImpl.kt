@@ -19,19 +19,42 @@ import com.alexmumo.common.Resource
 import com.alexmumo.domain.repository.AuthRepository
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
 
-class AuthRepositoryImpl(
-    private val firebaseAuth: FirebaseAuth
-) : AuthRepository {
+class AuthRepositoryImpl(private val firebaseAuth: FirebaseAuth) : AuthRepository {
     override suspend fun registerUser(name: String, email: String, password: String): Resource<AuthResult> {
-        TODO("Not yet implemented")
+        return try {
+            val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            Resource.Success(result)
+        } catch (e: Exception) {
+            Resource.Error(e.localizedMessage ?: "An error occurred")
+        }
     }
 
     override suspend fun loginUser(email: String, password: String): Resource<AuthResult> {
-        TODO("Not yet implemented")
+        return try {
+            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            Resource.Success(result)
+        } catch (e: Exception) {
+            Resource.Error(e.localizedMessage ?: "An error occurred")
+        }
     }
 
     override suspend fun logOutUser(): Resource<Any> {
-        TODO("Not yet implemented")
+        return try {
+            val result = firebaseAuth.signOut()
+            Resource.Success(result)
+        } catch (e: Exception) {
+            Resource.Error(e.localizedMessage ?: "An error occurred")
+        }
+    }
+
+    override suspend fun forgotPassword(email: String): Resource<Any> {
+        return try {
+            val result = firebaseAuth.sendPasswordResetEmail(email).await()
+            Resource.Success(result)
+        }catch (e: Exception) {
+            Resource.Error(e.localizedMessage ?: "An error occurred")
+        }
     }
 }

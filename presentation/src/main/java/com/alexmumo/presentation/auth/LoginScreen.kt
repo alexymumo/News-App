@@ -15,6 +15,7 @@
  */
 package com.alexmumo.presentation.auth
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -48,40 +50,45 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import org.koin.androidx.compose.getViewModel
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LoginScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)
-            .testTag("login_tag")
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Welcome Back",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+fun LoginScreen(
+    navController: NavController,
+    viewModel: AuthViewModel = getViewModel()
+) {
+    Scaffold(
+        topBar = {
+            Column(
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    text = "Welcome Back",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Text(
+                    text = "Login to your account",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
-        Spacer(modifier = Modifier.height(10.dp))
-        var name by remember { mutableStateOf("Name") }
-        var password by remember { mutableStateOf("Password") }
-
-        Card(
+    ) {
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 5.dp),
-            elevation = CardDefaults.cardElevation(focusedElevation = 20.dp)
+                .fillMaxSize()
+                .padding(10.dp)
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
+            var name by remember { mutableStateOf("Name") }
+            var password by remember { mutableStateOf("Password") }
+
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Name") },
+                label = { Text("Email") },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text
                 ),
@@ -109,37 +116,40 @@ fun LoginScreen() {
                     Icon(imageVector = Icons.Default.Lock, contentDescription = null)
                 }
             )
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-        Text(
-            text = "Forgot Password?",
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            textAlign = TextAlign.Left,
-            modifier = Modifier.align(Alignment.End)
-        )
-        Button(
-            onClick = { },
-            modifier = Modifier.fillMaxWidth()
-        ) {
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Log In",
-                maxLines = 1,
-                fontWeight = FontWeight.Normal
+                text = "Forgot Password?",
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                textAlign = TextAlign.Left,
+                modifier = Modifier.align(Alignment.End)
+            )
+            Button(
+                onClick = {
+                    viewModel.signInUser()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Log In",
+                    maxLines = 1,
+                    fontWeight = FontWeight.Normal
+                )
+            }
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text = "Don't have an account?, Register",
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
-        Spacer(modifier = Modifier.height(5.dp))
-        Text(
-            text = "Don't have an account?, Register",
-            fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
     }
 }
 
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }

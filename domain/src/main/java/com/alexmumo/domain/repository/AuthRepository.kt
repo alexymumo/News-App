@@ -22,4 +22,5 @@ interface AuthRepository {
     suspend fun registerUser(name: String, email: String, password: String): Resource<AuthResult>
     suspend fun loginUser(email: String, password: String): Resource<AuthResult>
     suspend fun logOutUser(): Resource<Any>
+    suspend fun forgotPassword(email: String): Resource<Any>
 }

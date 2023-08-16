@@ -48,14 +48,12 @@ fun WelcomeScreen() {
             onClick = { /*TODO*/ },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Row {
-                Text(
-                    text = "Register",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = "Google Sign In",
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center
+            )
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(

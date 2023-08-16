@@ -36,8 +36,8 @@ class NewsRemoteMediator(
     private val newsApi: NewsApi
 ) : RemoteMediator<Int, Article>() {
 
-    //val articleDao = newsDatabase.articleDao()
-    //val remoteKeyDao = newsDatabase.remoteKeyDao()
+    // val articleDao = newsDatabase.articleDao()
+    // val remoteKeyDao = newsDatabase.remoteKeyDao()
 
     /*
     *updating the backing database and invalidating PagingSource

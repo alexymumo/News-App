@@ -19,7 +19,6 @@ import com.alexmumo.common.Constants.NEWS_API_KEY
 import com.alexmumo.common.Constants.PAGE
 import com.alexmumo.common.Constants.PAGE_SIZE
 import com.alexmumo.network.response.NewsResponse
-import org.koin.android.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

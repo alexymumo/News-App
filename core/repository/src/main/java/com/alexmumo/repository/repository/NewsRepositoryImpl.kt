@@ -19,8 +19,6 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import com.alexmumo.common.Resource
 import com.alexmumo.database.db.NewsDatabase
 import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.NewsRepository
@@ -29,9 +27,6 @@ import com.alexmumo.repository.mediator.NewsRemoteMediator
 import com.alexmumo.repository.paging.NewsPagingSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
-import java.lang.Exception
 
 class NewsRepositoryImpl constructor(private val newsDatabase: NewsDatabase, private val newsApi: NewsApi) : NewsRepository {
     @OptIn(ExperimentalPagingApi::class)

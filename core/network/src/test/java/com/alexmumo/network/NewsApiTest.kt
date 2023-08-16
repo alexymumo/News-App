@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 News-App
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.alexmumo.network
 
 import android.content.Context
@@ -19,7 +34,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.InputStream
 import java.net.HttpURLConnection
 
-
 @RunWith(RobolectricTestRunner::class)
 class NewsApiTest {
     private var context: Context? = null
@@ -31,7 +45,6 @@ class NewsApiTest {
         mockWebServer.start(8080)
 
         context = InstrumentationRegistry.getInstrumentation().context
-
 
         val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -57,7 +70,7 @@ class NewsApiTest {
 
     @Test
     fun `test 200 response`() = runBlocking {
-        val result = newsApi.getTopHeadLines("","",1, 20,"test")
+        val result = newsApi.getTopHeadLines("", "", 1, 20, "test")
         Truth.assertThat(result.body()).isEqualTo(result.body())
     }
 

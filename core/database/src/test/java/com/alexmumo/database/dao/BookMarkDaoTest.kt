@@ -21,15 +21,12 @@ import androidx.test.core.app.ApplicationProvider
 import com.alexmumo.database.data.bookMarkEntity
 import com.alexmumo.database.db.NewsDatabase
 import com.google.common.truth.Truth
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import java.io.IOException
-
 
 @RunWith(RobolectricTestRunner::class)
 class BookMarkDaoTest {
@@ -53,7 +50,6 @@ class BookMarkDaoTest {
         Truth.assertThat(bookmarks).isEqualTo(bookmarks)
     }
 
-
     fun `test bookmark dao fetches bookmark list`() = runTest {
         bookMarkDao.saveBookMark(bookMarkEntity)
         val result = bookMarkDao.getBookMarks()
@@ -61,10 +57,10 @@ class BookMarkDaoTest {
     }
 
     fun `test delete bookmark`() = runTest {
-            bookMarkDao.saveBookMark(bookMarkEntity)
-            bookMarkDao.deleteBookMark()
-            val result = bookMarkDao.getBookMarks()
-            Truth.assertThat(result).isNull()
+        bookMarkDao.saveBookMark(bookMarkEntity)
+        bookMarkDao.deleteBookMark()
+        val result = bookMarkDao.getBookMarks()
+        Truth.assertThat(result).isNull()
     }
 
     @After
@@ -73,4 +69,3 @@ class BookMarkDaoTest {
         newsDatabase.close()
     }
 }
-

@@ -15,6 +15,7 @@
  */
 package com.alexmumo.presentation.di
 
+import com.alexmumo.presentation.auth.AuthViewModel
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
 import com.alexmumo.presentation.home.HomeViewModel
 import com.alexmumo.presentation.search.SearchViewModel
@@ -35,5 +36,9 @@ val presentationModule = module {
 
     viewModel {
         SettingsViewModel(get())
+    }
+
+    viewModel {
+        AuthViewModel(get())
     }
 }
