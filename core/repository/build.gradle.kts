@@ -67,6 +67,6 @@ dependencies {
     implementation(libs.room.ktx)
 
     // Firebase
-    implementation(libs.bundles.firebase)
+    //implementation(libs.bundles.firebase)
 
 }

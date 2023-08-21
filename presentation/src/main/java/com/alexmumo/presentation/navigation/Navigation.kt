@@ -20,9 +20,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.alexmumo.domain.model.Article
-import com.alexmumo.presentation.auth.LoginScreen
-import com.alexmumo.presentation.auth.RegisterScreen
-import com.alexmumo.presentation.auth.WelcomeScreen
 import com.alexmumo.presentation.bookmarks.BookMarkScreen
 import com.alexmumo.presentation.detail.DetailScreen
 import com.alexmumo.presentation.home.HomeScreen
@@ -35,15 +32,6 @@ fun Navigation(navController: NavHostController) {
         navController = navController,
         startDestination = NavItem.Home.route
     ) {
-        composable(NavItem.Register.route) {
-            RegisterScreen()
-        }
-        composable(NavItem.Login.route) {
-            LoginScreen(navController = navController)
-        }
-        composable(NavItem.Landing.route) {
-            WelcomeScreen(navController = navController)
-        }
         composable(NavItem.Home.route) {
             HomeScreen(navController = navController)
         }

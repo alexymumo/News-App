@@ -37,7 +37,7 @@ fun SearchBar(
         keyboardActions = KeyboardActions(
             onSearch ={
                 if (searchViewModel.searchParamState.value.isNotEmpty()) {
-                    searchViewModel._searchParam.value = text
+                    searchViewModel.searchParam.value = text
                     onSearch()
                 }
             }
@@ -52,13 +52,13 @@ fun SearchBar(
         },
         onValueChange = { value ->
             text = if (value.trim().isNotEmpty())  value else ""
-                searchViewModel._searchParam.value = text
+                searchViewModel.searchParam.value = text
 
         },
         trailingIcon = {
             IconButton(onClick = {
-                if (searchViewModel._searchParam.value.trim().isNotEmpty()) {
-                    searchViewModel._searchParam.value = text
+                if (searchViewModel.searchParam.value.trim().isNotEmpty()) {
+                    searchViewModel.searchParam.value = text
                     onSearch()
                 }
             }) {

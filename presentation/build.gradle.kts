@@ -93,9 +93,6 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.roboelectric)
 
-    //Firebase
-    //implementation(libs.bundles.firebase)
-
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     // Coil-Compose

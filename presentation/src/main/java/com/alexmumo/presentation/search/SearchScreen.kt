@@ -15,59 +15,21 @@
  */
 package com.alexmumo.presentation.search
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.paging.LoadState
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.alexmumo.domain.model.Article
-import com.alexmumo.presentation.components.NewsCard
-import com.alexmumo.presentation.search.view.SearchBar
-import com.alexmumo.presentation.search.view.SearchCard
-import org.koin.androidx.compose.getViewModel
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun SearchScreen(
-    navController: NavController,
-    searchViewModel: SearchViewModel = getViewModel(),
-    article: Article
+    navController: NavController
 ) {
-    val result = searchViewModel.searchState.value.collectAsLazyPagingItems()
-
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        SearchBar(
-            onSearch = { searchViewModel.searchArticle() }
-        )
-
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(5.dp)
-        ) {
-            when(result.loadState.refresh) {
-                is LoadState.NotLoading -> {
-                    items(result.itemCount) { 
-                        NewsCard(onNavigate = {}, article = article)
-                    }
-                }
-                is LoadState.Loading -> {
-
-                }
-                is LoadState.Error -> {
-
-
-                }
-                else -> {}
-            }
+    Scaffold(
+        topBar = {
         }
+    ) {
+
     }
 }
 
@@ -76,7 +38,45 @@ fun SearchScreen(
 @Preview
 @Composable
 fun SearchScreenPreview() {
-    // SearchScreen()
+    val navController = rememberNavController()
+    SearchScreen(navController = navController)
 }
+
+/*
+  searchViewModel: SearchViewModel = getViewModel(),
+  article: Article
+
+
+  val result = searchViewModel.searchState.value.collectAsLazyPagingItems()
+
+  Column(
+      modifier = Modifier.fillMaxSize()
+  ) {
+      SearchBar(
+          onSearch = { searchViewModel.searchArticle() }
+      )
+
+      LazyColumn(
+          modifier = Modifier.fillMaxSize(),
+          contentPadding = PaddingValues(5.dp)
+      ) {
+          when(result.loadState.refresh) {
+              is LoadState.NotLoading -> {
+                  items(result.itemCount) {
+                      NewsCard(onNavigate = {}, article = article)
+                  }
+              }
+              is LoadState.Loading -> {
+
+              }
+              is LoadState.Error -> {
+
+
+              }
+              else -> {}
+          }
+      }
+  }
+  */
 
 

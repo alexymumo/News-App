@@ -104,7 +104,7 @@ fun DetailScreen(
                                     urlToImage = article.urlToImage
                                 )
                             )
-                            Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
+                            //Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
                         }
                     }
                 )
@@ -132,7 +132,7 @@ fun DetailScreen(
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
                 Text(
-                    text = article.description!!,
+                    text = article.content ?: "Null",
                     fontSize = 18.sp,
                     modifier = Modifier
                         .fillMaxWidth()
