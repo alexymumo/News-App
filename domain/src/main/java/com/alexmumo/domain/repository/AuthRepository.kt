@@ -24,3 +24,9 @@ interface AuthRepository {
     suspend fun logOutUser(): Resource<Any>
     suspend fun forgotPassword(email: String): Resource<Any>
 }
+
+data class AuthState(
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val data: AuthResult? = null
+)

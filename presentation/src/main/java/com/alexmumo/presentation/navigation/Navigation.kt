@@ -39,10 +39,10 @@ fun Navigation(navController: NavHostController) {
             RegisterScreen()
         }
         composable(NavItem.Login.route) {
-            LoginScreen()
+            LoginScreen(navController = navController)
         }
         composable(NavItem.Landing.route) {
-            WelcomeScreen()
+            WelcomeScreen(navController = navController)
         }
         composable(NavItem.Home.route) {
             HomeScreen(navController = navController)

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.common.Resource
 import com.alexmumo.domain.repository.AuthRepository
-import com.alexmumo.presentation.state.AuthState
+import com.alexmumo.domain.repository.AuthState
 import com.alexmumo.presentation.state.TextFieldState
 import kotlinx.coroutines.launch
 

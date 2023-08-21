@@ -5,8 +5,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    //id("com.google.gms.google-services")
+    //id("com.google.firebase.crashlytics")
 }
 
 val localPropertiesFile = rootProject.file("local.properties")
@@ -94,7 +94,7 @@ dependencies {
     testImplementation(libs.roboelectric)
 
     //Firebase
-    implementation(libs.bundles.firebase)
+    //implementation(libs.bundles.firebase)
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 

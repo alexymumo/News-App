@@ -40,6 +40,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -48,10 +49,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.common.theme.NewsAppTheme
 
 @Composable
-fun RegisterScreen() {
+fun RegisterScreen(
+    navController: NavController
+) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
@@ -88,7 +93,9 @@ fun RegisterScreen() {
                 leadingIcon = {
                     Icon(imageVector = Icons.Default.Person, contentDescription = null)
                 },
-                modifier = Modifier.fillMaxWidth().padding(5.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
             )
             Spacer(modifier = Modifier.height(5.dp))
             OutlinedTextField(
@@ -104,7 +111,9 @@ fun RegisterScreen() {
                 label = {
                     Text(text = "Email")
                 },
-                modifier = Modifier.fillMaxWidth().padding(5.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
             )
             Spacer(modifier = Modifier.height(5.dp))
             OutlinedTextField(
@@ -122,7 +131,9 @@ fun RegisterScreen() {
                 },
                 trailingIcon = {
                 },
-                modifier = Modifier.fillMaxWidth().padding(5.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp)
             )
         }
         Spacer(modifier = Modifier.height(10.dp))
@@ -138,7 +149,8 @@ fun RegisterScreen() {
             )
         }
         Row(
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "Already have an account?, Sign In",
@@ -152,7 +164,8 @@ fun RegisterScreen() {
 @Preview
 @Composable
 fun RegisterScreenPreview() {
+    val navController = rememberNavController()
     NewsAppTheme {
-        RegisterScreen()
+        RegisterScreen(navController = navController)
     }
 }
