@@ -19,45 +19,38 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import androidx.paging.filter
-import androidx.paging.map
-import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.presentation.state.SearchState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel constructor(private val searchRepository: SearchRepository) : ViewModel() {
+    private val _searchState = MutableStateFlow(SearchState())
+    val searchState: StateFlow<SearchState> = _searchState.asStateFlow()
 
-    private var _search = mutableStateOf<Flow<PagingData<Article>>>(emptyFlow())
-    var searchState: State<Flow<PagingData<Article>>> = _search
+    private val _news = mutableStateOf("")
+    val news: State<String> = _news
 
-    var searchParam = mutableStateOf("")
-    var _prevSearch = mutableStateOf("")
-    var searchParamState: State<String> = searchParam
-
-    init {
-        searchParam.value = ""
+    fun setSearchString(search: String) {
+        _news.value = search
     }
 
-    fun searchArticle() {
-        viewModelScope.launch {
-            if (searchParam.value.isNotEmpty()) {
-                _search.value = searchRepository.searchNews(queryString = searchParam.value).map { articles ->
-                    articles.filter {
-                        ((it.author != null || it.source != null || it.content != null || it.description != null))
-                    }
-                }.cachedIn(viewModelScope)
+    fun searchNews() {
+        _searchState.value = searchState.value.copy(
+            isLoading = false
+        )
+        val searchNews = news.value
+        if (searchNews.isNotEmpty()) {
+            viewModelScope.launch {
+                searchRepository.searchNews(queryString = searchNews).collect { response ->
+                    _searchState.value = searchState.value.copy(
+                        isLoading = false,
+                        articles = emptyFlow()
+                    )
+                }
             }
         }
     }

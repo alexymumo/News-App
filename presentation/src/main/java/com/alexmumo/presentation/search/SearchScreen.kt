@@ -15,31 +15,30 @@
  */
 package com.alexmumo.presentation.search
 
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.alexmumo.domain.model.Article
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun SearchScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: SearchViewModel = getViewModel(),
+    article: Article
 ) {
-    Scaffold(
-        topBar = {
-        }
-    ) {
-
-    }
 }
 
-
+@Composable
+fun SearchContent() {
+}
 
 @Preview
 @Composable
 fun SearchScreenPreview() {
     val navController = rememberNavController()
-    SearchScreen(navController = navController)
+    // SearchScreen(navController = navController, article = ar)
 }
 
 /*
@@ -78,5 +77,3 @@ fun SearchScreenPreview() {
       }
   }
   */
-
-

@@ -13,38 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.activity
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+package com.alexmumo.presentation.main
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.alexmumo.presentation.common.theme.NewsAppTheme
-import com.alexmumo.presentation.main.MainScreen
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.alexmumo.presentation.navigation.BottomNav
+import com.alexmumo.presentation.navigation.Navigation
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
-        super.onCreate(savedInstanceState)
-        setContent {
-            NewsAppTheme {
-                MainScreen()
-            }
-        }
-    }
-}
-
-/*
-    /*
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-
-                ) {
-                    MainScreen()
-                }
-                */
-//color = MaterialTheme.colorScheme.background
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
@@ -63,12 +43,4 @@ fun MainScreen() {
             Navigation(navController = navController)
         }
     }
-}
-
- */
-
-@Preview
-@Composable
-fun MainScreenPreview() {
-    // MainScreen()
 }

@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexmumo.domain.model.Article
-import com.alexmumo.presentation.R
 
 @Composable
 fun SearchCard(
@@ -78,5 +77,5 @@ fun SearchCard(
 @Preview
 @Composable
 fun SearchItemPreview() {
-    //SearchCard()
+    // SearchCard()
 }

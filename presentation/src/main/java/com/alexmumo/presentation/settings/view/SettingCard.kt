@@ -66,19 +66,13 @@ fun SettingCard(
                 color = MaterialTheme.colorScheme.primary
             )
         }
+        Icon(
+            painter = painterResource(id = R.drawable.ic_arrow), contentDescription = null
+        )
     }
 }
 
 @Preview
 @Composable
 fun SettingCardPreview() {
-
-    /*SettingCard(
-        onClick = {
-        },
-        icon = 1,
-        title = "Test",
-        theme = 1
-    )
-    */
 }

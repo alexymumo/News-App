@@ -104,7 +104,7 @@ fun DetailScreen(
                                     urlToImage = article.urlToImage
                                 )
                             )
-                            //Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
+                            // Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
                         }
                     }
                 )
@@ -132,7 +132,7 @@ fun DetailScreen(
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
                 Text(
-                    text = article.content ?: "Null",
+                    text = article.content ?: "Unknown",
                     fontSize = 18.sp,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -177,7 +177,6 @@ fun DetailScreen(
     }
 }
 
-
 @Composable
 fun CustomLikeButton(
     onPress: (checkBookMark: Boolean) -> Unit = {},
@@ -207,7 +206,7 @@ fun BackButton(
     Button(
         shape = CircleShape,
         onClick = {
-                  onClick()
+            onClick()
         },
         modifier = Modifier
             .height(30.dp)
@@ -215,7 +214,6 @@ fun BackButton(
     ) {
         IconButton(onClick = {
             onClick()
-
         }) {
             Icon(Icons.Filled.ArrowBack, contentDescription = null)
         }
@@ -228,9 +226,8 @@ fun DetailScreenPreview() {
     // DetailScreen()
 }
 
-
 @Preview
 @Composable
 fun LikePreview() {
-    //BackButton()
+    // BackButton()
 }

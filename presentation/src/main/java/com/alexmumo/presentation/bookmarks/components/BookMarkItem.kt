@@ -15,7 +15,6 @@
  */
 package com.alexmumo.presentation.bookmarks.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,9 +25,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -41,14 +43,72 @@ import coil.request.ImageRequest
 import com.alexmumo.database.entity.BookMarkEntity
 
 @Composable
+fun BookMarkCard(
+    bookMarkEntity: BookMarkEntity
+) {
+    val context = LocalContext.current
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(4.dp)
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(context)
+                .data(bookMarkEntity.urlToImage)
+                .crossfade(true)
+                .build(),
+            contentDescription = "image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(130.dp).clip(RoundedCornerShape(8.dp))
+        )
+        Spacer(modifier = Modifier.width(2.dp))
+        Column {
+            Text(
+                text = bookMarkEntity.description ?: "UnKnown",
+                maxLines = 1,
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth(),
+                fontWeight = FontWeight.Normal
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Row {
+                Text(
+                    text = bookMarkEntity.author ?: "UnKnown",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Spacer(modifier = Modifier.width(5.dp))
+                Text(
+                    text = bookMarkEntity.sourceEntity.name ?: "UnKnown",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        }
+    }
+    Divider(
+        modifier = Modifier.fillMaxWidth(),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.onPrimary
+    )
+}
+
+@Composable
 fun BookMarkItem(
     bookMarkEntity: BookMarkEntity
-    //onNavigate: (BookMarkEntity) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.fillMaxWidth().height(100.dp).padding(5.dp).testTag("bookmark_tag"),
-
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(5.dp)
+            .testTag("bookmark_tag"),
     ) {
         Row(
             modifier = Modifier
@@ -71,30 +131,32 @@ fun BookMarkItem(
                     contentScale = ContentScale.FillBounds
                 )
             }
-            Spacer(modifier = Modifier.width(5.dp))
+            Spacer(modifier = Modifier.width(4.dp))
             Column {
                 Text(
-                    text = bookMarkEntity.description!!,
+                    text = bookMarkEntity.description ?: "Null",
                     maxLines = 1,
                     fontSize = 16.sp,
                     modifier = Modifier.fillMaxWidth(),
                     fontWeight = FontWeight.Normal
                 )
+                Spacer(modifier = Modifier.height(4.dp))
                 Row {
-                    /*
                     Text(
-                        text = bookMarkEntity.author!!,
+                        text = bookMarkEntity.author ?: "UnKnown",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Normal,
-                        maxLines = 1
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
+                    Spacer(modifier = Modifier.width(5.dp))
                     Text(
-                        text = bookMarkEntity.sourceEntity.name,
+                        text = bookMarkEntity.sourceEntity.name ?: "UnKnown",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Normal,
-                        maxLines = 1
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
-                    */
                 }
             }
         }
@@ -104,5 +166,6 @@ fun BookMarkItem(
 @Preview
 @Composable
 fun BookMarkItemPreview() {
+    // BookMarkCard()
     // BookMarkItem()
 }

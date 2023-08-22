@@ -22,13 +22,17 @@ data class SettingItem(
     val icon: Int
 )
 
-val settings = listOf(
+val settingItem = listOf(
     SettingItem(
-        title = "Theme",
+        title = "Change Theme",
         icon = R.drawable.ic_theme
     ),
     SettingItem(
-        title = "",
-        icon = R.drawable.ic_search
+        title = "Language",
+        icon = R.drawable.language
+    ),
+    SettingItem(
+        title = "Share App",
+        icon = R.drawable.ic_settings
     )
 )

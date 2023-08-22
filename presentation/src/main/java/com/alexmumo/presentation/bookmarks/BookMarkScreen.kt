@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.bookmarks.components.BookMarkItem
+import com.alexmumo.presentation.bookmarks.components.BookMarkCard
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -61,7 +61,7 @@ fun BookMarkScreen(
         ) {
             LazyColumn {
                 items(items = bookmarks.value) { bookMark ->
-                    BookMarkItem(bookMarkEntity = bookMark)
+                    BookMarkCard(bookMarkEntity = bookMark)
                 }
             }
         }
