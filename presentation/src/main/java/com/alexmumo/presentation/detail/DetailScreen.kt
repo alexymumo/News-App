@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.alexmumo.common.convertStringToDate
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.R
@@ -104,7 +105,6 @@ fun DetailScreen(
                                     urlToImage = article.urlToImage
                                 )
                             )
-                            // Toast.makeText(context, "Already liked", Toast.LENGTH_LONG).show()
                         }
                     }
                 )
@@ -128,7 +128,7 @@ fun DetailScreen(
                 contentScale = ContentScale.Crop
             )
             Card(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(end = 5.dp, start = 5.dp),
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
                 Text(
@@ -172,6 +172,13 @@ fun DetailScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    maxLines = 1,
+                    fontSize = 16.sp,
+                    color = Color.Green,
+                    text = convertStringToDate(article.publishedAt ?: "UnKnown")
+                )
             }
         }
     }
@@ -180,7 +187,7 @@ fun DetailScreen(
 @Composable
 fun CustomLikeButton(
     onPress: (checkBookMark: Boolean) -> Unit = {},
-    bookmarked: Boolean
+    bookmarked: Boolean 
 ) {
     IconButton(onClick = {
         onPress(bookmarked)

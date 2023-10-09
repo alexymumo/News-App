@@ -26,32 +26,47 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class SearchViewModel constructor(private val searchRepository: SearchRepository) : ViewModel() {
-    private val _searchState = MutableStateFlow(SearchState())
-    val searchState: StateFlow<SearchState> = _searchState.asStateFlow()
+    private val _searchState = mutableStateOf(SearchState())
+    val searchState: State<SearchState> = _searchState
 
-    private val _news = mutableStateOf("")
-    val news: State<String> = _news
+    private val _searchString = mutableStateOf("")
+    val searchString: State<String> = _searchString
 
     fun setSearchString(search: String) {
-        _news.value = search
+        _searchString.value = search
+        _searchState.value = searchState.value.copy(
+            articles = emptyFlow(),
+            errors = null
+        )
     }
 
-    fun searchNews() {
-        _searchState.value = searchState.value.copy(
-            isLoading = false
-        )
-        val searchNews = news.value
-        if (searchNews.isNotEmpty()) {
-            viewModelScope.launch {
-                searchRepository.searchNews(queryString = searchNews).collect { response ->
-                    _searchState.value = searchState.value.copy(
-                        isLoading = false,
-                        articles = emptyFlow()
-                    )
-                }
+    fun searchNews(value:String) {
+        viewModelScope.launch {
+            if (value.isBlank()) {
+                Timber.e("Failed")
             }
+            _searchState.value = searchState.value.copy(
+                articles = emptyFlow(),
+                isLoading = false
+            )
         }
     }
 }
+
+
+
+
+/*val searchNews = news.value
+    if (searchNews.isNotEmpty()) {
+        viewModelScope.launch {
+            searchRepository.searchNews(queryString = searchNews).collect { response ->
+                _searchState.value = searchState.value.copy(
+                    isLoading = false,
+                    articles = emptyFlow()
+                )
+            }
+        }
+    }*/

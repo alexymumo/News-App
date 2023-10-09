@@ -39,7 +39,6 @@ import com.alexmumo.domain.model.Article
 
 @Composable
 fun SearchCard(
-    onNavigate: (Article) -> Unit,
     article: Article
 ) {
     Card(
@@ -61,6 +60,7 @@ fun SearchCard(
                     .width(100.dp)
             )
             Spacer(modifier = Modifier.width(5.dp))
+
             Column {
                 Text(
                     text = article.title ?: "Null",

@@ -66,9 +66,6 @@ fun SettingCard(
                 color = MaterialTheme.colorScheme.primary
             )
         }
-        Icon(
-            painter = painterResource(id = R.drawable.ic_arrow), contentDescription = null
-        )
     }
 }
 
