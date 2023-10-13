@@ -18,6 +18,7 @@ package com.alexmumo.presentation
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
@@ -28,6 +29,8 @@ import org.junit.Test
 
 class NavTest {
 
+    @get:Rule
+    val composeUiRule = createEmptyComposeRule()
     @get:Rule
     val composeRule = createComposeRule()
     private lateinit var navHostController: TestNavHostController

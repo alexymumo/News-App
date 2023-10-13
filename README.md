@@ -39,8 +39,8 @@
 - [Timber](https://github.com/JakeWharton/timber) - Library for easier logging.
 - [Coil](https://coil-kt.github.io/coil/compose/) - Image Library from loading images from the database and caching in memory.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
-- [Truth]()
-- [Material3]()
+- [Truth]() -Assertion library by google
+- [Material3]() - Design system for compose
 
 
 ## Screenshots

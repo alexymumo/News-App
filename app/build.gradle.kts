@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin.Companion.isIncludeCompileClasspath
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,6 +13,8 @@ plugins {
 jacoco {
     toolVersion = "0.8.8"
 }
+
+
 
 project.afterEvaluate {
     setupAndroidReporting()
@@ -36,6 +40,11 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        debug {
+            isDebuggable = true
+            enableAndroidTestCoverage = true
+            enableUnitTestCoverage = true
         }
     }
 
@@ -89,5 +98,4 @@ dependencies {
 }
 
 fun setupAndroidReporting() {
-    
 }
