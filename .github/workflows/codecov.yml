@@ -1,0 +1,10 @@
+name: Generate Jacoco Report
+uses: codecov/codecov-action@v3
+env:
+  CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
