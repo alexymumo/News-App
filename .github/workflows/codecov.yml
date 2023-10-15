@@ -8,3 +8,28 @@ on:
     branches: [ dev ]
   pull_request:
     branches: [ dev ]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Unit Testing
+        uses: ReactiveCircus/android-emulator-runner@v2.14.3
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+      - name: Generate code coverage report
+        uses: actions/upload-artefact@v2
+        with:
+          name: report
+          path: app/build/reports/coverage/debug
+
+      - name: Download Test Report
+        uses: actions/download-artefact@v2
+        with:
+          name: report
+          path: app/build/reports/coverage/debug
+      - name: Upload Test report to codecov
+        uses: codecov/codecov-actions@v2
+        with:
+          files: "app/build/reports/coverage/debug/report.xml"
