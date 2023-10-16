@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.components
+package com.alexmumo.designsystem
 
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-
-@Composable
-fun TopAppBar(
-    title: String,
-    modifier: Modifier = Modifier,
-    showtitle: Boolean
-) {
-    Text(
-        text = title,
-        modifier = modifier
-    )
+sealed class TabItem(val title: String) {
+    object GeneralItem : TabItem("General")
+    object BusinessItem : TabItem("Business")
+    object TechItem : TabItem("Technology")
+    object SportItem : TabItem("Sports")
+    object HealthItem : TabItem("Health")
 }

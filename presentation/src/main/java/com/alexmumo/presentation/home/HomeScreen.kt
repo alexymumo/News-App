@@ -24,24 +24,19 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.alexmumo.designsystem.TabItem
+import com.alexmumo.designsystem.Tabs
 import com.alexmumo.presentation.components.NewsCard
 import com.alexmumo.presentation.navigation.NavItem
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -66,13 +61,7 @@ fun HomeScreen(
     }
 }
 
-sealed class TabItem(val title: String) {
-    object GeneralItem : TabItem("General")
-    object BusinessItem : TabItem("Business")
-    object TechItem : TabItem("Technology")
-    object SportItem : TabItem("Sports")
-    object HealthItem : TabItem("Health")
-}
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -84,38 +73,6 @@ fun RowItem(
     val pageState = rememberPagerState()
     Tabs(tabs = tabs, pageState = pageState)
     Screens(tabs = tabs, pageState = pageState, homeViewModel = viewModel, navController = navController)
-}
-
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun Tabs(
-    tabs: List<TabItem>,
-    pageState: PagerState
-) {
-    val scope = rememberCoroutineScope()
-    TabRow(
-        selectedTabIndex = pageState.currentPage,
-        contentColor = Color.White
-    ) {
-        tabs.forEachIndexed { index, tabItem ->
-            Tab(
-                text = {
-                    Text(
-                        text = tabItem.title,
-                        maxLines = 1,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.Thin
-                    )
-                },
-                selected = pageState.currentPage == index,
-                onClick = {
-                    scope.launch {
-                        pageState.animateScrollToPage(index)
-                    }
-                }
-            )
-        }
-    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)

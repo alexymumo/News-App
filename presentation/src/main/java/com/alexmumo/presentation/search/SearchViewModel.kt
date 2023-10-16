@@ -21,9 +21,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.presentation.state.SearchState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -43,7 +40,7 @@ class SearchViewModel constructor(private val searchRepository: SearchRepository
         )
     }
 
-    fun searchNews(value:String) {
+    fun searchNews(value: String) {
         viewModelScope.launch {
             if (value.isBlank()) {
                 Timber.e("Failed")
@@ -55,9 +52,6 @@ class SearchViewModel constructor(private val searchRepository: SearchRepository
         }
     }
 }
-
-
-
 
 /*val searchNews = news.value
     if (searchNews.isNotEmpty()) {

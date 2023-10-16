@@ -34,7 +34,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -51,7 +50,7 @@ fun SearchBar(
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(8.dp),
-        label = { Text(text = "Search..")},
+        label = { Text(text = "Search..") },
         trailingIcon = {
             IconButton(onClick = {
                 onSearch(searchString)
@@ -59,8 +58,9 @@ fun SearchBar(
                 Icon(imageVector = Icons.Default.Search, contentDescription = "search")
             }
         },
-        keyboardActions = KeyboardActions{
-            onSearch(searchString) },
+        keyboardActions = KeyboardActions {
+            onSearch(searchString)
+        },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Search,
@@ -69,12 +69,11 @@ fun SearchBar(
         maxLines = 1,
         shape = MaterialTheme.shapes.medium,
         singleLine = true,
-     )
+    )
 }
-
 
 @Preview
 @Composable
 fun SearchBarPreview() {
-    //SearchBar()
+    // SearchBar()
 }

@@ -13,6 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.components
+package com.alexmumo.designsystem
 
-class TabItem
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+
+@Composable
+fun TopAppBar(
+    title: String,
+    modifier: Modifier = Modifier,
+    showTitle: Boolean
+) {
+    Text(
+        text = title,
+        modifier = modifier
+    )
+}
+
+@Preview
+@Composable
+fun TopAppBarPreview() {
+    TopAppBar(title = "News-App", showTitle = true)
+}

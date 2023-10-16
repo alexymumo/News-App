@@ -98,8 +98,12 @@ dependencies {
     // Coil-Compose
     implementation(libs.coil.compose)
 
+    // Unit Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.expresso.core)
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-agent:1.13.8")
+
 
     // Paging
     implementation(libs.paging.runtime)
@@ -114,9 +118,14 @@ dependencies {
     // Splash - Screen
     implementation(libs.splash.screen)
 
+
+    // Android Test
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+
+
+
 
 }
 

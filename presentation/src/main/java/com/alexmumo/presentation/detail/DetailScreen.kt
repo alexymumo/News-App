@@ -187,7 +187,7 @@ fun DetailScreen(
 @Composable
 fun CustomLikeButton(
     onPress: (checkBookMark: Boolean) -> Unit = {},
-    bookmarked: Boolean 
+    bookmarked: Boolean
 ) {
     IconButton(onClick = {
         onPress(bookmarked)
