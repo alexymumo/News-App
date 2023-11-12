@@ -13,57 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.home
+package com.alexmumo.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.alexmumo.presentation.components.RowItem
-import org.koin.androidx.compose.getViewModel
-
-@Composable
-fun HomeScreen(
-    navController: NavController,
-    viewModel: HomeViewModel = getViewModel()
-) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        "News App",
-                        fontSize = 20.sp,
-                        fontFamily = FontFamily.Monospace,
-                        fontStyle = FontStyle.Normal
-                    )
-                }
-            )
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .testTag("home_test")
-
-        ) {
-            RowItem(viewModel = viewModel, navController = navController)
-        }
-    }
-}
-
-/*
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.alexmumo.presentation.home.HomeViewModel
+import com.alexmumo.presentation.navigation.NavItem
 
 @Composable
 fun Screens(
@@ -190,11 +153,4 @@ fun Screens(
             }
         }
     }
-}
-*/
-
-@Preview
-@Composable
-fun HomeScreePreview() {
-    // HomeScreen()
 }

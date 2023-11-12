@@ -36,6 +36,7 @@ android {
         }
     }
 
+    /*
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -43,10 +44,9 @@ android {
         }
         debug {
             isDebuggable = true
-            enableAndroidTestCoverage = true
-            enableUnitTestCoverage = true
         }
     }
+    */
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

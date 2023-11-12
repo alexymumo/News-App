@@ -28,7 +28,7 @@ android {
 
     testOptions {
         unitTests {
-            isIncludeAndroidResources = true
+            isIncludeAndroidResources = false
         }
     }
 
@@ -63,6 +63,7 @@ android {
 kotlin {
     sourceSets {
         all {
+            languageSettings.optIn("androidx.compose.foundation.ExperimentalFoundationApi")
             languageSettings.optIn("androidx.compose.material3.ExperimentalMaterial3Api")
         }
     }
@@ -102,6 +103,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.expresso.core)
     testImplementation("io.mockk:mockk:1.13.8")
+    androidTestImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("io.mockk:mockk-agent:1.13.8")
 
 
@@ -117,6 +119,9 @@ dependencies {
 
     // Splash - Screen
     implementation(libs.splash.screen)
+
+    // Roboelectric
+    implementation(libs.roboelectric)
 
 
     // Android Test

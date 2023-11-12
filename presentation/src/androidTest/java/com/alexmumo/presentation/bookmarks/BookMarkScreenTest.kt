@@ -13,38 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.components
+package com.alexmumo.presentation.bookmarks
 
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import com.alexmumo.presentation.bookmarks.components.BookMarkItem
-import com.alexmumo.presentation.data.bookMark
-import org.junit.Before
+import androidx.navigation.testing.TestNavHostController
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import io.mockk.mockk
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadows.ShadowLog
-import kotlin.jvm.Throws
 
-@RunWith(RobolectricTestRunner::class)
-class BookMarkItemTest {
+@RunWith(AndroidJUnit4::class)
+class BookMarkScreenTest {
+
+    private val viewmodel = mockk<BookMarkViewModel>()
+
     @get:Rule
     val composeRule = createComposeRule()
 
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        ShadowLog.stream = System.out
-    }
+    private lateinit var navHostController: TestNavHostController
 
     @Test
-    fun `test book mark item is displayed`() {
+    fun testBookMarkScreen() {
         composeRule.setContent {
-            BookMarkItem(bookMarkEntity = bookMark)
+            navHostController = TestNavHostController(LocalContext.current)
+            BookMarkScreen(navController = navHostController, viewModel = viewmodel)
         }
-        composeRule.onNodeWithTag("bookmark_tag").assertIsDisplayed()
-        composeRule.onNodeWithTag("bookmark_tag").assertExists()
+        composeRule.onNodeWithTag("bookmark_test_tag").assertIsDisplayed()
+        composeRule.onNodeWithTag("bookmark_test_tag").assertExists()
     }
 }
