@@ -59,7 +59,7 @@ fun NewsCard(
                 .data(article.urlToImage)
                 .crossfade(true)
                 .build(),
-            contentDescription = null,
+            contentDescription = "image",
             modifier = Modifier
                 .height(145.dp)
                 .width(145.dp)
