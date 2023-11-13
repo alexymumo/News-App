@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.bookmarks.components
+package com.alexmumo.presentation.bookmarks.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -45,6 +46,7 @@ import com.alexmumo.database.entity.BookMarkEntity
 @Composable
 fun BookMarkCard(
     bookMarkEntity: BookMarkEntity
+    // onNavigate: (BookMarkEntity) -> Unit
 ) {
     val context = LocalContext.current
     Row(
@@ -52,6 +54,9 @@ fun BookMarkCard(
             .fillMaxWidth()
             .height(150.dp)
             .padding(4.dp)
+            .clickable {
+                // onNavigate(bookMarkEntity)
+            }
     ) {
         AsyncImage(
             model = ImageRequest.Builder(context)

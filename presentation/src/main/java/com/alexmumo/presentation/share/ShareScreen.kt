@@ -13,41 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.main
+package com.alexmumo.presentation.share
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.navigation.BottomNav
-import com.alexmumo.presentation.navigation.Navigation
 
 @Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    Navigation(navController = navController)
+fun ShareScreen(
+    navController: NavController
+) {
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            BottomNav(navController = navController)
+        topBar = {
+            TopAppBar(title = {
+                Text(text = "Share")
+            })
         }
-    ) { padding ->
+    ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
+            modifier = Modifier.padding(paddingValues)
         ) {
-            Navigation(navController = navController)
+
         }
     }
 }
 
 @Preview
 @Composable
-fun MainScreenPreview() {
-    MainScreen()
+fun UploadScreenPreview() {
+    val navController = rememberNavController()
+    ShareScreen(navController = navController)
 }
