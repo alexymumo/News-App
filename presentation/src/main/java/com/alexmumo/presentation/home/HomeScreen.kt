@@ -69,18 +69,6 @@ fun HomeScreen(
                     )
                 }
             )
-            /*
-
-            FloatingActionButton(onClick = {
-                navController.navigate(NavItem.Upload.route)
-            }) {
-                Row {
-
-                }
-
-               Icon( Icons.Default.Add, contentDescription = "upload")
-            }
-            */
         }
     ) { paddingValues ->
         Column(
