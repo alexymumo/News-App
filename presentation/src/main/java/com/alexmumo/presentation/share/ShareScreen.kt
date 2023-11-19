@@ -65,7 +65,8 @@ fun ShareScreen(
                 singleLine = true,
             )
             Spacer(modifier = Modifier.height(4.dp))
-            OutlinedTextField(value = date, onValueChange = {},
+            OutlinedTextField(
+                value = date, onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true
             )

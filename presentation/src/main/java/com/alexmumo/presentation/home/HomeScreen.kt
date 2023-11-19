@@ -88,5 +88,5 @@ fun HomeScreen(
 @Composable
 fun HomeScreePreview() {
     val navController = rememberNavController()
-     HomeScreen(navController)
+    HomeScreen(navController)
 }
