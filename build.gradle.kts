@@ -29,13 +29,12 @@ subprojects {
     spotless {
         kotlin {
             target("**/*.kt")
+            ktlint().userData(mapOf("disabled_rules" to "filename"))
             licenseHeaderFile(
                 rootProject.file("${project.rootDir}/spotless/copyright.kt"),
                 "^(package|object|import|interface)"
             )
-            ktlint()
             trimTrailingWhitespace()
-            indentWithSpaces()
             endWithNewline()
         }
 
