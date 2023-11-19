@@ -9,10 +9,6 @@ plugins {
     //id("com.google.firebase.crashlytics")
 }
 
-val localPropertiesFile = rootProject.file("local.properties")
-val localProperties = Properties()
-localProperties.load(FileInputStream(localPropertiesFile))
-
 android {
     namespace = "com.alexmumo.presentation"
     compileSdk = 33
