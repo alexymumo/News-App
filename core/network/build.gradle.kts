@@ -5,10 +5,6 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
-val localPropertiesFile = rootProject.file("local.properties")
-val localProperties = Properties()
-localProperties.load(FileInputStream(localPropertiesFile))
-
 
 android {
     namespace = "com.alexmumo.network"
