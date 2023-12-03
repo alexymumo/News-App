@@ -38,6 +38,7 @@ subprojects {
             endWithNewline()
         }
 
+
         format("xml") {
             target()
             indentWithSpaces()
@@ -51,5 +52,20 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
+
+        apply(plugin = "com.diffplug.spotless")
+        /*
+        ktlint {
+            android.set(true)
+            verbose.set(true)
+            outputToConsole.set(true)
+            ignoreFailures.set(true)
+            outputColorName.set("RED")
+            enableExperimentalRules.set(true)
+            filter {
+                exclude { element -> element.file.path.contains("generated/")}
+            }
+        }*/
     }
+
 }
