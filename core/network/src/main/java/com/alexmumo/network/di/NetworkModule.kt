@@ -16,6 +16,7 @@
 package com.alexmumo.network.di
 
 import com.alexmumo.common.Constants.BASE_URL
+import com.alexmumo.network.BuildConfig
 import com.alexmumo.network.api.NewsApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,7 +37,12 @@ val networkModule = module {
 }
 
 fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-    return HttpLoggingInterceptor().setLevel(level = HttpLoggingInterceptor.Level.BODY)
+    val level = if (BuildConfig.DEBUG) {
+        HttpLoggingInterceptor.Level.BASIC
+    } else HttpLoggingInterceptor.Level.NONE
+    return HttpLoggingInterceptor().also {
+        it.level = level
+    }
 }
 fun provideOkhttpClient(): OkHttpClient {
     val client = OkHttpClient.Builder()

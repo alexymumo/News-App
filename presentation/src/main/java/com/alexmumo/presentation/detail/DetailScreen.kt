@@ -38,9 +38,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,6 +66,7 @@ import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
 import com.alexmumo.repository.mappers.toSourceEntity
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -70,7 +76,10 @@ fun DetailScreen(
     article: Article
 ) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember {SnackbarHostState()}
     Scaffold(
+        snackbarHost = {SnackbarHost(hostState = snackbarHostState)},
         topBar = {
             Row(
                 modifier = Modifier
@@ -91,7 +100,9 @@ fun DetailScreen(
                     bookmarked = viewModel.checkBookMarked(id = article.url).observeAsState().value != null,
                     onPress = { bookmarked ->
                         if (bookmarked) {
-                            Toast.makeText(context, "Liked", Toast.LENGTH_LONG).show()
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Already liked", "",false, duration = SnackbarDuration.Short)
+                            }
                         } else {
                             viewModel.saveBookMark(
                                 BookMarkEntity(
@@ -124,11 +135,11 @@ fun DetailScreen(
                 contentDescription = "image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(230.dp),
+                    .height(250.dp),
                 contentScale = ContentScale.Crop
             )
             Card(
-                modifier = Modifier.fillMaxSize().padding(end = 5.dp, start = 5.dp),
+                modifier = Modifier.fillMaxSize(),
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
                 Text(

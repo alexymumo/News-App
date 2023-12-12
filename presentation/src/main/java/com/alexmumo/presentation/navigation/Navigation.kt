@@ -25,7 +25,7 @@ import com.alexmumo.presentation.detail.DetailScreen
 import com.alexmumo.presentation.home.HomeScreen
 import com.alexmumo.presentation.search.SearchScreen
 import com.alexmumo.presentation.settings.SettingScreen
-
+import com.alexmumo.presentation.share.ShareScreen
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(
@@ -44,6 +44,10 @@ fun Navigation(navController: NavHostController) {
             article?.let {
                 DetailScreen(navController = navController, article = article)
             }
+        }
+
+        composable(NavItem.Upload.route) {
+            ShareScreen(navController = navController)
         }
         composable(NavItem.Search.route) {
             SearchScreen(navController = navController)

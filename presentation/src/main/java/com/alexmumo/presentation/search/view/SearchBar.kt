@@ -16,24 +16,25 @@
 package com.alexmumo.presentation.search.view
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
@@ -41,15 +42,13 @@ fun SearchBar(
     searchString: String,
     previousString: (String) -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
         value = searchString,
         onValueChange = {
             previousString(it)
         },
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(8.dp),
+        modifier = modifier.fillMaxWidth(),
         label = { Text(text = "Search..") },
         trailingIcon = {
             IconButton(onClick = {
@@ -59,6 +58,7 @@ fun SearchBar(
             }
         },
         keyboardActions = KeyboardActions {
+            keyboardController?.hide()
             onSearch(searchString)
         },
         keyboardOptions = KeyboardOptions(
@@ -67,7 +67,7 @@ fun SearchBar(
             autoCorrect = true
         ),
         maxLines = 1,
-        shape = MaterialTheme.shapes.medium,
+        shape = RoundedCornerShape(size = 8.dp),
         singleLine = true,
     )
 }

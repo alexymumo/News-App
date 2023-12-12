@@ -26,12 +26,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.bookmarks.components.BookMarkCard
+import com.alexmumo.presentation.bookmarks.view.BookMarkCard
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -58,6 +59,7 @@ fun BookMarkScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
+                .testTag("bookmark_test_tag")
         ) {
             LazyColumn {
                 items(items = bookmarks.value) { bookMark ->

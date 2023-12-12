@@ -13,36 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.search
+package com.alexmumo.presentation.components
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import org.junit.Before
+import com.alexmumo.domain.model.Article
+import com.alexmumo.domain.model.Source
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadows.ShadowLog
 
-@RunWith(RobolectricTestRunner::class)
-class SearchScreenTest {
+class NewsCardKtTest {
 
     @get:Rule
     val composeRule = createComposeRule()
 
-    @Before
-    fun setUp() {
-        ShadowLog.stream = System.out
-    }
-
     @Test
-    fun `verify search screen is displayed`() {
-
+    fun testNewsCardIsDisplayed() {
         composeRule.setContent {
-            // SearchScreen(navController = )
+            NewsCard(onNavigate = {}, article = article)
         }
-        composeRule.onNodeWithTag("search_tag").assertExists()
-        composeRule.onNodeWithTag("search_tag").assertIsDisplayed()
+        composeRule.onNodeWithTag("news_card_test_tag").assertExists()
+        composeRule.onNodeWithTag("news_card_test_tag").assertIsDisplayed()
     }
 }
+
+val source = Source(
+    id = null,
+    name = ""
+)
+
+val article = Article(
+    author = null,
+    content = null,
+    description = null,
+    publishedAt = null,
+    source = source,
+    title = null,
+    url = "",
+    urlToImage = null
+)

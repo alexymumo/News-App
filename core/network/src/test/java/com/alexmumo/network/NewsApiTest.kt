@@ -69,9 +69,15 @@ class NewsApiTest {
     }
 
     @Test
-    fun `test 200 response`() = runBlocking {
+    fun `test getTopHeadLines()`() = runBlocking {
         val result = newsApi.getTopHeadLines("", "", 1, 20, "test")
         Truth.assertThat(result.body()).isEqualTo(result.body())
+    }
+
+    @Test
+    fun `test searchNews()`() = runBlocking {
+        val search = newsApi.searchNews("", 23, 20, "test")
+        Truth.assertThat(search.body()).isEqualTo(search.body())
     }
 
     @After

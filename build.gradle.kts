@@ -19,7 +19,7 @@ plugins {
 allprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = "17"
         }
     }
 }
@@ -29,15 +29,15 @@ subprojects {
     spotless {
         kotlin {
             target("**/*.kt")
+            ktlint().userData(mapOf("disabled_rules" to "filename"))
             licenseHeaderFile(
                 rootProject.file("${project.rootDir}/spotless/copyright.kt"),
                 "^(package|object|import|interface)"
             )
-            ktlint()
             trimTrailingWhitespace()
-            indentWithSpaces()
             endWithNewline()
         }
+
 
         format("xml") {
             target()
@@ -52,5 +52,20 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
+
+        apply(plugin = "com.diffplug.spotless")
+        /*
+        ktlint {
+            android.set(true)
+            verbose.set(true)
+            outputToConsole.set(true)
+            ignoreFailures.set(true)
+            outputColorName.set("RED")
+            enableExperimentalRules.set(true)
+            filter {
+                exclude { element -> element.file.path.contains("generated/")}
+            }
+        }*/
     }
+
 }

@@ -20,11 +20,9 @@ import com.alexmumo.presentation.R
 
 sealed class NavItem(val route: String, @DrawableRes var icon: Int?, val title: String) {
     object Home : NavItem("home", R.drawable.ic_home, "Home")
-    object Landing : NavItem("landing", null, "Landing")
-    object Login : NavItem("login", null, "Login")
-    object Register : NavItem("register", null, "Register")
     object Bookmark : NavItem("bookmark", R.drawable.ic_bookmark, "BookMark")
     object Search : NavItem("search", R.drawable.ic_search, "Search")
     object Detail : NavItem("detail", null, "detail")
     object Settings : NavItem("settings", R.drawable.ic_settings, "Settings")
+    object Upload : NavItem("upload", null, "Upload")
 }

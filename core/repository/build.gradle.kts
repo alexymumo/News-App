@@ -27,11 +27,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 }
 
@@ -45,8 +45,6 @@ dependencies {
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.expresso.core)
 
     // Paging
     implementation(libs.bundles.paging)
@@ -66,7 +64,15 @@ dependencies {
     // Room
     implementation(libs.room.ktx)
 
-    // Firebase
-    //implementation(libs.bundles.firebase)
+    // Mockk
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-agent:1.13.8")
+
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
+    testImplementation("androidx.test:core-ktx:1.5.0")
+    testImplementation("org.robolectric:robolectric:4.9.2")
+
 
 }

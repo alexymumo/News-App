@@ -1,6 +1,3 @@
-import java.io.FileInputStream
-import java.util.Properties
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -8,10 +5,6 @@ plugins {
     //id("com.google.gms.google-services")
     //id("com.google.firebase.crashlytics")
 }
-
-val localPropertiesFile = rootProject.file("local.properties")
-val localProperties = Properties()
-localProperties.load(FileInputStream(localPropertiesFile))
 
 android {
     namespace = "com.alexmumo.presentation"
@@ -28,7 +21,7 @@ android {
 
     testOptions {
         unitTests {
-            isIncludeAndroidResources = true
+            isIncludeAndroidResources = false
         }
     }
 
@@ -44,11 +37,11 @@ android {
 
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -63,6 +56,7 @@ android {
 kotlin {
     sourceSets {
         all {
+            languageSettings.optIn("androidx.compose.foundation.ExperimentalFoundationApi")
             languageSettings.optIn("androidx.compose.material3.ExperimentalMaterial3Api")
         }
     }
@@ -102,6 +96,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.expresso.core)
     testImplementation("io.mockk:mockk:1.13.8")
+    androidTestImplementation("io.mockk:mockk-android:1.13.8")
     testImplementation("io.mockk:mockk-agent:1.13.8")
 
 
@@ -117,6 +112,9 @@ dependencies {
 
     // Splash - Screen
     implementation(libs.splash.screen)
+
+    // Roboelectric
+    implementation(libs.roboelectric)
 
 
     // Android Test
