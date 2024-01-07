@@ -87,7 +87,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.roboelectric)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+    implementation(libs.lifecycle.runtime.compose)
 
     // Coil-Compose
     implementation(libs.coil.compose)
@@ -95,9 +95,9 @@ dependencies {
     // Unit Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.expresso.core)
-    testImplementation("io.mockk:mockk:1.13.8")
-    androidTestImplementation("io.mockk:mockk-android:1.13.8")
-    testImplementation("io.mockk:mockk-agent:1.13.8")
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.agent)
 
 
     // Paging
@@ -118,9 +118,8 @@ dependencies {
 
 
     // Android Test
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.4.3")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.4.3")
+    androidTestImplementation(libs.junit.ext)
+    debugImplementation(libs.compose.ui.test.manifest)
 
 
 
