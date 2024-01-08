@@ -55,4 +55,5 @@ dependencies {
     implementation(libs.bundles.compose)
 
     implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.junit)
 }
