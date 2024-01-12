@@ -12,7 +12,6 @@ plugins {
     id("com.android.application") version "8.0.0" apply false
     id("com.android.library") version "8.0.0" apply false
     id("org.jetbrains.kotlin.android") version "1.8.20" apply false
-    id("org.jlleitschuh.gradle.ktlint") version ("11.3.1")
     id("com.diffplug.spotless") version ("5.17.1")
     id("com.google.dagger.hilt.android") version "2.44" apply false
 }
@@ -55,19 +54,6 @@ subprojects {
         }
 
         apply(plugin = "com.diffplug.spotless")
-        /*
-        ktlint {
-            android.set(true)
-            verbose.set(true)
-            outputToConsole.set(true)
-            ignoreFailures.set(true)
-            outputColorName.set("RED")
-            enableExperimentalRules.set(true)
-            filter {
-                exclude { element -> element.file.path.contains("generated/")}
-            }
-        }
-        */
     }
 
 }
