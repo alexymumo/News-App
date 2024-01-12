@@ -65,14 +65,16 @@ dependencies {
     implementation(libs.room.ktx)
 
     // Mockk
-    testImplementation("io.mockk:mockk:1.13.8")
-    testImplementation("io.mockk:mockk-agent:1.13.8")
+    testImplementation(libs.mockk.agent)
+    testImplementation(libs.mockk)
+
+    // Junit
+    testImplementation(libs.junit)
+    testImplementation(libs.junit.androidx.ktx)
 
 
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.test.ext:junit-ktx:1.1.5")
-    testImplementation("androidx.test:core-ktx:1.5.0")
-    testImplementation("org.robolectric:robolectric:4.9.2")
+    testImplementation(libs.core.test)
+    testImplementation(libs.roboelectric)
 
 
 }

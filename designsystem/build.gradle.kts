@@ -54,7 +54,6 @@ dependencies {
     // Compose
     implementation(libs.bundles.compose)
 
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
-
-
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.junit)
 }

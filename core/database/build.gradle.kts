@@ -45,8 +45,7 @@ dependencies {
     testImplementation(libs.truth)
     androidTestImplementation(libs.core.testing)
     implementation(libs.core.ktx)
-    implementation("androidx.test:core-ktx:1.5.0")
-
+    implementation(libs.core.test)
 
     // Paging
     implementation(libs.paging.runtime)
