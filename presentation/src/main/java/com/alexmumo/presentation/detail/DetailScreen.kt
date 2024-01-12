@@ -15,7 +15,6 @@
  */
 package com.alexmumo.presentation.detail
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -77,9 +76,9 @@ fun DetailScreen(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val snackbarHostState = remember {SnackbarHostState()}
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
-        snackbarHost = {SnackbarHost(hostState = snackbarHostState)},
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             Row(
                 modifier = Modifier
@@ -101,7 +100,7 @@ fun DetailScreen(
                     onPress = { bookmarked ->
                         if (bookmarked) {
                             scope.launch {
-                                snackbarHostState.showSnackbar("Already liked", "",false, duration = SnackbarDuration.Short)
+                                snackbarHostState.showSnackbar("Already liked", "", false, duration = SnackbarDuration.Short)
                             }
                         } else {
                             viewModel.saveBookMark(
