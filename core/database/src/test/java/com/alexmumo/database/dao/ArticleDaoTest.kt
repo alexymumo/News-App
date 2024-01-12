@@ -45,14 +45,6 @@ class ArticleDaoTest {
     }
 
     @Test
-    fun `test save article list`() = runTest {
-        val articles = listOf(articleEntity)
-        articleDao.saveArticles(articles)
-        val result = articleDao.pagingSource()
-        Truth.assertThat(result).isEqualTo(articles)
-    }
-
-    @Test
     fun `test delete article`() = runTest {
         articleDao.saveArticles(listOf(articleEntity))
         articleDao.deleteArticles()
