@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -68,5 +70,7 @@ dependencies {
     // Serialization-json
     implementation(libs.kotlin.serializatin)
 
-
+    // Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.hilt.compiler)
 }

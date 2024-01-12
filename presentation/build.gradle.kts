@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     //id("com.google.gms.google-services")
     //id("com.google.firebase.crashlytics")
 }
@@ -116,6 +117,9 @@ dependencies {
     // Roboelectric
     implementation(libs.roboelectric)
 
+    // Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.hilt.compiler)
 
     // Android Test
     androidTestImplementation(libs.junit.ext)

@@ -6,6 +6,7 @@ plugins {
     kotlin("kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("com.google.dagger.hilt.android")
     jacoco
 }
 
@@ -94,7 +95,13 @@ dependencies {
     //Firebase
     implementation(libs.bundles.firebase)
 
-    implementation("com.google.android.material:material:1.5.0")
+    //Material
+    implementation(libs.material)
+
+    // Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.hilt.compiler)
+
 }
 
 fun setupAndroidReporting() {
@@ -175,4 +182,7 @@ fun setupAndroidReporting() {
         }
     }
 
+}
+kapt {
+    correctErrorTypes = true
 }

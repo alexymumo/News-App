@@ -14,6 +14,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.20" apply false
     id("org.jlleitschuh.gradle.ktlint") version ("11.3.1")
     id("com.diffplug.spotless") version ("5.17.1")
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 allprojects {
@@ -65,7 +66,8 @@ subprojects {
             filter {
                 exclude { element -> element.file.path.contains("generated/")}
             }
-        }*/
+        }
+        */
     }
 
 }
