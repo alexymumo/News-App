@@ -36,7 +36,7 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun providesRoomDatabase(@ApplicationContext context: Context): NewsDatabase {
-        return Room.databaseBuilder(context, NewsDatabase::class.java, "news.db").build()
+        return Room.databaseBuilder(context, NewsDatabase::class.java, "").build()
     }
 }
 
