@@ -15,13 +15,30 @@
  */
 package com.alexmumo.database.di
 
+import android.content.Context
 import androidx.room.Room
 import com.alexmumo.database.dao.ArticleDao
 import com.alexmumo.database.dao.BookMarkDao
 import com.alexmumo.database.dao.RemoteKeyDao
 import com.alexmumo.database.db.NewsDatabase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import javax.inject.Singleton
+
+@InstallIn(SingletonComponent::class)
+@Module
+object DatabaseModule {
+    @Singleton
+    @Provides
+    fun providesRoomDatabase(@ApplicationContext context: Context) : NewsDatabase {
+        return Room.databaseBuilder(context, NewsDatabase::class.java, "").build()
+    }
+}
 
 val databaseModule = module {
     single {
