@@ -15,7 +15,6 @@
  */
 package com.alexmumo.repository.di
 
-import com.alexmumo.database.dao.BookMarkDao
 import com.alexmumo.database.db.NewsDatabase
 import com.alexmumo.domain.repository.BookMarkRepository
 import com.alexmumo.domain.repository.NewsRepository
@@ -32,7 +31,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule  {
+object RepositoryModule {
 
     @Provides
     @Singleton
@@ -52,4 +51,3 @@ object RepositoryModule  {
         return BookMarkRepositoryImpl(newsDatabase.bookMarkDao())
     }
 }
-

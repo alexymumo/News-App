@@ -21,7 +21,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alexmumo.presentation.home.HomeViewModel
 
-
 @Composable
 fun RowItem(
     viewModel: HomeViewModel = hiltViewModel(),

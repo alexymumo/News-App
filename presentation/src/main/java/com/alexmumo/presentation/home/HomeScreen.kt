@@ -38,7 +38,6 @@ import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.components.RowItem
 import com.alexmumo.presentation.navigation.NavItem
 
-
 @Composable
 fun HomeScreen(
     navController: NavController,
