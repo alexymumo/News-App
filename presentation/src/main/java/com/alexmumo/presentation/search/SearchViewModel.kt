@@ -21,11 +21,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.presentation.state.SearchState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class SearchViewModel constructor(private val searchRepository: SearchRepository) : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val searchRepository: SearchRepository) : ViewModel() {
     private val _searchState = mutableStateOf(SearchState())
     val searchState: State<SearchState> = _searchState
 

@@ -21,8 +21,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.domain.repository.SettingRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel constructor(private val settingRepository: SettingRepository) : ViewModel() {
+class SettingsViewModel @Inject constructor(private val settingRepository: SettingRepository) : ViewModel() {
 
     private val _themeDialog = mutableStateOf(false)
     val themeDialog: State<Boolean> = _themeDialog

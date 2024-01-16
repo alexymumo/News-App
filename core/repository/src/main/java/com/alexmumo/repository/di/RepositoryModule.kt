@@ -28,12 +28,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.koin.dsl.module
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object RepositoryModule  {
 
     @Provides
     @Singleton
@@ -49,14 +48,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesBookMarkRepository(bookMarkDao: BookMarkDao): BookMarkRepository {
-        return BookMarkRepositoryImpl(bookMarkDao)
+    fun providesBookMarkRepository(newsDatabase: NewsDatabase): BookMarkRepository {
+        return BookMarkRepositoryImpl(newsDatabase.bookMarkDao())
     }
 }
 
-val repositoryModule = module {
-    single<NewsRepository> { NewsRepositoryImpl(newsDatabase = get(), newsApi = get()) }
-    single<SearchRepository> { SearchRepositoryImpl(newsApi = get()) }
-    single<BookMarkRepository> { BookMarkRepositoryImpl(bookMarkDao = get()) }
-    // single<AuthRepository> { AuthRepositoryImpl(firebaseAuth = get()) }
-}

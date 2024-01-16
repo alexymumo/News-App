@@ -71,11 +71,9 @@ dependencies {
     implementation(project(":core:repository"))
     implementation(project(":designsystem"))
 
+    implementation(libs.android.appcompat)
     // Compose
     implementation(libs.bundles.compose)
-
-    // Koin
-    implementation(libs.bundles.koin)
 
     // Lifecycle
     implementation(libs.bundles.lifecycle)
@@ -119,6 +117,7 @@ dependencies {
 
     // Hilt
     implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation)
     kapt(libs.hilt.compiler)
 
     // Android Test

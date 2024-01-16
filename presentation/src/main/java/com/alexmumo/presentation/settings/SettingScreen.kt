@@ -31,17 +31,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.settings.view.SettingCard
 import com.alexmumo.presentation.settings.view.ThemeDialog
 import com.alexmumo.presentation.settings.view.settingItem
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun SettingScreen(
     navController: NavController,
-    settingsViewModel: SettingsViewModel = getViewModel()
+    settingsViewModel: SettingsViewModel = viewModel()
 ) {
     val themeDialog = settingsViewModel.themeDialog.value
     val context = LocalContext.current

@@ -24,7 +24,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -67,30 +66,4 @@ object NetworkModule {
     }
 }
 
-val networkModule = module {
-    single {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(provideOkhttpClient())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NewsApi::class.java)
-    }
-}
 
-fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-    val level = if (BuildConfig.DEBUG) {
-        HttpLoggingInterceptor.Level.BASIC
-    } else HttpLoggingInterceptor.Level.NONE
-    return HttpLoggingInterceptor().also {
-        it.level = level
-    }
-}
-fun provideOkhttpClient(): OkHttpClient {
-    val client = OkHttpClient.Builder()
-        .callTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .addInterceptor(providesHttpLoggingInterceptor())
-    return client.build()
-}

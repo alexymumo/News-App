@@ -30,7 +30,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -56,6 +55,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -66,12 +66,11 @@ import com.alexmumo.presentation.R
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
 import com.alexmumo.repository.mappers.toSourceEntity
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun DetailScreen(
     navController: NavController,
-    viewModel: BookMarkViewModel = getViewModel(),
+    viewModel: BookMarkViewModel = hiltViewModel(),
     article: Article
 ) {
     val context = LocalContext.current

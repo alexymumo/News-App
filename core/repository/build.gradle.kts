@@ -49,9 +49,6 @@ dependencies {
     // Paging
     implementation(libs.bundles.paging)
 
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Timber
     implementation(libs.timber)
 

@@ -52,9 +52,6 @@ dependencies {
     // Datastore
     implementation(libs.datastore)
 
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Timber
     implementation(libs.timber)
 

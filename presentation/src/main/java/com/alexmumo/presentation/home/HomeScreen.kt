@@ -32,16 +32,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.components.RowItem
 import com.alexmumo.presentation.navigation.NavItem
-import org.koin.androidx.compose.getViewModel
+
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = getViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     Scaffold(
         topBar = {

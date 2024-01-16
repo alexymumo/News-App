@@ -56,10 +56,6 @@ dependencies {
 
     implementation(libs.bundles.paging)
 
-
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Firebase
     implementation(libs.bundles.firebase)
 

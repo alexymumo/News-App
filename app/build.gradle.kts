@@ -86,9 +86,6 @@ dependencies {
     implementation(libs.android.appcompat)
     implementation(libs.android.core)
 
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Compose
     implementation(libs.bundles.compose)
 

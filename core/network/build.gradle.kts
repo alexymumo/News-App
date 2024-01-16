@@ -55,8 +55,6 @@ dependencies {
     testImplementation(libs.mock.webserver)
     testImplementation(libs.core.test)
     testImplementation(libs.truth)
-    // Koin
-    implementation(libs.bundles.koin)
 
     // Okhttp, Retrofit
     implementation(libs.bundles.networking)

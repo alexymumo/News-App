@@ -15,10 +15,7 @@
  */
 package com.alexmumo.datastore
 
-import com.alexmumo.domain.repository.SettingRepository
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module
-
+/*
 val datastoreModule = module {
     single<SettingRepository> {
         SettingsRepositoryImpl(newsPreference = get())
@@ -29,3 +26,5 @@ val datastoreModule = module {
         )
     }
 }
+
+ */

@@ -26,9 +26,9 @@ import com.alexmumo.network.api.NewsApi
 import com.alexmumo.repository.mediator.NewsRemoteMediator
 import com.alexmumo.repository.paging.NewsPagingSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class NewsRepositoryImpl constructor(private val newsDatabase: NewsDatabase, private val newsApi: NewsApi) : NewsRepository {
+class NewsRepositoryImpl @Inject constructor(private val newsDatabase: NewsDatabase, private val newsApi: NewsApi) : NewsRepository {
     @OptIn(ExperimentalPagingApi::class)
     override suspend fun fetchNews(category: String): Flow<PagingData<Article>> {
         val pagingConfig = PagingConfig(

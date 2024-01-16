@@ -22,7 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alexmumo.presentation.common.theme.NewsAppTheme
 import com.alexmumo.presentation.main.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -34,38 +36,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-/*
-    /*
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-
-                ) {
-                    MainScreen()
-                }
-                */
-//color = MaterialTheme.colorScheme.background
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-    Navigation(navController = navController)
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            BottomNav(navController = navController)
-        }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            Navigation(navController = navController)
-        }
-    }
-}
-
- */
 
 @Preview
 @Composable

@@ -63,9 +63,6 @@ dependencies {
     api(libs.room.runtime)
     kapt(libs.room.compiler)
 
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Timber
     implementation(libs.timber)
 

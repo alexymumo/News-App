@@ -30,15 +30,15 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.bookmarks.view.BookMarkCard
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun BookMarkScreen(
     navController: NavController,
-    viewModel: BookMarkViewModel = getViewModel()
+    viewModel: BookMarkViewModel = hiltViewModel()
 ) {
     val bookmarks = viewModel.bookMarkedNews.collectAsState(emptyList())
     Scaffold(
