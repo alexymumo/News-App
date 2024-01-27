@@ -99,9 +99,10 @@ fun DetailScreen(
                     onPress = { bookmarked ->
                         if (bookmarked) {
                             scope.launch {
-                                snackbarHostState.showSnackbar("Already liked", "", false, duration = SnackbarDuration.Short)
+                                snackbarHostState.showSnackbar("Already Bookmarked", "Ok", false, duration = SnackbarDuration.Short)
                             }
                         } else {
+
                             viewModel.saveBookMark(
                                 BookMarkEntity(
                                     author = article.author,
@@ -114,6 +115,9 @@ fun DetailScreen(
                                     urlToImage = article.urlToImage
                                 )
                             )
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Saved To Bookmarks", "", false, duration = SnackbarDuration.Short)
+                            }
                         }
                     }
                 )

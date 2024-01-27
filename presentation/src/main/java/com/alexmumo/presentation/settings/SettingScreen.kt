@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.settings.view.SettingCard
@@ -41,7 +41,7 @@ import com.alexmumo.presentation.settings.view.settingItem
 @Composable
 fun SettingScreen(
     navController: NavController,
-    settingsViewModel: SettingsViewModel = viewModel()
+    settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
     val themeDialog = settingsViewModel.themeDialog.value
     val context = LocalContext.current
@@ -91,7 +91,7 @@ private fun SettingContent(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         val items = if (isDisplayed) {
-            settingItem.filter { it.title != "LAnguage" }
+            settingItem.filter { it.title != "Language" }
         } else {
             settingItem
         }
