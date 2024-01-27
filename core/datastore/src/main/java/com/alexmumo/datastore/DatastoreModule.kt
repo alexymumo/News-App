@@ -15,17 +15,28 @@
  */
 package com.alexmumo.datastore
 
+import android.content.Context
 import com.alexmumo.domain.repository.SettingRepository
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val datastoreModule = module {
-    single<SettingRepository> {
-        SettingsRepositoryImpl(newsPreference = get())
+@InstallIn(SingletonComponent::class)
+@Module
+object DatastoreModule {
+
+    @Provides
+    @Singleton
+    fun providesSettingsRepository(newsPreference: NewsPreference): SettingRepository {
+        return SettingsRepositoryImpl(newsPreference)
     }
-    single {
-        NewsPreference(
-            context = androidApplication().applicationContext
-        )
+
+    @Provides
+    @Singleton
+    fun provideNewsPreference(@ApplicationContext context: Context): NewsPreference {
+        return NewsPreference(context)
     }
 }

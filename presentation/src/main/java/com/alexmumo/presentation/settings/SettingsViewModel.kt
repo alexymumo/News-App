@@ -20,9 +20,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.domain.repository.SettingRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SettingsViewModel constructor(private val settingRepository: SettingRepository) : ViewModel() {
+@HiltViewModel
+class SettingsViewModel @Inject constructor(private val settingRepository: SettingRepository) : ViewModel() {
 
     private val _themeDialog = mutableStateOf(false)
     val themeDialog: State<Boolean> = _themeDialog

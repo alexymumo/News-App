@@ -17,13 +17,13 @@ package com.alexmumo.presentation.components
 
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alexmumo.presentation.home.HomeViewModel
-import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun RowItem(
-    viewModel: HomeViewModel = getViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
     navController: NavController
 ) {
     val tabs = listOf(TabItem.GeneralItem, TabItem.BusinessItem, TabItem.TechItem, TabItem.SportItem, TabItem.HealthItem)

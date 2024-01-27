@@ -23,8 +23,9 @@ import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.network.api.NewsApi
 import com.alexmumo.repository.paging.SearchPagingSource
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class SearchRepositoryImpl(private val newsApi: NewsApi) : SearchRepository {
+class SearchRepositoryImpl @Inject constructor(private val newsApi: NewsApi) : SearchRepository {
     override suspend fun searchNews(queryString: String): Flow<PagingData<Article>> {
         val pagingConfig = PagingConfig(
             pageSize = 30,

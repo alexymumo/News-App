@@ -1,4 +1,5 @@
 appId: com.alexmumo.news_app
 ---
 - launchApp
-- tapOn: "Home"
+- tapOn:
+    id: Share

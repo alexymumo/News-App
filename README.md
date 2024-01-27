@@ -10,18 +10,19 @@
 - [Demo](#demo)
 
 ## Features
-- Display news into categories 
-- Search trending news
-- BookMarks 
-- Offline support
-- Support different languages,Themes,
+- Display news into categories - Done
+- Search trending news [WIP]
+- BookMarks - Done
+- Offline support - Done
+- Support different languages,Themes - [WIP]
+- 
 
 ## Architecture
 - Built using clean architecture 
 
 ## Tech-Stack
 - [Kotlin](https://kotlin.org) - Modern but already mature programming language aimed to make developers happier. It's concise, safe, interoperable with Java and other languages, and provides many ways to reuse code between multiple platforms for productive programming.
-- [Koin](https://hilt.com) - Dependency injection library for kotlin and android
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project
 - [Jetpack Components](https://developer.android.com/jetpack)
     - [Jetpack Compose](https://developer.android.com/jetpack/compose) - Modern toolkit for building native UI.
     - [Android KTX](https://developer.android.com/kotlin/ktx.html) - Provide concise, idiomatic Kotlin to Jetpack and Android platform APIs.
@@ -38,10 +39,13 @@
 - [Flow](https://developer.android.com/kotlin/flow) - Flows are built on top of coroutines and can provide multiple values. A flow is conceptually a stream of data that can be computed asynchronously.
 - [Timber](https://github.com/JakeWharton/timber) - Library for easier logging.
 - [Coil](https://coil-kt.github.io/coil/compose/) - Image Library from loading images from the database and caching in memory.
-- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
 - [Truth]() -Assertion library by google
 - [Material3]() - Design system for compose
-
+- [Maestro](https://maestro.mobile.dev/) - Is the simplest and most effective mobile UI testing framework.
+- [Firebase Crashlytics]() -
+- [Datastore]()
+ 
 
 ## Screenshots
 

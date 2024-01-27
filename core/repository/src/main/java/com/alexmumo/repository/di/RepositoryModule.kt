@@ -15,17 +15,39 @@
  */
 package com.alexmumo.repository.di
 
+import com.alexmumo.database.db.NewsDatabase
 import com.alexmumo.domain.repository.BookMarkRepository
 import com.alexmumo.domain.repository.NewsRepository
 import com.alexmumo.domain.repository.SearchRepository
+import com.alexmumo.network.api.NewsApi
 import com.alexmumo.repository.repository.BookMarkRepositoryImpl
 import com.alexmumo.repository.repository.NewsRepositoryImpl
 import com.alexmumo.repository.repository.SearchRepositoryImpl
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val repositoryModule = module {
-    single<NewsRepository> { NewsRepositoryImpl(newsDatabase = get(), newsApi = get()) }
-    single<SearchRepository> { SearchRepositoryImpl(newsApi = get()) }
-    single<BookMarkRepository> { BookMarkRepositoryImpl(bookMarkDao = get()) }
-    // single<AuthRepository> { AuthRepositoryImpl(firebaseAuth = get()) }
+@Module
+@InstallIn(SingletonComponent::class)
+object RepositoryModule {
+
+    @Provides
+    @Singleton
+    fun providesNewsRepository(newsDatabase: NewsDatabase, newsApi: NewsApi): NewsRepository {
+        return NewsRepositoryImpl(newsDatabase, newsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun providesSearchRepository(newsApi: NewsApi): SearchRepository {
+        return SearchRepositoryImpl(newsApi)
+    }
+
+    @Provides
+    @Singleton
+    fun providesBookMarkRepository(newsDatabase: NewsDatabase): BookMarkRepository {
+        return BookMarkRepositoryImpl(newsDatabase.bookMarkDao())
+    }
 }

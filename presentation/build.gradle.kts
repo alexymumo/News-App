@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.dagger.hilt.android")
     //id("com.google.gms.google-services")
     //id("com.google.firebase.crashlytics")
 }
@@ -70,11 +71,9 @@ dependencies {
     implementation(project(":core:repository"))
     implementation(project(":designsystem"))
 
+    implementation(libs.android.appcompat)
     // Compose
     implementation(libs.bundles.compose)
-
-    // Koin
-    implementation(libs.bundles.koin)
 
     // Lifecycle
     implementation(libs.bundles.lifecycle)
@@ -116,6 +115,10 @@ dependencies {
     // Roboelectric
     implementation(libs.roboelectric)
 
+    // Hilt
+    implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation)
+    kapt(libs.hilt.compiler)
 
     // Android Test
     androidTestImplementation(libs.junit.ext)

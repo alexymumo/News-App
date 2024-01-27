@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
 
@@ -55,11 +56,11 @@ dependencies {
 
     implementation(libs.bundles.paging)
 
-
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Firebase
     implementation(libs.bundles.firebase)
+
+    // Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.hilt.compiler)
 
 }

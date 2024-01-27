@@ -49,9 +49,6 @@ dependencies {
     // Paging
     implementation(libs.bundles.paging)
 
-    // Koin
-    implementation(libs.bundles.koin)
-
     // Timber
     implementation(libs.timber)
 
@@ -64,6 +61,10 @@ dependencies {
     // Room
     implementation(libs.room.ktx)
 
+    // Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.hilt.compiler)
+
     // Mockk
     testImplementation(libs.mockk.agent)
     testImplementation(libs.mockk)
@@ -75,6 +76,5 @@ dependencies {
 
     testImplementation(libs.core.test)
     testImplementation(libs.roboelectric)
-
 
 }
