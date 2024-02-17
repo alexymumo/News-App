@@ -22,13 +22,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alexmumo.presentation.common.theme.NewsAppTheme
 import com.alexmumo.presentation.main.MainScreen
+import com.alexmumo.repository.util.NetworkMonitor
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var networkMonitor: NetworkMonitor
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+        /*val isOffline = networkMonitor.isOnline
+            .map(Boolean::not)
+            .stateIn(
+                scope = null,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = false
+            )*/
         setContent {
             NewsAppTheme {
                 MainScreen()
