@@ -16,22 +16,24 @@
 package com.alexmumo.presentation.search
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.search.view.SearchBar
-import com.alexmumo.presentation.state.SearchState
+import com.alexmumo.domain.model.Article
+import com.alexmumo.presentation.components.NewsCard
 
 @Composable
 fun SearchScreen(
@@ -39,44 +41,60 @@ fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val state = viewModel.searchState.value
-    SearchScreenContent(
-        searchState = state,
-        onSearch = { search ->
-            viewModel.searchNews(search)
-        },
-        searchString = viewModel.searchString.value,
-        previousString = { searchParam ->
-            viewModel.setSearchString(searchParam)
+    val uiState: UiState<List<Article>> by viewModel.searchUiState.collectAsStateWithLifecycle()
+    var text by remember { mutableStateOf("") }
+    var active by remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        androidx.compose.material3.SearchBar(
+            query = text,
+            onQueryChange = {
+                text = it
+                viewModel.searchNewsByQuery(it)
+            },
+            onSearch = {
+                active = false
+            },
+            active = active,
+            onActiveChange ={
+                active = it
+            },
+            content = {
+                SearchContent(uiState = uiState, searchViewModel = viewModel)
+            }
+        )
+    }
+}
+
+
+@Composable
+fun SearchContent(
+    uiState: UiState<List<Article>>,
+    searchViewModel: SearchViewModel
+) {
+    when(uiState) {
+        is UiState.Success -> {
+            ArticleList(articles = uiState.data)
         }
-    )
+        is UiState.Error -> {
+
+        }
+        is UiState.Loading ->{
+
+        }
+    }
 }
 
 @Composable
-private fun SearchScreenContent(
-    searchState: SearchState,
-    onSearch: (String) -> Unit,
-    searchString: String,
-    previousString: (String) -> Unit
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(5.dp)
-    ) {
-        SearchBar(
-            searchString = searchString,
-            previousString = previousString,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            onSearch = onSearch
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        LazyColumn(
-            content = {
-            }
-        )
+fun ArticleList(articles: List<Article>) {
+    LazyColumn {
+        items(articles.size) {index ->
+            NewsCard(onNavigate = {}, article = articles[index])
+        }
     }
 }
 
