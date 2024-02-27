@@ -41,7 +41,7 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
     private val query = MutableStateFlow("")
 
     init {
-      searchNews()
+        searchNews()
     }
 
     fun searchNewsByQuery(queryString: String) {
@@ -49,12 +49,12 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun searchNews() {
+    fun searchNews() {
         viewModelScope.launch {
             query.debounce(2000).filter {
                 if (it.isNotEmpty() && it.length >= 100) {
                     return@filter true
-                }else {
+                } else {
                     _searchUiState.value = UiState.Success(emptyList())
                     return@filter false
                 }
@@ -68,7 +68,7 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
                 .collect {
                     if (it.isEmpty()) {
                         _searchUiState.value = UiState.Error("Not Found")
-                    }else {
+                    } else {
                         _searchUiState.value = UiState.Success(it)
                     }
                 }

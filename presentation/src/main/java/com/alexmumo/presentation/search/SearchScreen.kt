@@ -60,31 +60,28 @@ fun SearchScreen(
                 active = false
             },
             active = active,
-            onActiveChange ={
+            onActiveChange = {
                 active = it
             },
             content = {
-                SearchContent(uiState = uiState, searchViewModel = viewModel)
+                SearchContent(uiState, viewModel)
             }
         )
     }
 }
-
 
 @Composable
 fun SearchContent(
     uiState: UiState<List<Article>>,
     searchViewModel: SearchViewModel
 ) {
-    when(uiState) {
+    when (uiState) {
         is UiState.Success -> {
             ArticleList(articles = uiState.data)
         }
         is UiState.Error -> {
-
         }
-        is UiState.Loading ->{
-
+        is UiState.Loading -> {
         }
     }
 }
@@ -92,7 +89,7 @@ fun SearchContent(
 @Composable
 fun ArticleList(articles: List<Article>) {
     LazyColumn {
-        items(articles.size) {index ->
+        items(articles.size) { index ->
             NewsCard(onNavigate = {}, article = articles[index])
         }
     }
