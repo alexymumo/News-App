@@ -22,6 +22,7 @@ import com.alexmumo.domain.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -48,11 +49,11 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
         query.value = queryString
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     fun searchNews() {
         viewModelScope.launch {
-            query.debounce(2000).filter {
-                if (it.isNotEmpty() && it.length >= 100) {
+            query.debounce(20).filter {
+                if (it.isNotEmpty() && it.length >= 10) {
                     return@filter true
                 } else {
                     _searchUiState.value = UiState.Success(emptyList())

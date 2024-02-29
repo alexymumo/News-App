@@ -29,7 +29,8 @@ class SearchRepositoryImpl @Inject constructor(private val newsApi: NewsApi) : S
         return flow {
             emit(newsApi.searchNews(queryString))
         }.map { response ->
-            response.body()?.articles?.map { it.toDomain() } ?: listOf()
+            val searchResponse = response.body()?.articles ?: listOf()
+            searchResponse.map { it.toDomain() }
         }
     }
 }

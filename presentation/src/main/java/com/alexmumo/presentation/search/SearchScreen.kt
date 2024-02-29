@@ -19,6 +19,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -62,6 +66,11 @@ fun SearchScreen(
             active = active,
             onActiveChange = {
                 active = it
+            }, leadingIcon = {
+            Icon(imageVector = Icons.Default.Search, contentDescription = null)
+        },
+            placeholder = {
+                Text(text = "Search News")
             },
             content = {
                 SearchContent(uiState, viewModel)
@@ -82,6 +91,7 @@ fun SearchContent(
         is UiState.Error -> {
         }
         is UiState.Loading -> {
+            searchViewModel.searchNews()
         }
     }
 }
