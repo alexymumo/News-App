@@ -48,6 +48,9 @@ dependencies {
     implementation(libs.android.appcompat)
     testImplementation(libs.junit)
 
+    // Ktor
+    implementation(libs.bundles.ktor)
+
     // Coroutine
     implementation(libs.bundles.coroutine)
 

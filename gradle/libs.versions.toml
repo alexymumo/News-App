@@ -37,6 +37,7 @@ chunker = "4.0.0"
 mock = "1.13.8"
 hilt = "2.44"
 hilt-compose = "1.0.0"
+ktor-version = "2.3.8"
 
 [plugins]
 android-application = {id = "com.android.application", version.ref = "androidGradle"}
@@ -128,6 +129,11 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 splash-screen = {module = "androidx.core:core-splashscreen", version.ref ="splash"}
 
+# Ktor
+ktor-core = {module = "io.ktor:ktor-client-core", version.ref = "ktor-version"}
+ktor-cio = {module = "io.ktor:ktor-client-cio", version.ref = "ktor-version"}
+ktor-mock = {module = "io.ktor:ktor-client-mock", version.ref = "ktor-version"}
+
 [bundles]
 compose = ["coil-compose", "compose-activity", "compose-navigation", "compose-material", "compose-navigation-testing", "compose-ui", "compose-ui-test-junit", "compose-ui-test-manifest", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-ui-util"]
 room = ["room-compiler", "room-ktx", "room-paging", "room-runtime", "room-testing"]
@@ -138,6 +144,7 @@ coroutines = ["coroutines-test", "coroutines-android", "coroutines-core"]
 paging = ["paging-compose", "paging-runtime"]
 coroutine = ["coroutines-core","coroutines-android", "coroutines-test"]
 networking = ["retrofit-gson", "retrofit-version", "okhttp3-version", "okhttp-interceptor"]
+ktor = ["ktor-cio", "ktor-core", "ktor-mock"]
 
 
 
