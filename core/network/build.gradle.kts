@@ -10,6 +10,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
+        //buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
        // buildConfigField("String", "APIKEY", localProperties.getProperty("APIKEY"))
         minSdk = 26
         targetSdk = 33
