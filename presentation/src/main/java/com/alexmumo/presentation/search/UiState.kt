@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 News-App
+ * Copyright 2024 News-App
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.domain.repository
+package com.alexmumo.presentation.search
 
-import com.alexmumo.domain.model.Article
-import kotlinx.coroutines.flow.Flow
-
-interface SearchRepository {
-    suspend fun searchNews(queryString: String): Flow<List<Article>>
+sealed interface UiState<out T> {
+    data class Success<T>(val data: T) : UiState<T>
+    data class Error<T>(val message: String) : UiState<T>
+    object Loading : UiState<Nothing>
 }

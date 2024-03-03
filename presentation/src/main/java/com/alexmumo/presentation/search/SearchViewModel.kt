@@ -15,55 +15,64 @@
  */
 package com.alexmumo.presentation.search
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
-import com.alexmumo.presentation.state.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val searchRepository: SearchRepository) : ViewModel() {
-    private val _searchState = mutableStateOf(SearchState())
-    val searchState: State<SearchState> = _searchState
+    private val _searchUiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
+    val searchUiState: StateFlow<UiState<List<Article>>> = _searchUiState
 
-    private val _searchString = mutableStateOf("")
-    val searchString: State<String> = _searchString
+    private val query = MutableStateFlow("")
 
-    fun setSearchString(search: String) {
-        _searchString.value = search
-        _searchState.value = searchState.value.copy(
-            articles = emptyFlow(),
-            errors = null
-        )
+    init {
+        searchNews()
     }
 
-    fun searchNews(value: String) {
+    fun searchNewsByQuery(queryString: String) {
+        query.value = queryString
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+    fun searchNews() {
         viewModelScope.launch {
-            if (value.isBlank()) {
-                Timber.e("Failed")
+            query.debounce(20).filter {
+                if (it.isNotEmpty() && it.length >= 10) {
+                    return@filter true
+                } else {
+                    _searchUiState.value = UiState.Success(emptyList())
+                    return@filter false
+                }
             }
-            _searchState.value = searchState.value.copy(
-                articles = emptyFlow(),
-                isLoading = false
-            )
+                .distinctUntilChanged().flatMapLatest {
+                    _searchUiState.value = UiState.Loading
+                    return@flatMapLatest searchRepository.searchNews(it).catch { e ->
+                        _searchUiState.value = UiState.Error(e.toString())
+                    }
+                }.flowOn(Dispatchers.IO)
+                .collect {
+                    if (it.isEmpty()) {
+                        _searchUiState.value = UiState.Error("Not Found")
+                    } else {
+                        _searchUiState.value = UiState.Success(it)
+                    }
+                }
         }
     }
 }
-
-/*val searchNews = news.value
-    if (searchNews.isNotEmpty()) {
-        viewModelScope.launch {
-            searchRepository.searchNews(queryString = searchNews).collect { response ->
-                _searchState.value = searchState.value.copy(
-                    isLoading = false,
-                    articles = emptyFlow()
-                )
-            }
-        }
-    }*/
