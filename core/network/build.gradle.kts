@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -10,8 +12,9 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        //buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
-       // buildConfigField("String", "APIKEY", localProperties.getProperty("APIKEY"))
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
         minSdk = 26
         targetSdk = 33
 
