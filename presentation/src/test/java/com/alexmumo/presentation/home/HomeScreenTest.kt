@@ -1,5 +1,5 @@
 package com.alexmumo.presentation.home
 
-class HomeScreenTest {
 
-}
+
+class HomeScreenTest

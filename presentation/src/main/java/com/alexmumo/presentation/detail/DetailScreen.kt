@@ -190,7 +190,8 @@ fun DetailScreen(
                     maxLines = 1,
                     fontSize = 16.sp,
                     color = Color.Green,
-                    text = convertStringToDate(article.publishedAt ?: "UnKnown")
+                    text = article.publishedAt ?: "Uknown"
+                    //text = convertStringToDate(article.publishedAt ?: "UnKnown")
                 )
             }
         }
