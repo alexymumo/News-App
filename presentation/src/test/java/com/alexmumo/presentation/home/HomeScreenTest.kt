@@ -17,7 +17,6 @@ package com.alexmumo.presentation.home
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.domain.repository.NewsRepository
 import io.mockk.mockk
