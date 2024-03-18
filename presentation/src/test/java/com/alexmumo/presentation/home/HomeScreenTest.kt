@@ -15,4 +15,40 @@
  */
 package com.alexmumo.presentation.home
 
-class HomeScreenTest
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.navigation.compose.rememberNavController
+import com.alexmumo.domain.repository.NewsRepository
+import io.mockk.mockk
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLog
+
+@RunWith(RobolectricTestRunner::class)
+class HomeScreenTest {
+
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    private val newsRepository = mockk<NewsRepository>(relaxed = true)
+    private val viewModel = HomeViewModel(newsRepository = newsRepository)
+    @Before
+    @Throws(Exception::class)
+    fun setUp() {
+        ShadowLog.stream = System.out
+    }
+
+    @Test
+    fun `test home screen`() {
+        composeRule.setContent {
+            HomeScreen(navController = rememberNavController(), viewModel = viewModel)
+        }
+        composeRule.onNodeWithTag("title_test_tag").assertExists()
+        composeRule.onNodeWithTag("share_fab_test_tag").assertExists()
+        composeRule.onNodeWithTag("home_test_tag").assertExists()
+    }
+}

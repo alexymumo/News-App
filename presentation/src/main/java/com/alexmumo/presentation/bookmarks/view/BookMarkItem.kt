@@ -54,6 +54,7 @@ fun BookMarkCard(
             .fillMaxWidth()
             .height(150.dp)
             .padding(4.dp)
+            .testTag("book_mark_card_tag")
             .clickable {
                 // onNavigate(bookMarkEntity)
             }
@@ -97,12 +98,14 @@ fun BookMarkCard(
         }
     }
     Divider(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .testTag("divider_tag"),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.onPrimary
     )
 }
 
+/*
 @Composable
 fun BookMarkItem(
     bookMarkEntity: BookMarkEntity
@@ -167,6 +170,7 @@ fun BookMarkItem(
         }
     }
 }
+*/
 
 @Preview
 @Composable

@@ -16,6 +16,8 @@
 package com.alexmumo.presentation.detail
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithContentDescription
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.domain.model.Article
@@ -52,6 +54,7 @@ class DetailScreenTest {
             DetailScreen(navController = rememberNavController(), viewModel = viewModel, article = article)
         }
         composeRule.onNodeWithTag("detail_tag").assertExists()
+        composeRule.onNodeWithContentDescription("image").assertExists()
     }
 
     @Test
@@ -63,7 +66,6 @@ class DetailScreenTest {
             )
         }
         composeRule.onNodeWithTag("custom_like_tag", useUnmergedTree = true).assertExists()
-        // composeRule.onNodeWithTag("custom_like_tag").performClick()
     }
 
     companion object {
