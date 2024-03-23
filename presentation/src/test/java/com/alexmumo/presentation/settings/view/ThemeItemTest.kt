@@ -15,4 +15,25 @@
  */
 package com.alexmumo.presentation.settings.view
 
-class ThemeItemTest
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import com.alexmumo.presentation.R
+import com.alexmumo.presentation.common.theme.Theme
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+
+@RunWith(RobolectricTestRunner::class)
+class ThemeItemTest {
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Test
+    fun `test theme item`() {
+        composeRule.setContent {
+            ThemeItem(name = "test", value = Theme.DARK_THEME.value, icon = R.drawable.ic_theme, onSelected = {})
+        }
+        composeRule.onNodeWithTag("theme_item_test_tag").assertExists()
+    }
+}

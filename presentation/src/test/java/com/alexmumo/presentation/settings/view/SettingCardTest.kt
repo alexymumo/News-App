@@ -16,7 +16,9 @@
 package com.alexmumo.presentation.settings.view
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
+import com.alexmumo.presentation.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,9 +41,9 @@ class SettingCardTest {
     @Test
     fun `test setting card`() {
         composeRule.setContent {
-            // SettingCard(title = "", icon = R.id, onClick = {})
+            SettingCard(title = "test title", icon = R.drawable.ic_theme, onClick = {})
         }
         composeRule.onNodeWithTag("settings_card_test_tag").assertExists()
-        // composeRule.onNodeWithContentDescription("settings").assertExists()
+        composeRule.onNodeWithContentDescription("settings").assertExists()
     }
 }
