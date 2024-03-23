@@ -38,7 +38,6 @@ import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.settings.view.SettingCard
 import com.alexmumo.presentation.settings.view.ThemeDialog
 import com.alexmumo.presentation.settings.view.settingItem
-import org.jetbrains.annotations.VisibleForTesting
 
 @Composable
 fun SettingScreen(
@@ -82,7 +81,6 @@ fun SettingScreen(
         )
     }
 }
-
 
 @Composable
 fun SettingContent(

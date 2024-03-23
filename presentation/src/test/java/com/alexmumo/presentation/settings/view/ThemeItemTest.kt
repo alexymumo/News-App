@@ -31,7 +31,6 @@ class ThemeItemTest {
     @get:Rule
     val composeRule = createComposeRule()
 
-
     @Before
     @Throws(Exception::class)
     fun setUp() {
