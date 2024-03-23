@@ -39,9 +39,11 @@ dependencies {
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
+    implementation(libs.junit.androidx.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.expresso.core)
     androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.junit)
     testImplementation(libs.truth)
     androidTestImplementation(libs.core.testing)
     implementation(libs.core.ktx)
