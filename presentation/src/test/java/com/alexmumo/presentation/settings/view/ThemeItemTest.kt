@@ -19,16 +19,24 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.common.theme.Theme
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLog
 
 @RunWith(RobolectricTestRunner::class)
 class ThemeItemTest {
     @get:Rule
     val composeRule = createComposeRule()
 
+
+    @Before
+    @Throws(Exception::class)
+    fun setUp() {
+        ShadowLog.stream = System.out
+    }
     @Test
     fun `test theme item`() {
         composeRule.setContent {

@@ -27,6 +27,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.settings.view.SettingCard
 import com.alexmumo.presentation.settings.view.ThemeDialog
 import com.alexmumo.presentation.settings.view.settingItem
+import org.jetbrains.annotations.VisibleForTesting
 
 @Composable
 fun SettingScreen(
@@ -48,6 +50,7 @@ fun SettingScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                modifier = Modifier.testTag("top_app_bar_tag"),
                 title = {
                     Text(
                         text = "Settings",
@@ -58,7 +61,7 @@ fun SettingScreen(
                 }
             )
         },
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().testTag("setting_screen_test_tag")
     ) { paddingValues ->
         if (themeDialog) {
             ThemeDialog(
@@ -80,15 +83,17 @@ fun SettingScreen(
     }
 }
 
+
 @Composable
-private fun SettingContent(
+fun SettingContent(
     paddingValues: PaddingValues,
     onChangeTheme: () -> Unit,
     isDisplayed: Boolean
 ) {
     LazyColumn(
         contentPadding = paddingValues,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = Modifier.testTag("settings_content_tag")
     ) {
         val items = if (isDisplayed) {
             settingItem.filter { it.title != "Language" }
