@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/alexymumo/News-App/graph/badge.svg?token=15AJMIDLLE)](https://codecov.io/gh/alexymumo/News-App)
+
 ## News-App
 - News App is a multi-module news app built using Kotlin, Jetpack Compose and [News API]("https://newsapi.org/")
 
