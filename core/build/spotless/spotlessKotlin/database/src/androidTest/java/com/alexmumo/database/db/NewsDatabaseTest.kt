@@ -24,6 +24,7 @@ import com.alexmumo.database.dao.BookMarkDao
 import com.alexmumo.database.dao.RemoteKeyDao
 import com.alexmumo.database.entity.ArticleEntity
 import com.alexmumo.database.entity.SourceEntity
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -31,6 +32,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 class NewsDatabaseTest {
 
@@ -48,9 +50,18 @@ class NewsDatabaseTest {
         ).build()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun saveArticles_returns_a_listOf_articles() = runTest {
+        articleDao.saveArticles(articles)
+        val articles = articleDao.pagingSource()
+        assertThat(articles).isNotNull()
+    }
+
+    @Test
+    fun deleteArticles_returns_null() = runTest {
+        articleDao.saveArticles(articles)
+        val articles = articleDao.deleteArticles()
+        assertThat(articles).isNull()
     }
 
     @After
