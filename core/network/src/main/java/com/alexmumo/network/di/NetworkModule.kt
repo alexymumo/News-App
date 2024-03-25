@@ -22,6 +22,18 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.request.header
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.json.Json
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,6 +44,29 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Provides
+    fun provideDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(): HttpClient {
+        return HttpClient(Android) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(DefaultRequest) {
+                url(BASE_URL)
+                header("", "")
+            }
+            install(ContentNegotiation) {
+                json(Json)
+            }
+        }
+
+    }
+
+    /*
     @Provides
     @Singleton
     fun providesNewsApi(okHttpClient: OkHttpClient): NewsApi {
@@ -42,6 +77,8 @@ object NetworkModule {
             .build()
             .create(NewsApi::class.java)
     }
+
+
 
     @Provides
     @Singleton
@@ -64,4 +101,6 @@ object NetworkModule {
             .addInterceptor(httpLoggingInterceptor)
         return client.build()
     }
+
+     */
 }
