@@ -44,6 +44,7 @@ fun BookMarkScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                modifier = Modifier.testTag("top_app_bar_test_tag"),
                 title = {
                     Text(
                         text = "BookMarks",

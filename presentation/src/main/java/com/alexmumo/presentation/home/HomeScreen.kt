@@ -53,7 +53,8 @@ fun HomeScreen(
                         "News App",
                         fontSize = 20.sp,
                         fontFamily = FontFamily.Monospace,
-                        fontStyle = FontStyle.Normal
+                        fontStyle = FontStyle.Normal,
+                        modifier = Modifier.testTag("title_test_tag")
                     )
                 }
             )
@@ -63,6 +64,7 @@ fun HomeScreen(
                 onClick = {
                     navController.navigate(NavItem.Upload.route)
                 },
+                modifier = Modifier.testTag("share_fab_test_tag"),
                 icon = {
                     Icon(Icons.Default.Add, contentDescription = null)
                 },
@@ -78,7 +80,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .testTag("home_test")
+                .testTag("home_test_tag")
 
         ) {
             RowItem(viewModel = viewModel, navController = navController)
