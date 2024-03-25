@@ -18,6 +18,7 @@ package com.alexmumo.network.di
 import com.alexmumo.common.Constants.BASE_URL
 import com.alexmumo.network.BuildConfig
 import com.alexmumo.network.api.NewsApi
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,7 +58,6 @@ object NetworkModule {
             }
             install(DefaultRequest) {
                 url(BASE_URL)
-                header("", "")
             }
             install(ContentNegotiation) {
                 json(Json)
@@ -65,42 +65,4 @@ object NetworkModule {
         }
 
     }
-
-    /*
-    @Provides
-    @Singleton
-    fun providesNewsApi(okHttpClient: OkHttpClient): NewsApi {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NewsApi::class.java)
-    }
-
-
-
-    @Provides
-    @Singleton
-    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val level = if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Level.BASIC
-        } else HttpLoggingInterceptor.Level.NONE
-        return HttpLoggingInterceptor().also {
-            it.level = level
-        }
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkhttpInterceptor(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val client = OkHttpClient.Builder()
-            .callTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor)
-        return client.build()
-    }
-
-     */
 }
