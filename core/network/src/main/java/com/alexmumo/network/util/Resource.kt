@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 News-App
+ * Copyright 2024 News-App
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.common
+package com.alexmumo.network.util
 
-object Constants {
-    const val BASE_URL = "https://newsapi.org/v2/"
-    const val NEWS_API_KEY = ""
-    const val PAGE_SIZE = 100
-    const val PAGE = 1
-    const val COUNTRY_CODE = "us"
+sealed class Resource<T>(val data: T? = null, val error: String? = null) {
+    class Success<T>(data: T) : Resource<T>(data = data)
+    class Error<T>(error: String) : Resource<T>(error = error)
+    class Loading<T> : Resource<T>()
 }
