@@ -19,18 +19,17 @@ import com.alexmumo.common.Constants.NEWS_API_KEY
 import com.alexmumo.common.Constants.PAGE
 import com.alexmumo.common.Constants.PAGE_SIZE
 import com.alexmumo.network.response.NewsResponse
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface NewsApi {
+interface NewsService {
     @GET("everything")
     suspend fun searchNews(
         @Query("q") q: String,
         @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("page") page: Int = PAGE,
         @Query("apiKey") apiKey: String = NEWS_API_KEY
-    ): Response<NewsResponse>
+    ): NewsResponse
 
     @GET("top-headlines")
     suspend fun getTopHeadLines(
@@ -39,5 +38,5 @@ interface NewsApi {
         @Query("pageSize") pageSize: Int = PAGE_SIZE,
         @Query("page") page: Int = PAGE,
         @Query("apiKey") apiKey: String = NEWS_API_KEY
-    ): Response<NewsResponse>
+    ): NewsResponse
 }
