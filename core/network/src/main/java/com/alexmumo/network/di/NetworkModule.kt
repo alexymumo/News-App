@@ -16,52 +16,42 @@
 package com.alexmumo.network.di
 
 import com.alexmumo.common.Constants.BASE_URL
-import com.alexmumo.network.BuildConfig
-import com.alexmumo.network.api.NewsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.DefaultRequest
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
-    @Singleton
-    fun providesNewsApi(okHttpClient: OkHttpClient): NewsApi {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NewsApi::class.java)
-    }
+    fun provideDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @Provides
     @Singleton
-    fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val level = if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor.Level.BASIC
-        } else HttpLoggingInterceptor.Level.NONE
-        return HttpLoggingInterceptor().also {
-            it.level = level
+    fun provideHttpClient(): HttpClient {
+        return HttpClient(Android) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(DefaultRequest) {
+                url(BASE_URL)
+            }
+            install(ContentNegotiation) {
+                json(Json)
+            }
         }
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkhttpInterceptor(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val client = OkHttpClient.Builder()
-            .callTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(httpLoggingInterceptor)
-        return client.build()
     }
 }
