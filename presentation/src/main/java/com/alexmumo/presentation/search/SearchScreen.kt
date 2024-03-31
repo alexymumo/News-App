@@ -16,27 +16,30 @@
 package com.alexmumo.presentation.search
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.components.NewsCard
 
 @Composable
@@ -44,65 +47,75 @@ fun SearchScreen(
     navController: NavController,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    val uiState: UiState<List<Article>> by viewModel.searchUiState.collectAsStateWithLifecycle()
-    var text by remember { mutableStateOf("") }
-    var active by remember { mutableStateOf(false) }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        androidx.compose.material3.SearchBar(
-            query = text,
-            onQueryChange = {
-                text = it
-                viewModel.searchNewsByQuery(it)
-            },
-            onSearch = {
-                active = false
-            },
-            active = active,
-            onActiveChange = {
-                active = it
-            }, leadingIcon = {
-            Icon(imageVector = Icons.Default.Search, contentDescription = null)
+    val searchState = viewModel.searchState.value
+    SearchContent(
+        searchViewModel = viewModel,
+        onSearch = { search ->
+            viewModel.searchNews(search)
         },
-            placeholder = {
-                Text(text = "Search News")
-            },
-            content = {
-                SearchContent(uiState, viewModel)
-            }
-        )
-    }
+        currentString = viewModel.searchString.value,
+        onSearchTextChange = { text ->
+            viewModel.setSearchString(text)
+        },
+        searchState = searchState
+    )
 }
 
 @Composable
 fun SearchContent(
-    uiState: UiState<List<Article>>,
-    searchViewModel: SearchViewModel
+    searchViewModel: SearchViewModel,
+    onSearch: (String) -> Unit,
+    currentString: String,
+    onSearchTextChange: (String) -> Unit,
+    searchState: SearchState
 ) {
-    when (uiState) {
-        is UiState.Success -> {
-            ArticleList(articles = uiState.data)
-        }
-        is UiState.Error -> {
-        }
-        is UiState.Loading -> {
-            searchViewModel.searchNews()
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        CustomSearchBar(
+            modifier = Modifier.fillMaxWidth(),
+            onSearch = onSearch,
+            onSearchTextChange = onSearchTextChange,
+            currentString = currentString
+        )
+    }
+    Spacer(modifier = Modifier.height(5.dp))
+    LazyColumn {
+        items(searchState.data) { article ->
+            NewsCard(onNavigate = {}, article = article)
         }
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ArticleList(articles: List<Article>) {
-    LazyColumn {
-        items(articles.size) { index ->
-            NewsCard(onNavigate = {}, article = articles[index])
+fun CustomSearchBar(
+    modifier: Modifier = Modifier,
+    onSearch: (String) -> Unit = {},
+    onSearchTextChange: (String) -> Unit,
+    currentString: String
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    TextField(
+        value = currentString,
+        onValueChange = { onSearchTextChange(it) },
+        placeholder = { Text(text = "Search News..") },
+        modifier = modifier
+            .fillMaxWidth()
+            .shadow(4.dp, CircleShape),
+        maxLines = 1,
+        trailingIcon = {
+            IconButton(onClick = {
+                onSearch(currentString)
+                keyboardController?.hide()
+            }) {
+                Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+            }
+        },
+        keyboardActions = KeyboardActions {
+            onSearch(currentString)
         }
-    }
+    )
 }
 
 @Preview
