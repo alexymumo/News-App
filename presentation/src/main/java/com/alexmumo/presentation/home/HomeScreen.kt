@@ -17,20 +17,23 @@ package com.alexmumo.presentation.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -48,15 +51,19 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                modifier = Modifier.fillMaxWidth().testTag("title_test_tag"),
                 title = {
                     Text(
                         "News App",
                         fontSize = 20.sp,
-                        fontFamily = FontFamily.Monospace,
-                        fontStyle = FontStyle.Normal,
-                        modifier = Modifier.testTag("title_test_tag")
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle.Normal
                     )
-                }
+                },
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary
+                )
             )
         },
         floatingActionButton = {
@@ -66,7 +73,7 @@ fun HomeScreen(
                 },
                 modifier = Modifier.testTag("share_fab_test_tag"),
                 icon = {
-                    Icon(Icons.Default.Add, contentDescription = null)
+                    Icon(Icons.Outlined.Share, contentDescription = "share")
                 },
                 text = {
                     Text(
