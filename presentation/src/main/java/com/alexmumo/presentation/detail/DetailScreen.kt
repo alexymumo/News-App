@@ -59,7 +59,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.alexmumo.common.convertStringToDate
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.R
@@ -190,7 +189,8 @@ fun DetailScreen(
                     maxLines = 1,
                     fontSize = 16.sp,
                     color = Color.Green,
-                    text = convertStringToDate(article.publishedAt ?: "UnKnown")
+                    text = article.publishedAt ?: "Uknown"
+                    // text = convertStringToDate(article.publishedAt ?: "UnKnown")
                 )
             }
         }
@@ -209,7 +209,8 @@ fun CustomLikeButton(
             imageVector = Icons.Filled.FavoriteBorder, contentDescription = null,
             modifier = Modifier
                 .height(30.dp)
-                .width(30.dp),
+                .width(30.dp)
+                .testTag("custom_like_tag"),
             tint = if (bookmarked) {
                 Color.Magenta
             } else {

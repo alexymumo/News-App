@@ -39,25 +39,17 @@ dependencies {
 
     implementation(libs.android.core)
     implementation(libs.android.appcompat)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.expresso.core)
-    androidTestImplementation(libs.truth)
-    testImplementation(libs.truth)
-    androidTestImplementation(libs.core.testing)
+    implementation(libs.junit.androidx.ktx)
     implementation(libs.core.ktx)
     implementation(libs.core.test)
 
     // Paging
     implementation(libs.paging.runtime)
 
-    // Robolectric
-    testImplementation(libs.roboelectric)
-
     // Coroutine
     implementation(libs.bundles.coroutine)
 
     // Room
-    testImplementation(libs.room.testing)
     implementation(libs.room.paging)
     implementation(libs.room.ktx)
     api(libs.room.runtime)
@@ -69,4 +61,15 @@ dependencies {
     // Hilt
     implementation(libs.dagger.hilt)
     kapt(libs.hilt.compiler)
+
+
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.room.testing)
+    testImplementation(libs.roboelectric)
+
+    androidTestImplementation(libs.core.testing)
+    androidTestImplementation(libs.expresso.core)
+    androidTestImplementation(libs.truth)
+    androidTestImplementation(libs.junit)
 }

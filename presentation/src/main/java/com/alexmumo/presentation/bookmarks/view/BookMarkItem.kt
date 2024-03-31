@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -54,6 +53,7 @@ fun BookMarkCard(
             .fillMaxWidth()
             .height(150.dp)
             .padding(4.dp)
+            .testTag("book_mark_card_tag")
             .clickable {
                 // onNavigate(bookMarkEntity)
             }
@@ -97,12 +97,14 @@ fun BookMarkCard(
         }
     }
     Divider(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth()
+            .testTag("divider_tag"),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.onPrimary
     )
 }
 
+/*
 @Composable
 fun BookMarkItem(
     bookMarkEntity: BookMarkEntity
@@ -167,6 +169,7 @@ fun BookMarkItem(
         }
     }
 }
+*/
 
 @Preview
 @Composable

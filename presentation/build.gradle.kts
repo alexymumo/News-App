@@ -22,10 +22,17 @@ android {
 
     testOptions {
         unitTests {
-            isIncludeAndroidResources = false
+            isIncludeAndroidResources = true
         }
     }
-
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md"
+            )
+        )
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -112,8 +119,6 @@ dependencies {
     // Splash - Screen
     implementation(libs.splash.screen)
 
-    // Roboelectric
-    implementation(libs.roboelectric)
 
     // Hilt
     implementation(libs.dagger.hilt)
@@ -123,9 +128,6 @@ dependencies {
     // Android Test
     androidTestImplementation(libs.junit.ext)
     debugImplementation(libs.compose.ui.test.manifest)
-
-
-
 
 }
 
