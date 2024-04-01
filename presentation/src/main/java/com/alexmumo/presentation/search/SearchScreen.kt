@@ -47,6 +47,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.components.NewsCard
+import com.alexmumo.presentation.navigation.NavItem
+import timber.log.Timber
 
 @Composable
 fun SearchScreen(
@@ -63,7 +65,8 @@ fun SearchScreen(
         onSearchTextChange = { text ->
             viewModel.setSearchString(text)
         },
-        searchState = searchState
+        searchState = searchState,
+        navController = navController
     )
 }
 
@@ -73,7 +76,8 @@ fun SearchContent(
     onSearch: (String) -> Unit,
     currentString: String,
     onSearchTextChange: (String) -> Unit,
-    searchState: SearchState
+    searchState: SearchState,
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
@@ -89,7 +93,14 @@ fun SearchContent(
         Spacer(modifier = Modifier.height(5.dp))
         LazyColumn {
             items(searchState.data) { article ->
-                NewsCard(onNavigate = {}, article = article)
+                NewsCard(onNavigate = {
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        key = "news",
+                        value = article
+                    )
+                    navController.navigate(NavItem.Detail.route)
+                    Timber.tag("Logged ${NavItem.Detail.route}")
+                }, article = article)
             }
         }
     }
