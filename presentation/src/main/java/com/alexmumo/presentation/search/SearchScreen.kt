@@ -20,10 +20,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -36,6 +39,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -71,19 +76,21 @@ fun SearchContent(
     searchState: SearchState
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().testTag("search_screen_test_tag")
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("search_screen_test_tag")
     ) {
         CustomSearchBar(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(all = 5.dp).wrapContentHeight(),
             onSearch = onSearch,
             onSearchTextChange = onSearchTextChange,
             currentString = currentString
         )
-    }
-    Spacer(modifier = Modifier.height(5.dp))
-    LazyColumn {
-        items(searchState.data) { article ->
-            NewsCard(onNavigate = {}, article = article)
+        Spacer(modifier = Modifier.height(5.dp))
+        LazyColumn {
+            items(searchState.data) { article ->
+                NewsCard(onNavigate = {}, article = article)
+            }
         }
     }
 }
@@ -106,6 +113,12 @@ fun CustomSearchBar(
             .testTag("search_text_tag")
             .shadow(4.dp, CircleShape),
         maxLines = 1,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            autoCorrect = true,
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
         trailingIcon = {
             IconButton(onClick = {
                 onSearch(currentString)
@@ -115,6 +128,7 @@ fun CustomSearchBar(
             }
         },
         keyboardActions = KeyboardActions {
+            keyboardController?.hide()
             onSearch(currentString)
         }
     )
