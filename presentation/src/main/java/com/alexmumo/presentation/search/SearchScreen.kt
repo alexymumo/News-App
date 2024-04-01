@@ -35,6 +35,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -70,7 +71,7 @@ fun SearchContent(
     searchState: SearchState
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize().testTag("search_screen_test_tag")
     ) {
         CustomSearchBar(
             modifier = Modifier.fillMaxWidth(),
@@ -102,6 +103,7 @@ fun CustomSearchBar(
         placeholder = { Text(text = "Search News..") },
         modifier = modifier
             .fillMaxWidth()
+            .testTag("search_text_tag")
             .shadow(4.dp, CircleShape),
         maxLines = 1,
         trailingIcon = {
