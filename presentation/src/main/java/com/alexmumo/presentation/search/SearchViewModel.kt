@@ -19,9 +19,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,14 +48,26 @@ class SearchViewModel @Inject constructor(private val searchRepository: SearchRe
 
     fun searchNews(searchString: String) {
         viewModelScope.launch {
-//            _searchState.value = searchState.value.copy(
-//                isLoading = true
-//            )
-            val response = searchRepository.searchNews(searchString)
-            _searchState.value = searchState.value.copy(
-                isLoading = false,
-                data = response ?: emptyList()
-            )
+            searchRepository.searchNews(searchString).collectLatest { articles ->
+                when (articles) {
+                    is Resource.Loading -> {
+                        _searchState.value = searchState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is Resource.Error -> {
+                        _searchState.value = searchState.value.copy(
+                            error = "Error occurred"
+                        )
+                    }
+                    is Resource.Success -> {
+                        _searchState.value = searchState.value.copy(
+                            isLoading = false,
+                            data = articles.data ?: emptyList()
+                        )
+                    }
+                }
+            }
         }
     }
 

@@ -15,8 +15,10 @@
  */
 package com.alexmumo.domain.repository
 
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.model.Article
+import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
-    suspend fun searchNews(queryString: String): List<Article>
+    suspend fun searchNews(queryString: String): Flow<Resource<List<Article>>>
 }
