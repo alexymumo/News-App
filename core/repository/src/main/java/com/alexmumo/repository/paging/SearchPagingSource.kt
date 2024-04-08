@@ -35,8 +35,6 @@ class SearchPagingSource constructor(
         return try {
             val searchResponse = newsApi.searchNews(
                 q = queryString,
-                pageSize = 20,
-                page = page,
                 apiKey = NEWS_API_KEY
             )
 

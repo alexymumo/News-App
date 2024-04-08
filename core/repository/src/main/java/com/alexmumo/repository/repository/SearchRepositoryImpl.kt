@@ -15,27 +15,25 @@
  */
 package com.alexmumo.repository.repository
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import com.alexmumo.common.Resource
 import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
 import com.alexmumo.network.api.NewsApi
-import com.alexmumo.repository.paging.SearchPagingSource
+import com.alexmumo.repository.mappers.toDomain
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import java.io.IOException
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(private val newsApi: NewsApi) : SearchRepository {
-    override suspend fun searchNews(queryString: String): Flow<PagingData<Article>> {
-        val pagingConfig = PagingConfig(
-            pageSize = 30,
-            enablePlaceholders = true
-        )
-        return Pager(
-            config = pagingConfig,
-            pagingSourceFactory = {
-                SearchPagingSource(newsApi = newsApi, queryString = queryString)
-            }
-        ).flow
+    override suspend fun searchNews(queryString: String): Flow<Resource<List<Article>>> = flow {
+        emit(Resource.Loading())
+        try {
+            val searchResponse = newsApi.searchNews(queryString).body()?.articles ?: listOf()
+            val search = searchResponse.map { it.toDomain() }
+            emit(Resource.Success(data = search))
+        } catch (e: IOException) {
+            emit(Resource.Error(message = "An error occurred"))
+        }
     }
 }

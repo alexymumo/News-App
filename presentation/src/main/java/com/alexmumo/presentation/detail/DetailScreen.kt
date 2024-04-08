@@ -150,6 +150,7 @@ fun DetailScreen(
                         .fillMaxWidth()
                         .padding(all = 2.dp),
                     color = Color.White,
+                    maxLines = 20
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

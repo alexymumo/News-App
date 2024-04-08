@@ -21,63 +21,128 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.search.view.SearchBar
-import com.alexmumo.presentation.state.SearchState
+import com.alexmumo.presentation.components.NewsCard
+import com.alexmumo.presentation.navigation.NavItem
+import timber.log.Timber
 
 @Composable
 fun SearchScreen(
     navController: NavController,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    val state = viewModel.searchState.value
-    SearchScreenContent(
-        searchState = state,
+    val searchState = viewModel.searchState.value
+    SearchContent(
+        searchViewModel = viewModel,
         onSearch = { search ->
             viewModel.searchNews(search)
         },
-        searchString = viewModel.searchString.value,
-        previousString = { searchParam ->
-            viewModel.setSearchString(searchParam)
-        }
+        currentString = viewModel.searchString.value,
+        onSearchTextChange = { text ->
+            viewModel.setSearchString(text)
+        },
+        searchState = searchState,
+        navController = navController
     )
 }
 
 @Composable
-private fun SearchScreenContent(
-    searchState: SearchState,
+fun SearchContent(
+    searchViewModel: SearchViewModel,
     onSearch: (String) -> Unit,
-    searchString: String,
-    previousString: (String) -> Unit
+    currentString: String,
+    onSearchTextChange: (String) -> Unit,
+    searchState: SearchState,
+    navController: NavController
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp)
+            .testTag("search_screen_test_tag")
     ) {
-        SearchBar(
-            searchString = searchString,
-            previousString = previousString,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            onSearch = onSearch
+        CustomSearchBar(
+            modifier = Modifier.fillMaxWidth().padding(all = 5.dp).wrapContentHeight(),
+            onSearch = onSearch,
+            onSearchTextChange = onSearchTextChange,
+            currentString = currentString
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        LazyColumn(
-            content = {
+        Spacer(modifier = Modifier.height(5.dp))
+        LazyColumn {
+            items(searchState.data) { article ->
+                NewsCard(onNavigate = {
+                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                        key = "news",
+                        value = article
+                    )
+                    navController.navigate(NavItem.Detail.route)
+                    Timber.tag("Logged ${NavItem.Detail.route}")
+                }, article = article)
             }
-        )
+        }
     }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun CustomSearchBar(
+    modifier: Modifier = Modifier,
+    onSearch: (String) -> Unit = {},
+    onSearchTextChange: (String) -> Unit,
+    currentString: String
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    TextField(
+        value = currentString,
+        onValueChange = { onSearchTextChange(it) },
+        placeholder = { Text(text = "Search News..") },
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("search_text_tag")
+            .shadow(4.dp, CircleShape),
+        maxLines = 1,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            autoCorrect = true,
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
+        trailingIcon = {
+            IconButton(onClick = {
+                onSearch(currentString)
+                keyboardController?.hide()
+            }) {
+                Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+            }
+        },
+        keyboardActions = KeyboardActions {
+            keyboardController?.hide()
+            onSearch(currentString)
+        }
+    )
 }
 
 @Preview

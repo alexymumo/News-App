@@ -19,51 +19,89 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alexmumo.common.Resource
+import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.repository.SearchRepository
-import com.alexmumo.presentation.state.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val searchRepository: SearchRepository) : ViewModel() {
-    private val _searchState = mutableStateOf(SearchState())
-    val searchState: State<SearchState> = _searchState
+    // private val _searchUiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
+    // val searchUiState: StateFlow<UiState<List<Article>>> = _searchUiState
 
     private val _searchString = mutableStateOf("")
     val searchString: State<String> = _searchString
 
-    fun setSearchString(search: String) {
-        _searchString.value = search
+    private val _searchState = mutableStateOf(SearchState())
+    val searchState: State<SearchState> = _searchState
+
+    fun setSearchString(value: String) {
+        _searchString.value = value
         _searchState.value = searchState.value.copy(
-            articles = emptyFlow(),
-            errors = null
+            error = null,
+            data = emptyList()
         )
     }
 
-    fun searchNews(value: String) {
+    fun searchNews(searchString: String) {
         viewModelScope.launch {
-            if (value.isBlank()) {
-                Timber.e("Failed")
+            searchRepository.searchNews(searchString).collectLatest { articles ->
+                when (articles) {
+                    is Resource.Loading -> {
+                        _searchState.value = searchState.value.copy(
+                            isLoading = true
+                        )
+                    }
+                    is Resource.Error -> {
+                        _searchState.value = searchState.value.copy(
+                            error = "Error occurred"
+                        )
+                    }
+                    is Resource.Success -> {
+                        _searchState.value = searchState.value.copy(
+                            isLoading = false,
+                            data = articles.data ?: emptyList()
+                        )
+                    }
+                }
             }
-            _searchState.value = searchState.value.copy(
-                articles = emptyFlow(),
-                isLoading = false
-            )
         }
     }
+
+//
+//    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+//    fun searchNews() {
+//        viewModelScope.launch {
+//            query.debounce(20).filter {
+//                if (it.isNotEmpty() && it.length >= 10) {
+//                    return@filter true
+//                } else {
+//                    _searchUiState.value = UiState.Success(emptyList())
+//                    return@filter false
+//                }
+//            }
+//                .distinctUntilChanged().flatMapLatest {
+//                    _searchUiState.value = UiState.Loading
+//                    return@flatMapLatest searchRepository.searchNews(it).catch { e ->
+//                        _searchUiState.value = UiState.Error(e.toString())
+//                    }
+//                }.flowOn(Dispatchers.IO)
+//                .collect {
+//                    if (it.isEmpty()) {
+//                        _searchUiState.value = UiState.Error("Not Found")
+//                    } else {
+//                        _searchUiState.value = UiState.Success(it)
+//                    }
+//                }
+//        }
+//    }
 }
 
-/*val searchNews = news.value
-    if (searchNews.isNotEmpty()) {
-        viewModelScope.launch {
-            searchRepository.searchNews(queryString = searchNews).collect { response ->
-                _searchState.value = searchState.value.copy(
-                    isLoading = false,
-                    articles = emptyFlow()
-                )
-            }
-        }
-    }*/
+data class SearchState(
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val data: List<Article> = emptyList()
+)
