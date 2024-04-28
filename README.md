@@ -12,12 +12,12 @@
 - [Demo](#demo)
 
 ## Features
-- Display news into categories - Done
-- Search trending news [WIP]
-- BookMarks - Done
-- Offline support - Done
-- Support different languages,Themes - [WIP]
-- 
+- Display news into different categories ✔️
+- Search trending news ✔️
+- BookMarks ✔️
+- Offline support ✔️
+- Support different languages,Themes 🚧
+- Share News 🚧
 
 ## Architecture
 - Built using clean architecture 
@@ -42,15 +42,31 @@
 - [Timber](https://github.com/JakeWharton/timber) - Library for easier logging.
 - [Coil](https://coil-kt.github.io/coil/compose/) - Image Library from loading images from the database and caching in memory.
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides runBlocking coroutine builder used in tests.
-- [Truth]() -Assertion library by google
 - [Material3]() - Design system for compose
 - [Maestro](https://maestro.mobile.dev/) - Is the simplest and most effective mobile UI testing framework.
-- [Firebase Crashlytics]() -
-- [Datastore]()
+- [Firebase Crashlytics]() - lightweight, realtime crash reporter that helps you track, prioritize, and fix stability issues that erode your app quality
+- [Datastore](https://developer.android.com/topic/libraries/architecture/datastore) - data storage solution that allows you to store key-value pairs or typed objects with protocol buffers
  
 
 ## Screenshots
+Home
+
+![Screenshot 2024-04-28 184741](https://github.com/alexymumo/News-App/assets/56880898/5827eacf-2a54-4686-9402-2e45f6fa6d74)
+![Screenshot 2024-04-28 184830](https://github.com/alexymumo/News-App/assets/56880898/9ce4a4b0-54f0-4290-8c6c-5746a0adad1a)
+
+Search
+
+![Screenshot 2024-04-28 185209](https://github.com/alexymumo/News-App/assets/56880898/040d8689-916a-4101-bfd5-314f3f36814a)
+
+BookMarks
+
+![Screenshot 2024-04-28 185509](https://github.com/alexymumo/News-App/assets/56880898/89b5dfee-f2d8-4961-9c40-501d44f55f6e)
+
 
 ## Tests
+- [Mockk](https://mockk.io/) - Mocking library for Kotlin
+- [Truth]() - Assertion library by google
+- [Junit4](https://github.com/junit-team/junit4) - Simple framework to write repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks. 
+- [Robolectric](https://robolectric.org/) -  Framework that brings fast and reliable unit tests to Android
 
 ## Demo
