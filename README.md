@@ -63,10 +63,10 @@ BookMarks
 ![Screenshot 2024-04-28 185509](https://github.com/alexymumo/News-App/assets/56880898/89b5dfee-f2d8-4961-9c40-501d44f55f6e)
 
 
-## Tests
+## Tests/home/alex/AndroidStudioProjects/droidconKeKotlin
 - [Mockk](https://mockk.io/) - Mocking library for Kotlin
 - [Truth]() - Assertion library by google
-- [Junit4](https://github.com/junit-team/junit4) - Simple framework to write repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks. 
+- [Junit4](https://github.com/junit-team/junit4) - Simple framework to write repeatable tests. It is an instance of the Unit architecture for unit testing frameworks. 
 - [Robolectric](https://robolectric.org/) -  Framework that brings fast and reliable unit tests to Android
 
 ## Demo
