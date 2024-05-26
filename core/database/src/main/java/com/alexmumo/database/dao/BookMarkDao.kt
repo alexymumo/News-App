@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookMarkDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveBookMark(bookMarkEntity: BookMarkEntity)
 
     @Query("DELETE FROM bookmark_table")

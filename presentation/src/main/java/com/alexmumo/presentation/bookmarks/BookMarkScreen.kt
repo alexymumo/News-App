@@ -15,7 +15,6 @@
  */
 package com.alexmumo.presentation.bookmarks
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,6 +22,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -41,13 +41,15 @@ fun BookMarkScreen(
     viewModel: BookMarkViewModel = hiltViewModel()
 ) {
     val bookmarks = viewModel.bookMarkedNews.collectAsState(emptyList())
+    val delete = viewModel.deleteBookMarkedNews()
+    val dismissState = rememberDismissState()
     Scaffold(
         topBar = {
             TopAppBar(
                 modifier = Modifier.testTag("top_app_bar_test_tag"),
                 title = {
                     Text(
-                        text = "BookMarks",
+                        text = "Bookmarks",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1
@@ -56,18 +58,37 @@ fun BookMarkScreen(
             )
         }
     ) { paddingValues ->
+        LazyColumn(
+            modifier = Modifier
+                .testTag("bookmark_test_tag")
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            items(items = bookmarks.value) { bookMarkEntity ->
+                BookMarkCard(
+                    bookMarkEntity = bookMarkEntity
+                    /*
+                    onNavigate = {
+                        navController.currentBackStackEntry?.savedStateHandle?.set(
+                            key = "news",
+                            value = bookMarkEntity
+                        )
+                        navController.navigate(NavItem.Detail.route)
+                    }
+                    */
+                )
+            }
+        }
+
+        /*
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
                 .testTag("bookmark_test_tag")
         ) {
-            LazyColumn {
-                items(items = bookmarks.value) { bookMark ->
-                    BookMarkCard(bookMarkEntity = bookMark)
-                }
-            }
         }
+        */
     }
 }
 
@@ -77,3 +98,18 @@ fun BookMarkScreenPreview() {
     val navController = rememberNavController()
     BookMarkScreen(navController = navController)
 }
+
+/*if(dismissState.isDismissed(DismissDirection.EndToStart)) {
+    viewModel.deleteBookMarkedNews()
+}
+SwipeToDismiss(
+    state = dismissState,
+    background = {
+        DeleteCard(dismissState = dismissState)
+    },
+    directions = setOf(DismissDirection.EndToStart),
+    dismissContent = {
+        BookMarkCard(bookMarkEntity = bookMark)
+    }
+)
+*/

@@ -101,7 +101,6 @@ fun DetailScreen(
                                 snackbarHostState.showSnackbar("Already Bookmarked", "Ok", false, duration = SnackbarDuration.Short)
                             }
                         } else {
-
                             viewModel.saveBookMark(
                                 BookMarkEntity(
                                     author = article.author,

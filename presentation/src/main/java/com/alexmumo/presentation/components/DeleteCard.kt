@@ -34,6 +34,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
+fun SwipeToDeleteCard() {
+    val state = rememberDismissState()
+}
+
+@Composable
 fun DeleteCard(
     dismissState: DismissState
 ) {
