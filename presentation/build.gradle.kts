@@ -87,7 +87,6 @@ dependencies {
 
     // Navigation
     implementation(libs.compose.navigation)
-    androidTestImplementation(libs.compose.navigation.testing)
 
     // Roboelectric
     testImplementation(libs.junit)
@@ -97,13 +96,6 @@ dependencies {
 
     // Coil-Compose
     implementation(libs.coil.compose)
-
-    // Unit Test
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.expresso.core)
-    testImplementation(libs.mockk)
-    androidTestImplementation(libs.mockk.android)
-    testImplementation(libs.mockk.agent)
 
 
     // Paging
@@ -126,8 +118,20 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Android Test
-    androidTestImplementation(libs.junit.ext)
+
     debugImplementation(libs.compose.ui.test.manifest)
+
+    // Unit Test
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockk.agent)
+    testImplementation(libs.hilt.test)
+
+
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.expresso.core)
+    androidTestImplementation(libs.compose.navigation.testing)
 
 }
 

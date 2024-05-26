@@ -21,7 +21,6 @@ import androidx.lifecycle.viewModelScope
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.repository.BookMarkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +28,7 @@ import javax.inject.Inject
 class BookMarkViewModel @Inject constructor(private val bookMarkRepository: BookMarkRepository) : ViewModel() {
     val bookMarkedNews = bookMarkRepository.getBookMarks()
     fun saveBookMark(bookMarkEntity: BookMarkEntity) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             bookMarkRepository.saveBookMark(bookMarkEntity)
         }
     }
