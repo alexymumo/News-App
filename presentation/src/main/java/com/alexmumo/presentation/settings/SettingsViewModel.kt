@@ -20,12 +20,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alexmumo.domain.repository.SettingRepository
+import com.alexmumo.presentation.state.ThemeState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(private val settingRepository: SettingRepository) : ViewModel() {
+
+    private val _themeState = MutableStateFlow(ThemeState(false))
+    val themeState : StateFlow<ThemeState> = _themeState
 
     private val _themeDialog = mutableStateOf(false)
     val themeDialog: State<Boolean> = _themeDialog

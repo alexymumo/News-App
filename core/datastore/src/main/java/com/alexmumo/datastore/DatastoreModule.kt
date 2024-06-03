@@ -30,13 +30,13 @@ object DatastoreModule {
 
     @Provides
     @Singleton
-    fun providesSettingsRepository(newsPreference: NewsPreference): SettingRepository {
-        return SettingsRepositoryImpl(newsPreference)
+    fun providesSettingsRepository(settingsPreference: SettingsPreference): SettingRepository {
+        return SettingsRepositoryImpl(settingsPreference)
     }
 
     @Provides
     @Singleton
-    fun provideNewsPreference(@ApplicationContext context: Context): NewsPreference {
-        return NewsPreference(context)
+    fun provideNewsPreference(@ApplicationContext context: Context): SettingsPreference {
+        return SettingsPreference(context)
     }
 }

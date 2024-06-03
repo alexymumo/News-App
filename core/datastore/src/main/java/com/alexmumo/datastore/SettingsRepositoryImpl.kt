@@ -18,7 +18,7 @@ package com.alexmumo.datastore
 import com.alexmumo.domain.repository.SettingRepository
 import kotlinx.coroutines.flow.Flow
 
-class SettingsRepositoryImpl constructor(private val newsPreference: NewsPreference) : SettingRepository {
+class SettingsRepositoryImpl constructor(private val newsPreference: SettingsPreference) : SettingRepository {
     override val getTheme: Flow<Int>
         get() = newsPreference.getTheme
 

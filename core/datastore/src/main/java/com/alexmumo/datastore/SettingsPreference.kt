@@ -19,17 +19,19 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-class NewsPreference(
+//val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+class SettingsPreference(
     private val context: Context
 ) {
     private val NEWS_THEME = intPreferencesKey(name = "theme")
+
     suspend fun setTheme(theme: Int) {
         context.datastore.edit { settings ->
             settings[NEWS_THEME] = theme
@@ -39,4 +41,12 @@ class NewsPreference(
     val getTheme: Flow<Int> = context.datastore.data.map { settings ->
         settings[NEWS_THEME] ?: AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
+
+    val datastore = context.datastore
+    companion object {
+        private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+        val DARK_MODE = booleanPreferencesKey("dark_theme")
+    }
 }
+
+
