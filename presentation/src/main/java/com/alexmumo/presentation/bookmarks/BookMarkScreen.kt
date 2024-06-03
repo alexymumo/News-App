@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.bookmarks.view.BookMarkCard
+import com.alexmumo.presentation.navigation.NavItem
 
 @Composable
 fun BookMarkScreen(
@@ -66,8 +67,7 @@ fun BookMarkScreen(
         ) {
             items(items = bookmarks.value) { bookMarkEntity ->
                 BookMarkCard(
-                    bookMarkEntity = bookMarkEntity
-                    /*
+                    bookMarkEntity = bookMarkEntity,
                     onNavigate = {
                         navController.currentBackStackEntry?.savedStateHandle?.set(
                             key = "news",
@@ -75,20 +75,9 @@ fun BookMarkScreen(
                         )
                         navController.navigate(NavItem.Detail.route)
                     }
-                    */
                 )
             }
         }
-
-        /*
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-                .testTag("bookmark_test_tag")
-        ) {
-        }
-        */
     }
 }
 

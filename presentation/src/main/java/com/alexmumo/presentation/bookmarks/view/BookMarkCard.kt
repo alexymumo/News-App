@@ -44,8 +44,8 @@ import com.alexmumo.database.entity.BookMarkEntity
 
 @Composable
 fun BookMarkCard(
+    onNavigate: (BookMarkEntity) -> Unit,
     bookMarkEntity: BookMarkEntity
-    // onNavigate: (BookMarkEntity) -> Unit
 ) {
     val context = LocalContext.current
     Row(
@@ -55,7 +55,7 @@ fun BookMarkCard(
             .padding(4.dp)
             .testTag("book_mark_card_tag")
             .clickable {
-                // onNavigate(bookMarkEntity)
+                onNavigate(bookMarkEntity)
             }
     ) {
         AsyncImage(
