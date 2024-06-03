@@ -57,10 +57,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.model.Article
+import com.alexmumo.domain.model.Source
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
 import com.alexmumo.repository.mappers.toSourceEntity
@@ -244,8 +246,21 @@ fun BackButton(
 @Preview
 @Composable
 fun DetailScreenPreview() {
-    // DetailScreen()
+    val navController = rememberNavController()
+    DetailScreen(navController = navController, article = article)
 }
+
+val article = Article(
+    author = "",
+    content = "",
+    description = "",
+    publishedAt = "",
+    source = Source(id = "", name = ""),
+    title = "",
+    url = "",
+    urlToImage = ""
+
+)
 
 @Preview
 @Composable
