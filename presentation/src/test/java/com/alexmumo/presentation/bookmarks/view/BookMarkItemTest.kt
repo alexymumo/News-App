@@ -20,6 +20,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.database.entity.SourceEntity
+import com.alexmumo.presentation.components.BookMarkCard
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

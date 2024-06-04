@@ -35,9 +35,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.settings.view.SettingCard
-import com.alexmumo.presentation.settings.view.ThemeDialog
-import com.alexmumo.presentation.settings.view.settingItem
+import com.alexmumo.presentation.components.SettingCard
+import com.alexmumo.presentation.components.ThemeDialog
+import com.alexmumo.presentation.components.settingItem
 
 @Composable
 fun SettingScreen(

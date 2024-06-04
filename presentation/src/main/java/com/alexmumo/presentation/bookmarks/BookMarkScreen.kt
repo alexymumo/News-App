@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.alexmumo.presentation.bookmarks.view.BookMarkCard
+import com.alexmumo.presentation.components.BookMarkCard
 import com.alexmumo.presentation.navigation.NavItem
 
 @Composable
