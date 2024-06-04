@@ -24,29 +24,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.alexmumo.presentation.components.NewsCard
+import com.alexmumo.presentation.components.SearchBar
 import com.alexmumo.presentation.navigation.NavItem
 import timber.log.Timber
 
@@ -84,7 +71,7 @@ fun SearchContent(
             .fillMaxSize()
             .testTag("search_screen_test_tag")
     ) {
-        CustomSearchBar(
+        SearchBar(
             modifier = Modifier.fillMaxWidth().padding(all = 5.dp).wrapContentHeight(),
             onSearch = onSearch,
             onSearchTextChange = onSearchTextChange,
@@ -104,45 +91,6 @@ fun SearchContent(
             }
         }
     }
-}
-
-@OptIn(ExperimentalComposeUiApi::class)
-@Composable
-fun CustomSearchBar(
-    modifier: Modifier = Modifier,
-    onSearch: (String) -> Unit = {},
-    onSearchTextChange: (String) -> Unit,
-    currentString: String
-) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-    TextField(
-        value = currentString,
-        onValueChange = { onSearchTextChange(it) },
-        placeholder = { Text(text = "Search News..") },
-        modifier = modifier
-            .fillMaxWidth()
-            .testTag("search_text_tag")
-            .shadow(4.dp, CircleShape),
-        maxLines = 1,
-        singleLine = true,
-        keyboardOptions = KeyboardOptions(
-            autoCorrect = true,
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Search
-        ),
-        trailingIcon = {
-            IconButton(onClick = {
-                onSearch(currentString)
-                keyboardController?.hide()
-            }) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = "search")
-            }
-        },
-        keyboardActions = KeyboardActions {
-            keyboardController?.hide()
-            onSearch(currentString)
-        }
-    )
 }
 
 @Preview

@@ -31,7 +31,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(private val settingRepository: SettingRepository) : ViewModel() {
 
     private val _themeState = MutableStateFlow(ThemeState(false))
-    val themeState : StateFlow<ThemeState> = _themeState
+    val themeState: StateFlow<ThemeState> = _themeState
 
     private val _themeDialog = mutableStateOf(false)
     val themeDialog: State<Boolean> = _themeDialog

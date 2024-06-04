@@ -25,12 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -65,6 +60,7 @@ import com.alexmumo.domain.model.Article
 import com.alexmumo.domain.model.Source
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
+import com.alexmumo.presentation.components.BookMarkButton
 import com.alexmumo.repository.mappers.toSourceEntity
 import kotlinx.coroutines.launch
 
@@ -95,7 +91,7 @@ fun DetailScreen(
                         modifier = Modifier.size(40.dp)
                     )
                 }
-                CustomLikeButton(
+                BookMarkButton(
                     bookmarked = viewModel.checkBookMarked(id = article.url).observeAsState().value != null,
                     onPress = { bookmarked ->
                         if (bookmarked) {
@@ -195,50 +191,6 @@ fun DetailScreen(
                     // text = convertStringToDate(article.publishedAt ?: "UnKnown")
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun CustomLikeButton(
-    onPress: (checkBookMark: Boolean) -> Unit = {},
-    bookmarked: Boolean
-) {
-    IconButton(onClick = {
-        onPress(bookmarked)
-    }) {
-        Icon(
-            imageVector = Icons.Filled.FavoriteBorder, contentDescription = null,
-            modifier = Modifier
-                .height(30.dp)
-                .width(30.dp)
-                .testTag("custom_like_tag"),
-            tint = if (bookmarked) {
-                Color.Magenta
-            } else {
-                Color.Green
-            }
-        )
-    }
-}
-
-@Composable
-fun BackButton(
-    onClick: () -> Unit = {}
-) {
-    Button(
-        shape = CircleShape,
-        onClick = {
-            onClick()
-        },
-        modifier = Modifier
-            .height(30.dp)
-            .width(30.dp)
-    ) {
-        IconButton(onClick = {
-            onClick()
-        }) {
-            Icon(Icons.Filled.ArrowBack, contentDescription = null)
         }
     }
 }

@@ -26,7 +26,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-//val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+// val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class SettingsPreference(
     private val context: Context
 ) {
@@ -48,5 +48,3 @@ class SettingsPreference(
         val DARK_MODE = booleanPreferencesKey("dark_theme")
     }
 }
-
-

@@ -16,7 +16,7 @@
 package com.alexmumo.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -28,7 +28,9 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,39 +41,39 @@ import androidx.compose.ui.unit.dp
 fun SearchBar(
     modifier: Modifier = Modifier,
     onSearch: (String) -> Unit = {},
-    searchString: String,
-    previousString: (String) -> Unit
+    onSearchTextChange: (String) -> Unit,
+    currentString: String
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     TextField(
-        value = searchString,
-        onValueChange = {
-            previousString(it)
-        },
-        modifier = modifier.fillMaxWidth(),
-        label = { Text(text = "Search..") },
+        value = currentString,
+        onValueChange = { onSearchTextChange(it) },
+        placeholder = { Text(text = "Search News..") },
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("search_text_tag")
+            .shadow(4.dp, CircleShape),
+        maxLines = 1,
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            autoCorrect = true,
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
         trailingIcon = {
             IconButton(onClick = {
-                onSearch(searchString)
+                onSearch(currentString)
+                keyboardController?.hide()
             }) {
                 Icon(imageVector = Icons.Default.Search, contentDescription = "search")
             }
         },
         keyboardActions = KeyboardActions {
             keyboardController?.hide()
-            onSearch(searchString)
-        },
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Search,
-            autoCorrect = true
-        ),
-        maxLines = 1,
-        shape = RoundedCornerShape(size = 8.dp),
-        singleLine = true,
+            onSearch(currentString)
+        }
     )
 }
-
 @Preview
 @Composable
 fun SearchBarPreview() {
