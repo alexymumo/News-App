@@ -15,17 +15,29 @@
  */
 package com.alexmumo.presentation.settings
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
@@ -60,7 +72,9 @@ fun SettingScreen(
                 }
             )
         },
-        modifier = Modifier.fillMaxSize().testTag("setting_screen_test_tag")
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("setting_screen_test_tag")
     ) { paddingValues ->
         if (themeDialog) {
             ThemeDialog(
@@ -81,6 +95,8 @@ fun SettingScreen(
         )
     }
 }
+
+
 
 @Composable
 fun SettingContent(
@@ -114,11 +130,57 @@ fun SettingContent(
     }
 }
 
+@Composable
+fun Settings() {
+    Column(modifier = Modifier.fillMaxSize()) {
+
+        Card(modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .padding(all = 4.dp),
+            shape = CardDefaults.outlinedShape
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Sign In")
+                }
+                Button(onClick = { /*TODO*/ }) {
+                    Text(text = "Sign Up")
+                }
+            }
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .padding(all = 5.dp),
+            border = BorderStroke(width = 1.dp, brush = Brush.linearGradient()),
+            shape = CardDefaults.outlinedShape
+        ) {
+            Text(text = "Change Theme")
+            Divider(modifier = Modifier.fillMaxWidth())
+            Text(text = "Share App")
+            Divider(modifier = Modifier
+                .fillMaxWidth()
+                .width(0.5.dp))
+            Text(text = "Language")
+            Divider(modifier = Modifier
+                .fillMaxWidth()
+                .width(0.5.dp))
+            Text(text = "About Us")
+
+        }
+    }
+}
 @Preview
 @Composable
 fun SettingsScreenPreview() {
-    val navController = rememberNavController()
-    SettingScreen(navController = navController)
+    Settings()
+    //val navController = rememberNavController()
+    //SettingScreen(navController = navController)
 }
 
 @Preview
