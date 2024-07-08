@@ -25,11 +25,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -63,6 +64,8 @@ import com.alexmumo.database.entity.BookMarkEntity
 import com.alexmumo.domain.model.Article
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.bookmarks.BookMarkViewModel
+import com.alexmumo.presentation.components.BookmarkButton
+import com.alexmumo.presentation.components.TextTag
 import com.alexmumo.repository.mappers.toSourceEntity
 import kotlinx.coroutines.launch
 
@@ -72,7 +75,6 @@ fun DetailScreen(
     viewModel: BookMarkViewModel = hiltViewModel(),
     article: Article
 ) {
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
@@ -93,7 +95,7 @@ fun DetailScreen(
                         modifier = Modifier.size(40.dp)
                     )
                 }
-                CustomLikeButton(
+                BookmarkButton(
                     bookmarked = viewModel.checkBookMarked(id = article.url).observeAsState().value != null,
                     onPress = { bookmarked ->
                         if (bookmarked) {
@@ -148,9 +150,9 @@ fun DetailScreen(
                     fontSize = 18.sp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(all = 2.dp),
-                    color = Color.White,
-                    maxLines = 20
+                        .padding(all = 4.dp)
+                        .verticalScroll(rememberScrollState()),
+                    color = Color.White
                 )
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -163,12 +165,7 @@ fun DetailScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.width(5.dp))
-                    Text(
-                        text = article.source.name,
-                        maxLines = 1,
-                        fontSize = 16.sp,
-                        color = Color.Green
-                    )
+                    TextTag(tag = article.source.name)
                     Spacer(modifier = Modifier.width(5.dp))
                     Text(
                         text = "Author",
@@ -176,48 +173,13 @@ fun DetailScreen(
                         maxLines = 1,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    article.author?.let {
-                        Text(
-                            text = it,
-                            maxLines = 1,
-                            fontSize = 16.sp,
-                            color = Color.Green
-                        )
-                    }
+                    Spacer(modifier = Modifier.width(5.dp))
+                    article.author?.let { TextTag(tag = it) }
                 }
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    maxLines = 1,
-                    fontSize = 16.sp,
-                    color = Color.Green,
-                    text = article.publishedAt ?: "Uknown"
-                    // text = convertStringToDate(article.publishedAt ?: "UnKnown")
-                )
+                // text = convertStringToDate(article.publishedAt ?: "UnKnown")
             }
         }
-    }
-}
-
-@Composable
-fun CustomLikeButton(
-    onPress: (checkBookMark: Boolean) -> Unit = {},
-    bookmarked: Boolean
-) {
-    IconButton(onClick = {
-        onPress(bookmarked)
-    }) {
-        Icon(
-            imageVector = Icons.Filled.FavoriteBorder, contentDescription = null,
-            modifier = Modifier
-                .height(30.dp)
-                .width(30.dp)
-                .testTag("custom_like_tag"),
-            tint = if (bookmarked) {
-                Color.Magenta
-            } else {
-                Color.Green
-            }
-        )
     }
 }
 

@@ -56,17 +56,6 @@ class DetailScreenTest {
         composeRule.onNodeWithContentDescription("image").assertExists()
     }
 
-    @Test
-    fun `test custom button`() {
-        composeRule.setContent {
-            CustomLikeButton(
-                onPress = {},
-                bookmarked = true
-            )
-        }
-        composeRule.onNodeWithTag("custom_like_tag", useUnmergedTree = true).assertExists()
-    }
-
     companion object {
         val article = Article(
             author = null, content = null, description = null, publishedAt = null, Source(id = null, name = ""), title = null, url = "", urlToImage = null

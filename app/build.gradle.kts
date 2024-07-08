@@ -38,16 +38,32 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("debug") {
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+        }
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
-        debug {
-            enableAndroidTestCoverage = true
-            enableUnitTestCoverage = true
+    }
+
+    flavorDimensions += "apps"
+    productFlavors {
+        create("demo") {
+            dimension = "apps"
+            manifestPlaceholders["appLabel"] = "news app demo"
+            isDefault = true
+        }
+        create("news") {
+            dimension = "apps"
+            applicationIdSuffix = ".news"
+            versionNameSuffix = "-news"
+            manifestPlaceholders["appLabel"] = "News App"
         }
     }
 

@@ -26,7 +26,7 @@ import com.alexmumo.database.entity.RemoteKeyEntity
 
 @Database(
     entities = [BookMarkEntity::class, ArticleEntity::class, RemoteKeyEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class NewsDatabase : RoomDatabase() {

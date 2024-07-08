@@ -16,6 +16,7 @@
 package com.alexmumo.presentation.components
 
 import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -23,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
@@ -55,4 +57,12 @@ fun Tabs(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun TabsPreview() {
+    val tabs = listOf<TabItem>()
+    val pageState = rememberPagerState()
+    Tabs(tabs = tabs, pageState = pageState)
 }
