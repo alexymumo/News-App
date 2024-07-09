@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexmumo.database.entity.BookMarkEntity
+import com.alexmumo.presentation.components.TextTag
 
 @Composable
 fun BookMarkCard(
@@ -65,27 +66,36 @@ fun BookMarkCard(
                 .build(),
             contentDescription = "image",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size(130.dp).clip(RoundedCornerShape(8.dp))
+            modifier = Modifier
+                .size(130.dp)
+                .clip(RoundedCornerShape(8.dp))
         )
         Spacer(modifier = Modifier.width(2.dp))
         Column {
             Text(
                 text = bookMarkEntity.description ?: "UnKnown",
-                maxLines = 1,
+                maxLines = 2,
                 fontSize = 16.sp,
                 modifier = Modifier.fillMaxWidth(),
                 fontWeight = FontWeight.Normal
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(2.dp))
             Row {
-                Text(
+                TextTag(
+                    tag = bookMarkEntity.author
+                )
+
+                /*Text(
                     text = bookMarkEntity.author ?: "UnKnown",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
+
+                 */
                 Spacer(modifier = Modifier.width(5.dp))
+
                 Text(
                     text = bookMarkEntity.sourceEntity.name ?: "UnKnown",
                     fontSize = 16.sp,
@@ -97,7 +107,8 @@ fun BookMarkCard(
         }
     }
     Divider(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .testTag("divider_tag"),
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.onPrimary

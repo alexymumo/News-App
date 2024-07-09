@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -145,15 +146,20 @@ fun DetailScreen(
                 modifier = Modifier.fillMaxSize(),
                 shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
             ) {
-                Text(
-                    text = article.content ?: "Unknown",
-                    fontSize = 18.sp,
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(all = 4.dp)
-                        .verticalScroll(rememberScrollState()),
-                    color = Color.White
-                )
+                        .wrapContentHeight()
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Text(
+                        text = article.content ?: "Unknown",
+                        fontSize = 18.sp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(all = 4.dp),
+                        color = Color.White
+                    )
+                }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center

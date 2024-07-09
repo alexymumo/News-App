@@ -1,13 +1,23 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties().apply {
+    load(FileInputStream(localPropertiesFile))
+}
+val apiKey: String = localProperties.getProperty("apiKey")
 
 android {
     namespace = "com.alexmumo.common"
     compileSdk = 33
 
     defaultConfig {
+        buildConfigField("String","API_KEY", "\"$apiKey\"")
         minSdk = 26
         targetSdk = 33
 

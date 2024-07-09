@@ -10,12 +10,9 @@ plugins {
     jacoco
 }
 
-
 jacoco {
     toolVersion = "0.8.8"
 }
-
-
 
 project.afterEvaluate {
     setupAndroidReporting()
