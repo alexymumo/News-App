@@ -182,7 +182,7 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.width(5.dp))
                     article.author?.let { TextTag(tag = it) }
                 }
-                Spacer(modifier = Modifier.height(4.dp))
+                // Spacer(modifier = Modifier.height(4.dp))
                 // text = convertStringToDate(article.publishedAt ?: "UnKnown")
             }
         }

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.search
+package com.alexmumo.repository.util
 
-sealed interface UiState<out T> {
-    data class Success<T>(val data: T) : UiState<T>
-    data class Error<T>(val message: String) : UiState<T>
-    object Loading : UiState<Nothing>
+import kotlinx.coroutines.flow.Flow
+
+interface NetworkMonitor {
+    val isConnected: Flow<Boolean>
 }

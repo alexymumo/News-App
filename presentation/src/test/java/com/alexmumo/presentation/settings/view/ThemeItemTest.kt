@@ -19,6 +19,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.alexmumo.presentation.R
 import com.alexmumo.presentation.common.theme.Theme
+import com.alexmumo.presentation.components.ThemeItem
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

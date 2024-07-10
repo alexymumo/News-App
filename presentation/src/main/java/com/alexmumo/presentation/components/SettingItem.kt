@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.settings.view
+package com.alexmumo.presentation.components
 
 import com.alexmumo.presentation.R
 

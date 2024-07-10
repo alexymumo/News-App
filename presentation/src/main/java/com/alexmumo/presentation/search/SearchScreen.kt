@@ -57,7 +57,6 @@ fun SearchScreen(
 ) {
     val searchState = viewModel.searchState.value
     SearchContent(
-        searchViewModel = viewModel,
         onSearch = { search ->
             viewModel.searchNews(search)
         },
@@ -72,7 +71,6 @@ fun SearchScreen(
 
 @Composable
 fun SearchContent(
-    searchViewModel: SearchViewModel,
     onSearch: (String) -> Unit,
     currentString: String,
     onSearchTextChange: (String) -> Unit,

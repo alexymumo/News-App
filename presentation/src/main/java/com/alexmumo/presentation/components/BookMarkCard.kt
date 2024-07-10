@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alexmumo.presentation.bookmarks.view
+package com.alexmumo.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -41,11 +41,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexmumo.database.entity.BookMarkEntity
-import com.alexmumo.presentation.components.TextTag
 
 @Composable
 fun BookMarkCard(
-    bookMarkEntity: BookMarkEntity
+    bookMarkEntity: BookMarkEntity,
     // onNavigate: (BookMarkEntity) -> Unit
 ) {
     val context = LocalContext.current
@@ -82,26 +81,7 @@ fun BookMarkCard(
             Spacer(modifier = Modifier.height(2.dp))
             Row {
                 TextTag(
-                    tag = bookMarkEntity.author
-                )
-
-                /*Text(
-                    text = bookMarkEntity.author ?: "UnKnown",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-
-                 */
-                Spacer(modifier = Modifier.width(5.dp))
-
-                Text(
-                    text = bookMarkEntity.sourceEntity.name ?: "UnKnown",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    tag = bookMarkEntity.author ?: "Unknown"
                 )
             }
         }
@@ -114,73 +94,6 @@ fun BookMarkCard(
         color = MaterialTheme.colorScheme.onPrimary
     )
 }
-
-/*
-@Composable
-fun BookMarkItem(
-    bookMarkEntity: BookMarkEntity
-) {
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .padding(5.dp)
-            .testTag("bookmark_tag"),
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(5.dp)
-        ) {
-            Card(
-                modifier = Modifier
-                    .height(80.dp)
-                    .width(80.dp),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(bookMarkEntity.urlToImage)
-                        .crossfade(true)
-                        .build(),
-                    modifier = Modifier.size(80.dp),
-                    contentDescription = "image",
-                    contentScale = ContentScale.FillBounds
-                )
-            }
-            Spacer(modifier = Modifier.width(4.dp))
-            Column {
-                Text(
-                    text = bookMarkEntity.description ?: "Null",
-                    maxLines = 1,
-                    fontSize = 16.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                    fontWeight = FontWeight.Normal
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Row {
-                    Text(
-                        text = bookMarkEntity.author ?: "UnKnown",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                    Spacer(modifier = Modifier.width(5.dp))
-                    Text(
-                        text = bookMarkEntity.sourceEntity.name ?: "UnKnown",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            }
-        }
-    }
-}
-*/
 
 @Preview
 @Composable
