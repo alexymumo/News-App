@@ -15,4 +15,21 @@
  */
 package com.alexmumo.presentation.share
 
-class ShareScreenTest
+import androidx.compose.ui.test.junit4.createComposeRule
+import org.junit.Before
+import org.junit.Rule
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLog
+
+@RunWith(RobolectricTestRunner::class)
+class ShareScreenTest {
+
+    @get:Rule
+    val composeRule = createComposeRule()
+
+    @Before
+    fun setUp() {
+        ShadowLog.stream = System.out
+    }
+}
